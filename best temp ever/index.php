@@ -1022,14 +1022,14 @@
 								///////////////////////////////////////
 								/*should do some regex here*/
 								/////////////////////////////////////
-								$db = new PDO("mysql:dbname=thedoctors", "root", "");
-								$first = $db->quote($_POST["first"]);
-								$last =  $db->quote($_POST["last"]);
-								$email = $db->quote($_POST["email"]);
-								$country = $db->quote($_POST["country"]);
-								$password = $db->quote($_POST["password"]);
-								$date = $db->quote($_POST["date"]);
-								if (isset($_POST["submit"])&&isset($first) && isset($last) && isset($email) && isset($country) && isset($password) && isset($date)) {
+								if (isset($_POST["submit"])) {
+									$db = new PDO("mysql:dbname=thedoctors", "root", "");
+									$first = $db->quote($_POST["first"]);
+									$last =  $db->quote($_POST["last"]);
+									$email = $db->quote($_POST["email"]);
+									$country = $db->quote($_POST["country"]);
+									$password = $db->quote($_POST["password"]);
+									$date = $db->quote($_POST["date"]);
 									$v = md5(time().$first);
 									$vkey = $db->quote($v);
 									$password = $db->quote(md5($password));
