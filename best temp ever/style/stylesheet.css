@@ -847,7 +847,6 @@ span.right { float: right; }
 
 .close-button, .message-popup .fa.close-button { position: absolute; top: -5px; color: #FFF; display: block; width: 25px; height: 25px; background: #1fdeb8 ; font-size: 14px; text-align: center; padding-top: 5px; cursor: pointer; border-radius: 2px; }
 
-.close-button:hover { background: #0040b0; }
 
 .check-box { position: relative; display: inline-block; width: 20px; height: 20px; display: inline-block; background: #FFF; border-radius: 2px; border: 1px solid #000; cursor: pointer; transform: translateY(8px); -webkit-transform: translateY(8px); -moz-transform: translateY(8px); -ms-transform: translateY(8px); }
 
@@ -866,7 +865,7 @@ span.right { float: right; }
 
 .be-popup-sign-button { float: right; color: #FFF; padding: 15px 30px; background: #1fdeb8 ; font-size: 14px; border: none; border-radius: 2px; }
 
-.be-popup-sign-button:hover { background: #0040b0; }
+
 
 .be-date-block .large-popup-tex { display: block; }
 
