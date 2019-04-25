@@ -44,7 +44,7 @@
         <div class="container-fluid custom-container">
             <div class="row no_row row-header">
                 <div class="brand-be">
-                    <a href="index.html">
+                    <a href="index.php">
                         <img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px; alt=" logo">
                         <img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
                         <img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
