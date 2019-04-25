@@ -583,7 +583,7 @@ form.input-search { position: relative; margin-bottom: 50px; }
 
 .drop-down-list a { color: #8da4e0; }
 
-.drop-down-list a:hover { color: #FFF; background: #0d50b5; }
+.drop-down-list a:hover { color: #FFF; background: #1fdeb8 ; }
 
 .drop-down-list, .be-drop-down:hover:after, .be-drop-down:hover i, .be-drop-down.be-dropdown-active:after, .be-drop-down.be-dropdown-active i { color: rgba(255, 255, 255, 0.8); }
 
