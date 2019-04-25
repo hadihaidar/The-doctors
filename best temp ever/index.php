@@ -31,7 +31,7 @@
     <div class="be-loader">
         <div class="spinner">
             <img src="img/text.png" alt="">
-                 <p class="circle">
+            <p class="circle">
                 <span class="ouro">
                     <span class="left"><span class="anim"></span></span>
                     <span class="right"><span class="anim"></span></span>
@@ -88,7 +88,7 @@
                 <a class="be-register btn color-1 size-1 hover-1"><i class="fa fa-lock"></i>sign up now</a>
             </div>
         </div>
-      </div>
+    </div>
 
 
     <div class="be-fixed-filter"></div>
@@ -105,10 +105,10 @@
                         </div>
                         <form action="./" class="popup-input-search">
                             <div class="col-md-6">
-                                <input class="input-signtype" type="email" required="" placeholder="Your email">
+                                <input class="input-signtype" name="email" type="email" required="" placeholder="Your email">
                             </div>
                             <div class="col-md-6">
-                                <input class="input-signtype" type="password" required="" placeholder="Password">
+                                <input class="input-signtype" type="password" name="password" required="" placeholder="Password">
                             </div>
                             <div class="col-xs-6">
                                 <div class="be-checkbox">
