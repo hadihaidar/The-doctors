@@ -352,9 +352,9 @@ header .header-menu > #ad-work-li {position: static; float: right;margin-top: 20
 	02 - HEADER BACKGROUND
 ==================================
 */
-.head-bg { background: #000; position: relative; padding: 10px; margin-bottom: 50px; }
+.head-bg { background: #000;  position: fixed;height: 100%; width: 100%;}
 
-.head-bg-img { position: absolute; left: 0; top: 0; background: url(../img/download.jpg);height: 100%; width: 100%; background-size: cover; opacity: 0.2; z-index: 1; background-position: center center; }
+.head-bg-img { position: fixed; left: 0; top: 0; background: url(../img/download.jpg);height: 100%; width: 100%; background-size:cover;opacity: 0.5; background-position: center center;}
 
 .head-bg-content { height: 400px; text-align: center; position: relative; z-index: 200; display: table-cell; vertical-align: middle; width: 5000px; }
 
@@ -385,7 +385,7 @@ header .header-menu > #ad-work-li {position: static; float: right;margin-top: 20
 	03 - MAIN
 ==================================
 */
-#content-block { margin-top: 70px; margin-bottom: 50px; }
+#content-block { margin-top: 70px; margin-bottom: 50px;padding: 0px;height: auto; width: auto;  }
 
 .for-be-dropdowns .be-drop-down { display: inline-block; margin-bottom: 50px; margin-right: 30px; }
 
