@@ -1,6 +1,5 @@
 <?php
-    $_POST[""];
-    $_POST[""];
+  
     $db = new PDO("mysql:dbname=thedoctors", "root", "");
     $query = $db->exec("SELECT * FROM user");
     foreach ($db as $row){
