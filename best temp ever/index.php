@@ -30,8 +30,7 @@
     <!-- THE LOADER -->
     <div class="be-loader">
         <div class="spinner">
-            <img src="img/logo-loader.png" alt="">
-            <p class="circle">
+            <img src="img/text.png" alt="">            <p class="circle">
                 <span class="ouro">
                     <span class="left"><span class="anim"></span></span>
                     <span class="right"><span class="anim"></span></span>
