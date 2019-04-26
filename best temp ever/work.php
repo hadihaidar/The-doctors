@@ -1,5 +1,8 @@
+<?php
+    session_start();
 
-<!DOCTYPE html>
+
+?>
 <html>
 	<head>
 		<title>TheDoctors</title>
@@ -52,7 +55,7 @@
 				<div class="header-menu-block">
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
 					<ul class="header-menu" id="one">
-						<li><a href="activity.html">Activity</a></li>
+						<li><a href="activity.php">Activity</a></li>
 						<li><a href="search.html">Discover</a>
 							<ul>
 								<li><a href="search.html">Explore</a></li>
@@ -62,12 +65,12 @@
 						</li>
 						<li><a href="author-login.html">My Portfolio</a></li>
 						<li><a href="site-map.html">Site Map</a></li>
-						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.html">Add Work </a></li>
+						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php" >Add Posts </a></li>
 					</ul>
 				</div>
 				<div class="login-header-block">
 					<div class="login_block">
-						<a class="btn-login btn color-1 size-2 hover-2" href="blog-detail-2.html"><i class="fa fa-user"></i>
+						<a class="btn-login btn color-1 size-2 hover-2" href="blog-detail-2.html" <?php if(isset($_SESSION['name'])) echo 'style="display:none"';?>><i class="fa fa-user"></i>
 						Log in</a>
 					</div>
 				</div>
@@ -83,9 +86,7 @@
 					<li id="content-w" class="en-nav active">1. Content</li>
 					<li id="setting-w" class="en-nav">2. Setting</li>
 				</ul>
-				<div class="buttons-navbar">
-					<button type="button" class="btn btn-primary">Upload</button>
-				</div>
+
 			</div>
 		</div>
 		<div class="work-area">
@@ -183,16 +184,28 @@
 						<div class="sec"  data-sec="basic-information">
 							<div class="be-large-post large-area">
 								<div class="info-block style-2">
-									<div class="be-large-post-align "><h3 class="info-block-label">Work name</h3></div>
+
+									<div class="be-large-post-align "><h3 class="info-block-label">Post Info</h3></div>
 								</div>
 								<div class="be-large-post-align">
-									<div class="upload-zone">
-										<i class="fa center-i fa-cloud-upload"></i>
-										<input class="file" type="file"/>
-									</div>
+
+
+
+
+										<form class="" action="work.php" method="post">
+											<textarea id="special" name="post" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>"></textarea>
+
+
+										</form>
 								</div>
+								<div class="buttons-navbar">
+									<input type="submit" class="btn btn-primary" value="POST" />
+								</div>
+
 							</div>
+
 						</div>
+
 					</div>
 				</div>
 			</div>
