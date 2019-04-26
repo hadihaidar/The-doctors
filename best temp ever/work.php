@@ -293,82 +293,14 @@
 		<div class="editor-menu">
 			<div class="container">
 				<ul class="editor-nav">
-					<li id="content-w" class="en-nav active">1. Content</li>
-					<li id="setting-w" class="en-nav">2. Setting</li>
+					<li id="content-w" class="en-nav active">1. Add Status</li>
+					<li id="setting-w" class="en-nav">2. Upload Image</li>
+					<li id="setting-w" class="en-nav">3. Upload Video</li>
 				</ul>
 
 			</div>
 		</div>
-		<div class="work-area">
-			<div class="setting-popup">
-				<div class="cover-box s-cover-box">
-					<div class="setting-form">
-						<form>
-							<div class="form-group">
-								<label for="in1">Creative Fields</label>
-								<input type="text" class="form-control" id="in1">
-							</div>
-							<div class="form-group">
-								<label >Project Tags</label>
-								<textarea ></textarea>
-							</div>
-							<div class="form-group">
-								<label >Email address</label>
-								<textarea ></textarea>
-							</div>
-						</form>
-					</div>
-					<div class="setting-block">
-						<div class="settings-row cfix">
-							<div class="left settings-label">Extra Info:</div>
-							<div class="left settings-option">
-								<div class="settings-sub-option cfix">
-									<div class="left settings-note st-label">
-										<span class="grey">For a Brand/Company</span>
-									</div>
-									<div class="right fake-link" id="add-brand">+ Add Brand</div>
-								</div>
-
-								<div class="settings-sub-option cfix">
-									<div class="left settings-note st-label">
-										<span class="grey">For an Agency</span>
-									</div>
-									<div class="right fake-link" id="add-agency">+ Add Agency</div>
-								</div>
-
-								<div class="settings-sub-option cfix">
-									<div class="left settings-note st-label">
-										<span class="grey">For a School</span>
-									</div>
-									<div class="right fake-link" id="add-school">+ Add School</div>
-								</div>
-							</div>
-							<div class="left settings-label">Tools Used:</div>
-							<div class="left settings-option">
-								<div class="settings-sub-option cfix">
-									<div class="left settings-note st-label">
-										<span class="grey">Software, Hardware, Materials...</span>
-									</div>
-									<div class="right fake-link" id="tools">+ Add Tools</div>
-								</div>
-							</div>
-							<div class="left settings-label">For a Team:</div>
-							<div class="left settings-option">
-								<div class="settings-sub-option cfix">
-									<div class="left settings-note st-label">
-										<span class="grey">This project isn't on any team.</span>
-									</div>
-									<div class="right fake-link" id="team">+ Add Team</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="popup-buttons right-buttons">
-						<button type="button" class="btn btn-primary">Save Changes</button>
-						<button type="button" class="btn btn-success">Publish</button>
-					</div>
-				</div>
-			</div>
+	</div>
 			<div class="container be-detail-container">
 				<div class="row">
 					<div class="col-xs-12 col-md-3 st-col left-feild">
@@ -403,7 +335,7 @@
 
 
 										<form class="" action="work.php" method="post">
-											<textarea id="special" name="post" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>"></textarea>
+											<textarea id="special" name="post" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>?"></textarea>
 
 												<input type="submit" name="submitMe" class="buttons-navbar btn btn-primary" value="POST" />
 												<?php
