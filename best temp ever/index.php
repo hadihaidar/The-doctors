@@ -51,23 +51,7 @@
                         <img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
                     </a>
                 </div>
-                <div class="header-menu-block">
-                    <button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
-                    <ul class="header-menu" id="one">
-                        <li><a href="activity.html" class="blackitt">Activity</a></li>
-                        <li><a href="search.html" class="blackitt">Discover</a>
-                            <ul>
-                                <li><a href="search.html" class="blackitt">Explore</a></li>
-                                <li><a href="people.html" class="blackitt">People</a></li>
-                                <li><a href="gallery.html" class="blackitt">Galleries</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="author-login.html" class="blackitt">My Portfolio</a></li>
-                        <li><a href="site-map.html" class="blackitt">Site Map</a></li>
-                        <li><a href="organization.html" class="blackitt">Organization</a></li>
-                        <li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.html">Add Work </a></li>
-                    </ul>
-                </div>
+                
                 <div class="login-header-block">
                     <div class="login_block">
                         <a id="blackit" class="btn-login btn color-1 size-2 hover-2" href=""><i class="fa fa-user"></i>
@@ -123,7 +107,7 @@
                                 <a href="blog-detail-2.html" class="link-large-popup">Forgot password?</a>
                             </div>
                             <div class="col-xs-6 for-signin">
-                                <input type="submit" class="be-popup-sign-button" value="SIGN IN">
+                                <input name = 'login' type="submit" class="be-popup-sign-button" value="SIGN IN">
                             </div>
                         </form>
                     </div>
