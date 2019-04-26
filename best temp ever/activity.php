@@ -1,4 +1,8 @@
-<?php session_start();?>
+<?php session_start();
+	if (!isset($_SESSION['name'])){
+		header("location:index.php");
+	}
+?>
 <html>
 	<head>
 		<title>TheDoctors</title>
