@@ -25,7 +25,8 @@
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
   height: 50%;
-width:100%;}
+width:100%;
+margin-bottom: 15px;}
 
 textarea::placeholder {
   color: #90949c !important;

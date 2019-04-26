@@ -52,6 +52,216 @@
 		<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
 	</a>
 </div>
+<div class="login-header-block">
+	<div class="login_block">
+		<a class="notofications-popup" href="page1.html">
+			<i class="fa fa-bell-o"></i>
+			<span class="noto-count">23</span>
+		</a>
+		<div class="noto-popup notofications-block">
+		<div class="m-close"><i class="fa fa-times"></i></div>
+			<div class="noto-label">Your Notification</div>
+			<div class="noto-body">
+				<div class="noto-entry">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c1.png" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">Ravi Sah</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<a href="page1.html" class="noto-message">Start following your work</a>
+						</div>
+					</div>
+				</div>
+				<div class="noto-entry">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c6.jpg" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">Louis Paquet</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<div class="noto-message">
+								Saved “<a href="page1.html">Omni-onepage app template</a>” to Inspiration
+								<a class="portfolio-link type-2 clearfix" href="page1.html">
+									<img src="img/p_link_23.jpg" alt="">
+									<img src="img/p_link_31.jpg" alt="">
+									<img src="img/p_link_32.jpg" alt="">
+									<img src="img/p_link_33.jpg" alt="">
+									<img src="img/p_link_34.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="noto-entry">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c7.jpg" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">v-a studio</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<div class="noto-message">
+								<a class="noto-left" href="page1.html">
+									<img src="img/n_pop_1.jpg" alt="">
+								</a>
+								Saved “<a href="page1.html">Omni-onepage app template</a>” to Inspiration
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="noto-entry">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c8.jpg" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">Hoang Nguyen</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<div class="noto-message">
+								<a class="noto-left" href="page1.html">
+									<img src="img/n_pop_2.jpg" alt="">
+								</a>
+								Awesome, love the big whitespace and also everything between :)
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="noto-entry">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c9.jpg" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">Cüneyt ŞEN</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<a href="page1.html" class="noto-message">
+								Start following your work
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="messages-popup" href="page1.html">
+			<i class="fa fa-envelope-o"></i>
+			<span class="noto-count">4</span>
+		</a>
+		<div class="noto-popup messages-block">
+				<div class="m-close"><i class="fa fa-times"></i></div>
+			<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages-2.html">compose</a><a href="messages.html">View all messages</a></span></div>
+			<div class="noto-body">
+				<div class="noto-entry style-2">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c1.png" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">Ravi Sah</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<div class="noto-message">Sed velit mauris, pulvinar sit amet accumsan vitae, egestas, pulvinar sit amet accumsan vitae, egestas</div>
+						</div>
+					</div>
+				</div>
+				<div class="noto-entry style-2">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c6.jpg" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">Louis Paquet</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<div class="noto-message">
+							Pellentesque habitant morbi tristique senectus et netus tristique senectus
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="noto-entry style-2">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c9.jpg" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">Cüneyt ŞEN</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<div class="noto-message">
+								Sed id erat vitae libero malesuada dictum vel sit amet eros
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="noto-entry style-2">
+					<div class="noto-content clearfix">
+						<div class="noto-img">
+							<a href="page1.html">
+								<img src="img/c10.jpg" alt="" class="be-ava-comment">
+							</a>
+						</div>
+						<div class="noto-text">
+							<div class="noto-text-top">
+								<span class="noto-name"><a href="page1.html">Tomasz Mazurczak</a></span>
+								<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							</div>
+							<div class="noto-message">
+								In molestie libero quis cursus ullamcorper eu rhoncus magna
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="be-drop-down login-user-down">
+			<img class="login-user" src="img/login.jpg" alt="">
+			<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name'])?></span></span>
+			<div class="drop-down-list a-list">
+				<a href="activity.html">My Portfolio</a>
+				<a href="statictics.html">Statistics </a>
+				<a href="about-us.html">Work Experience</a>
+				<a href="author-edit.html">Account Settings</a>
+				<a href="login.html">Logout</a>
+			</div>
+		</div>
+	</div>
+</div>
 				<div class="header-menu-block">
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
 					<ul class="header-menu" id="one">
@@ -65,7 +275,7 @@
 						</li>
 						<li><a href="author-login.html">My Portfolio</a></li>
 						<li><a href="site-map.html">Site Map</a></li>
-						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php" >Add Posts </a></li>
+
 					</ul>
 				</div>
 				<div class="login-header-block">
@@ -192,14 +402,32 @@
 
 
 
-										<form class="" action="work.php" method="post">
+										<form class="" action="work.php?success=''" method="post">
 											<textarea id="special" name="post" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>"></textarea>
 
+												<input type="submit" name="submitMe" class="buttons-navbar btn btn-primary" value="POST" />
+												<?php
+												if (isset($_POST["submitMe"])) {
+													$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+													$postData = $db->quote($_POST["post"]);	//user's post
+													//  $stmt = $db->prepare("INSERT INTO post (body, timee,likes,comments,userem) VALUES (?, ?, ?, ?, ?)");
+													//  $stmt->bind_param("ssiis", $first, $timee,0,0, $emaill);	//Now() returns current time
+													//
+													// // set parameters and execute
+													// $first = "hello";
+													// $timee = "01-12-1999";
+													// $emaill ="hmh75@mail.aub.edu";
+													// $stmt->execute();
+													// header("location:activity.php");
+													$stmt = $db->query("INSERT INTO post (body,timee,likes,comments,userem) VALUES (".$postData.", NOW(), 0, 0, 'hmh75@mail.aub.edu');");
 
+												}
+
+												 ?>
 										</form>
-								</div>
-								<div class="buttons-navbar">
-									<input type="submit" class="btn btn-primary" value="POST" />
+
+
+
 								</div>
 
 							</div>
@@ -340,6 +568,7 @@
 	    </div>
 	   <div class="open"><img src="img/icon-134.png" alt=""></div>
 	</div>
+
 	<!-- SCRIPT	-->
 	<script src="script/jquery-2.1.4.min.js"></script>
 	<script src="script/jquery-ui.min.js"></script>
@@ -350,5 +579,6 @@
 	<script src="script/colors.js"></script>
 	<script src="script/jqColorPicker.js"></script>
 	<script src="script/global.js"></script>
+
 	</body>
 </html>
