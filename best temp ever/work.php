@@ -402,7 +402,7 @@
 
 
 
-										<form class="" action="work.php?success=''" method="post">
+										<form class="" action="work.php" method="post">
 											<textarea id="special" name="post" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>"></textarea>
 
 												<input type="submit" name="submitMe" class="buttons-navbar btn btn-primary" value="POST" />
@@ -420,7 +420,7 @@
 													// $stmt->execute();
 													// header("location:activity.php");
 													$stmt = $db->query("INSERT INTO post (body,timee,likes,comments,userem) VALUES (".$postData.", NOW(), 0, 0, 'hmh75@mail.aub.edu');");
-
+													echo("<script>alert('Post uploaded!');</script>");
 												}
 
 												 ?>
