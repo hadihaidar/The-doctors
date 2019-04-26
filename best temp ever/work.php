@@ -253,11 +253,11 @@
 			<img class="login-user" src="img/login.jpg" alt="">
 			<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name'])?></span></span>
 			<div class="drop-down-list a-list">
-				<a href="activity.html">My Portfolio</a>
+				<a href="activity.php">My Portfolio</a>
 				<a href="statictics.html">Statistics </a>
 				<a href="about-us.html">Work Experience</a>
 				<a href="author-edit.html">Account Settings</a>
-				<a href="login.html">Logout</a>
+				<a href="login.php">Logout</a>
 			</div>
 		</div>
 	</div>

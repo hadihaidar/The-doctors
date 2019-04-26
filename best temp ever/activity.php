@@ -265,7 +265,7 @@
 				<div class="header-menu-block">
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
 					<ul class="header-menu" id="one">
-						<li><a href="activity.html">Activity</a></li>
+						<li><a href="activity.php">Activity</a></li>
 						<li><a href="search.html">Discover</a>
 							<ul>
 								<li><a href="search.html">Explore</a></li>
