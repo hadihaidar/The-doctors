@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+<?php session_start();?>
 <html>
 	<head>
 		<title>TheDoctors</title>
@@ -248,7 +247,7 @@
 						</div>
 						<div class="be-drop-down login-user-down">
 							<img class="login-user" src="img/login.jpg" alt="">
-							<span class="be-dropdown-content">Hi, <span>Taylor</span></span>
+							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name'])?></span></span>
 							<div class="drop-down-list a-list">
 								<a href="activity.html">My Portfolio</a>
 								<a href="statictics.html">Statistics </a>

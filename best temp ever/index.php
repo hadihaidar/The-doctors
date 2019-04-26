@@ -103,7 +103,7 @@
                             <i class="fa fa-times close-button"></i>
                             <h5 class="large-popup-title">Log in</h5>
                         </div>
-                        <form action="./" class="popup-input-search">
+                        <form action="login.php" method ="POST" class="popup-input-search">
                             <div class="col-md-6">
                                 <input class="input-signtype" name="email" type="email" required="" placeholder="Your email">
                             </div>
@@ -131,6 +131,13 @@
             </div>
         </div>
     </div>
+    <?php
+        if ($_GET['empty']==true){
+    ?>
+    <script>alert("<?php echo($_REQUEST['empty']) ?>");</script>
+    <?php
+        }
+    ?>
     <div class="large-popup register">
         <div class="large-popup-fixed"></div>
         <div class="container large-popup-container">
@@ -202,7 +209,7 @@
                                     if ($query) {
                                         $to = $_POST["email"];
                                         $subject = "Email Verification";
-                                        $message = "<a href = 'http://localhost/the%20doctors/The-doctors/best%20temp%20ever/verify.php?vkey=$v'>Verify Account</a>";
+                                        $message = "<a href = 'http://localhost/the%20doctors/The-doctors/best%20temp%20ever/verify.    ?vkey=$v'>Verify Account</a>";
                                         $headers = "From: hadihaidar75@yahoo.com\r\n";
                                         $headers .= "MTME-Version: 1.0" . "\r\n";
                                         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
