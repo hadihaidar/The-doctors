@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['name'])) {
+    header("location:activity.php");
+}
+?>
 <html>
 
 <head>
@@ -14,6 +20,7 @@
     <link rel="stylesheet" href="style/jquery-ui.css">
     <link rel="stylesheet" href="style/stylesheet.css">
 </head>
+
 <body>
     <!-- THE LOADER -->
     <div class="be-loader">
@@ -66,7 +73,7 @@
                 if ($row['Email'] == $_POST['email']) {
                     $COUNT = 1;
                     $rand = "random";
-                    $pas = time().$rand; //to be send to the email
+                    $pas = time() . $rand; //to be send to the email
                     $pass = $db->quote(md5($db->quote($pas))); // to be added to db
                     $e = $db->quote($_POST['email']);
                     $query = $db->exec("UPDATE user SET Password= ($pass) where  Email =($e)");
