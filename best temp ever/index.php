@@ -100,16 +100,7 @@
                                 <input class="input-signtype" type="password" name="password" required="" placeholder="Password">
                             </div>
                             <div class="col-xs-6">
-                                <div class="be-checkbox">
-                                    <label class="check-box">
-                                        <input class="checkbox-input" type="checkbox" value=""> <span class="check-box-sign"></span>
-                                    </label>
-                                    <span class="large-popup-text">
-                                        Stay signed in
-                                    </span>
-                                </div>
-
-                                <a href="blog-detail-2.html" class="link-large-popup">Forgot password?</a>
+                                <a href="forget.php" class="link-large-popup">Forgot password?</a>
                             </div>
                             <div class="col-xs-6 for-signin">
                                 <input name = 'login' type="submit" class="be-popup-sign-button" value="SIGN IN">
