@@ -295,7 +295,7 @@
 				<ul class="editor-nav">
 					<li id="content-w" class="en-nav active">1. Add Status</li>
 					<li id="setting-w" class="en-nav">2. Upload Image</li>
-					<li id="setting-w" class="en-nav">3. Upload Video</li>
+					<li id="cover-w" class="en-nav">3. Upload Video</li>
 				</ul>
 
 			</div>
@@ -324,12 +324,12 @@
 					</div>
 					<div class="col-xs-12 col-md-9 _editor-content_">
 						<div class="sec"  data-sec="basic-information">
-							<div class="be-large-post large-area">
+							<div class="be-large-post large-area" id="main">
 								<div class="info-block style-2">
 
 									<div class="be-large-post-align "><h3 class="info-block-label">Post Info</h3></div>
 								</div>
-								<div class="be-large-post-align">
+								<div class="be-large-post-align" id="firstdiv">
 
 
 
@@ -341,27 +341,84 @@
 												<?php
 												if (isset($_POST["submitMe"])) {
 													$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+                          $Data = $_POST["post"];
 													$postData = $db->quote($_POST["post"]);	//user's post
-													//  $stmt = $db->prepare("INSERT INTO post (body, timee,likes,comments,userem) VALUES (?, ?, ?, ?, ?)");
-													//  $stmt->bind_param("ssiis", $first, $timee,0,0, $emaill);	//Now() returns current time
-													//
-													// // set parameters and execute
-													// $first = "hello";
-													// $timee = "01-12-1999";
-													// $emaill ="hmh75@mail.aub.edu";
+												  // $stmt = $db->prepare("INSERT INTO post (body, timee,likes,comments,userem) VALUES (?, ?, ?, ?, ?);");
+                          //
+													// //
+													// // // set parameters and execute
+													// $first = ".$postData.";
+													// $timee = NOW();
+                          // $like= 0;
+                          // $comment=0;
+													// $emaill ='hmh75@mail.aub.edu';
+                          // $stmt->bind_param("ssiis", $first, $timee,$like,$comment, $emaill);	//Now() returns current time
 													// $stmt->execute();
+                          // $result = $stmt->get_result();
 													// header("location:activity.php");
+                          if (strlen($Data)>3000 || strlen($Data)<1) {
+                            	echo("<script>alert('Make sure your post is of correct length!');</script>");
+
+                          }
+                          else{
 													$stmt = $db->query("INSERT INTO post (body,timee,likes,comments,userem) VALUES (".$postData.", NOW(), 0, 0, 'hmh75@mail.aub.edu');");
-													echo("<script>alert('Post uploaded!');</script>");
+													echo("<script>alert('Post uploaded! You can check it in your profile!');</script>");
 												}
+                      }
 
 												 ?>
+
 										</form>
 
 
 
 								</div>
+                	<div class="be-large-post-align" id="seconddiv" enctype ="multipart/form-data" style="display:none;">
 
+                    <form class="" action="work.php" method="post">
+                      <label for="imageUpload" class="btn btn-primary btn-block btn-outlined">Choose Images</label>
+                      <input type="file" id="imageUpload" accept="image/*" style="display: none">
+                      <textarea id="special" name="post" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>?"></textarea>
+
+												<input type="submit" name="submitMe" class="buttons-navbar btn btn-primary" value="Upload" />
+                    </form>
+                  </div>
+
+                  <div class="be-large-post-align" id="thirddiv" style="display:none;">this is working! </div>
+
+                  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+                  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
+                  <script type="text/javascript">
+
+                  $("#setting-w").on("click", function(){
+                  $("#firstdiv").fadeOut(1, function() {
+                  $("#seconddiv").fadeIn(1, function() {
+                    });
+                  $("#thirddiv").fadeOut(1, function() {
+                    });
+                  });
+                  });
+
+                  $("#content-w").on("click", function(){
+                  $("#seconddiv").fadeOut(0.1, function() {
+                  $("#firstdiv").fadeIn(0.1, function() {
+                    });
+                  $("#thirddiv").fadeOut(0.1, function() {
+                      });
+                  });
+                  });
+
+                  $("#cover-w").on("click", function(){
+                  $("#seconddiv").fadeOut(0.1, function() {
+                  $("#firstdiv").fadeOut(0.1, function() {
+                    });
+                  $("#thirddiv").fadeIn(0.1, function() {
+                    });
+                  });
+                  });
+
+
+                  </script>
 							</div>
 
 						</div>
