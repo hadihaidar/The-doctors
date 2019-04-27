@@ -1,5 +1,3 @@
-
-
 <html>
 
 <head>
@@ -15,19 +13,8 @@
     <link rel="stylesheet" href="style/idangerous.swiper.css">
     <link rel="stylesheet" href="style/jquery-ui.css">
     <link rel="stylesheet" href="style/stylesheet.css">
-
-    <!--[if lt IE 10]>
-			<link rel="stylesheet" type="text/css" href="style/ie-9.css" />
-		<![endif]-->
-    <!--[if lt IE 9]>
-		    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	    <![endif]-->
-
 </head>
-
 <body>
-
     <!-- THE LOADER -->
     <div class="be-loader">
         <div class="spinner">
@@ -55,7 +42,6 @@
             </div>
         </div>
     </header>
-
     <!-- MAIN CONTENT -->
     <div id="content-block">
         <div class="head-bg">
@@ -70,9 +56,7 @@
                 </div>
             </form>
         </div>
-
         <?php
-        echo(123);
         ///check if the email exists in the db
         if (isset($_POST['forget'])) {
             $db = new PDO("mysql:dbname=thedoctors", "root", "");
@@ -81,21 +65,30 @@
             foreach ($query as $row) {
                 if ($row['Email'] == $_POST['email']) {
                     $COUNT = 1;
-                    echo("123");
-                    ///reset to a new random password
-                    ///send it to the email
-                    ///alert the an email was sent
+                    $rand = "random";
+                    $pas = time().$rand; //to be send to the email
+                    $pass = $db->quote(md5($db->quote($pas))); // to be added to db
+                    $e = $db->quote($_POST['email']);
+                    $query = $db->exec("UPDATE user SET Password= ($pass) where  Email =($e)");
+                    if ($query) {
+                        $to = $_POST["email"];
+                        $subject = "Password Reset";
+                        $message = "Your new password is: <b>$pas</b>";
+                        $headers = "From: hadihaidar75@yahoo.com\r\n";
+                        $headers .= "MTME-Version: 1.0" . "\r\n";
+                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                        mail($to, $subject, $message, $headers);
+                        echo ('<script>alert("An email with the new password was sent")</script>');
+                    } else {
+                        echo ('<script>alert("Something went wrong please try again")</script>');
+                    }
                 }
             }
             if ($COUNT == 0) {
-                echo ("<script>alert('This email doen't exist')</script>");
+                echo ("<script>alert('This email does not exist');</script>");
             }
         }
         ?>
-
-
-
-
         <div class="theme-config">
             <div class="main-color">
                 <div class="title">Main Color:</div>
