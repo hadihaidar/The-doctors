@@ -343,17 +343,19 @@
 													$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
                           $Data = $_POST["post"];
 													$postData = $db->quote($_POST["post"]);	//user's post
-												  // $stmt = $db->prepare("INSERT INTO post (body, timee,likes,comments,userem) VALUES (?, ?, ?, ?, ?);");
+                          $user = $db->quote($_SESSION["user"]);	//user's email
+												  $stmt = "INSERT INTO post (body,timee,likes,comments,userem) VALUES (:post, NOW(), :likess, :commentss, :email);";
+                          $sth = $db->prepare($stmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
                           //
 													// //
 													// // // set parameters and execute
-													// $first = ".$postData.";
-													// $timee = NOW();
-                          // $like= 0;
-                          // $comment=0;
-													// $emaill ='hmh75@mail.aub.edu';
-                          // $stmt->bind_param("ssiis", $first, $timee,$like,$comment, $emaill);	//Now() returns current time
-													// $stmt->execute();
+
+													$first = ".$postData.";
+                          $like= 0;
+                          $comment=0;
+
+                           //$stmt->bind_param("siis", $first, $like, $comment, $user);
                           // $result = $stmt->get_result();
 													// header("location:activity.php");
                           if (strlen($Data)>3000 || strlen($Data)<1) {
@@ -361,8 +363,8 @@
 
                           }
                           else{
-													$stmt = $db->query("INSERT INTO post (body,timee,likes,comments,userem) VALUES (".$postData.", NOW(), 0, 0, 'hmh75@mail.aub.edu');");
-													echo("<script>alert('Post uploaded! You can check it in your profile!');</script>");
+                              $sth->execute(array(':post' => $Data, ':likess' => $like, ':commentss' => $comment, ':email' => $_SESSION['user']));
+													    echo("<script>alert('Post uploaded! You can check it in your profile!');</script>");
 												}
                       }
 
@@ -373,16 +375,82 @@
 
 
 								</div>
-                	<div class="be-large-post-align" id="seconddiv" enctype ="multipart/form-data" style="display:none;">
+                	<div class="be-large-post-align" id="seconddiv"  style="display:none;">
 
-                    <form class="" action="work.php" method="post">
-                      <label for="imageUpload" class="btn btn-primary btn-block btn-outlined">Choose Images</label>
-                      <input type="file" id="imageUpload" accept="image/*" style="display: none">
-                      <textarea id="special" name="post" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>?"></textarea>
+                    <form class="" action="work.php" method="post" enctype ="multipart/form-data">
+                      <!-- <label class="btn btn-primary" for="my-file-selector">
+                      <input id="my-file-selector" type="file" multiple="multiple" style="display:none"
+                      onchange="$('#upload-file-info').html(this.files[0].name)">
+                      Button Text Here
+                      </label>
+                      <span class='label label-info' id="upload-file-info"></span> -->
 
-												<input type="submit" name="submitMe" class="buttons-navbar btn btn-primary" value="Upload" />
-                    </form>
-                  </div>
+                      Select Image Files to Upload:
+                     <input type="file" name="files[]" multiple >
+                     <textarea id="special" name="post2" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>?"></textarea>
+
+                            <input type="submit" name="submitIt" class="buttons-navbar btn btn-primary" value="Upload" />
+                         </form>
+                       </div>
+
+              <?php
+                      if(isset($_POST['submitIt'])){
+                      // Include the database configuration file
+
+                      // File upload configuration
+                      $targetDir = "img/".$_SESSION['user'];
+                      $allowTypes = array('jpg','png','jpeg','gif');
+
+                      $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
+                      if(!empty(array_filter($_FILES['files']['name']))){
+                          foreach($_FILES['files']['name'] as $key=>$val){
+                              // File upload path
+                              $fileName = basename($_FILES['files']['name'][$key]);
+                              $targetFilePath = $targetDir . $fileName;
+
+                              // Check whether file type is valid
+                              $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+                              if(in_array($fileType, $allowTypes)){
+                                  // Upload file to server
+                                  if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
+                                      // Image db insert sql
+                                      $insertValuesSQL .= "('".$fileName."', NOW()),";
+                                  }else{
+                                      $errorUpload .= $_FILES['files']['name'][$key].', ';
+                                  }
+                              }else{
+                                  $errorUploadType .= $_FILES['files']['name'][$key].', ';
+                              }
+                          }
+
+                          if(!empty($insertValuesSQL)){
+                              $insertValuesSQL = trim($insertValuesSQL,',');
+                              // Insert image file name into database
+                              $db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+                              $postinfo = $db->quote($_POST["post2"]);	//user's post
+                              $insert = $db->query("INSERT INTO images (file_name,caption,upload-timee,likes,comments,userem) VALUES $insertValuesSQL.$postData,0, 0, 'hmh75@mail.aub.edu');");
+                              if($insert){
+                                  $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
+                                  $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
+                                  $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
+                                  $statusMsg = "Files are uploaded successfully.".$errorMsg;
+                              }else{
+                                  $statusMsg = "Sorry, there was an error uploading your file.";
+                              }
+                          }
+                      }else{
+                          $statusMsg = 'Please select a file to upload.';
+                      }
+
+                      // Display status message
+                      echo $statusMsg;
+        }
+ ?>
+
+
+
+
+
 
                   <div class="be-large-post-align" id="thirddiv" style="display:none;">this is working! </div>
 
