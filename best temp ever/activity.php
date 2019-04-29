@@ -253,10 +253,10 @@
 							<img class="login-user" src="img/login.jpg" alt="">
 							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name'])?></span></span>
 							<div class="drop-down-list a-list">
-								<a href="activity.html">My Portfolio</a>
-								<a href="statictics.html">Statistics </a>
-								<a href="about-us.html">Work Experience</a>
-								<a href="author-edit.html">Account Settings</a>
+								<a href="activity.php">My Portfolio</a>
+								<a href="statictics.php">Statistics </a>
+								<a href="about-us.php">Work Experience</a>
+								<a href="author-edit.php">Account Settings</a>
 								<a href="login.php?logout" >Logout</a>
 							</div>
 						</div>
@@ -266,13 +266,7 @@
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
 					<ul class="header-menu" id="one">
 						<li><a href="activity.php">Activity</a></li>
-						<li><a href="search.html">Discover</a>
-							<ul>
-								<li><a href="search.html">Explore</a></li>
-								<li><a href="people.html">People</a></li>
-								<li><a href="gallery.html">Galleries</a></li>
-							</ul>
-						</li>
+						<li><a href="search.php">Search</a></li>
 						<li><a href="author-login.html">My Portfolio</a></li>
 						<li><a href="site-map.html">Site Map</a></li>
 						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Posts </a></li>

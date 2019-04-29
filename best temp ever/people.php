@@ -53,11 +53,11 @@
 				<div class="header-menu-block">
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
 					<ul class="header-menu" id="one">
-						<li><a href="activity.html">Activity</a></li>
-						<li><a href="search.html">Discover</a>
+						<li><a href="activity.php">Activity</a></li>
+						<li><a href="search.php">Discover</a>
 							<ul>
-								<li><a href="search.html">Explore</a></li>
-								<li><a href="people.html">People</a></li>
+								<li><a href="search.php">Explore</a></li>
+								<li><a href="people.php">People</a></li>
 								<li><a href="gallery.html">Galleries</a></li>
 							</ul>
 						</li>
@@ -144,20 +144,334 @@
 				</div>
 			</div>
 		</div>
-		<div class="s_keywords">
-			<div class="container-fluid custom-container">
-				<a class="btn color-1 size-3 hover-10"><i class="fa fa-trash-o"></i>clear all filters</a>
-				<a class="btn color-6 size-3 hover-10">web design <i class="fa keyword fa-times"></i></a>
-				<a class="btn color-6 size-3 hover-10">ui <i class="fa keyword fa-times"></i></a>
-				<a class="btn color-6 size-3 hover-10">flat <i class="fa keyword fa-times"></i></a>
-				<a class="btn color-6 size-3 hover-10">wireframe <i class="fa keyword fa-times"></i></a>
-
-			</div>
-		</div>
 		<div class="container-fluid custom-container">
 			<div class="row">
 
-				<div class="col-md-2 left-feild">
+				<div class="col-md-10 col-md-push-2">
+					<div id="container-mix" class="be-user-wrapper row">
+						<div  class="mix category-4 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_2.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">17</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Daniel Ng</a>
+								<p class="be-user-info">Singapore, Singapore</p>
+								<div class="be-text-tags">
+									<a href="blog-detail-2.html">Graphic Design</a>,
+									<a href="blog-detail-2.html">Branding,</a>
+									<a href="blog-detail-2.html">Typography</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g1.jpg" alt="">
+									<img src="img/g2.jpg" alt="">
+									<img src="img/g3.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-3 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_3.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">34</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Louis Paquet</a>
+								<p class="be-user-info">Singapore, Singapore</p>
+								<div class="be-text-tags">
+									<a href="blog-detail-2.html">Web Design</a>,
+									<a href="blog-detail-2.html">Graphic Design</a>,
+									<a href="blog-detail-2.html">Art Director</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g4.jpg" alt="">
+									<img src="img/g5.jpg" alt="">
+									<img src="img/g6.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-2 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_4.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">42</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Phoenix, the Creative Studio</a>
+								<p class="be-user-info">Montreal, Quebec, Canada</p>
+								<div class="be-text-tags">
+										<a href="blog-detail-2.html">Web Design</a>,
+										<a href="blog-detail-2.html">Brandingn</a>,
+										<a href="blog-detail-2.html">Graphic Designr</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g10.jpg" alt="">
+									<img src="img/g8.jpg" alt="">
+									<img src="img/g1.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-1 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_5.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">21</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Cüneyt ŞEN</a>
+								<p class="be-user-info">Istanbul, Turkey</p>
+								<div class="be-text-tags">
+										<a href="blog-detail-2.html">Web Design</a>,
+										<a href="blog-detail-2.html">UI/UX</a>,
+										<a href="blog-detail-2.html">Graphic Designr</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g7.jpg" alt="">
+									<img src="img/g8.jpg" alt="">
+									<img src="img/g9.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-6 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_6.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">19</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Christopher Nicola</a>
+								<p class="be-user-info">Montreal, Quebec, Canada</p>
+								<div class="be-text-tags">
+										<a href="blog-detail-2.html">Web Design</a>,
+										<a href="blog-detail-2.html">Brandingn</a>,
+										<a href="blog-detail-2.html">Graphic Designr</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g1.jpg" alt="">
+									<img src="img/g3.jpg" alt="">
+									<img src="img/g4.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-5 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_7.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">9</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Maciej Mizer</a>
+								<p class="be-user-info">Łódź, Poland</p>
+								<div class="be-text-tags">
+										<a href="blog-detail-2.html">Digital Art</a>,
+										<a href="blog-detail-2.html">Illustration</a>,
+										<a href="blog-detail-2.html">Web Design</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g7.jpg" alt="">
+									<img src="img/g8.jpg" alt="">
+									<img src="img/g9.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-4 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_8.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">4</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Tomasz Mazurczak</a>
+								<p class="be-user-info">Opole, Poland</p>
+								<div class="be-text-tags">
+									<a href="blog-detail-2.html">Web Design</a>,
+									<a href="blog-detail-2.html">UI/UX</a>,
+									<a href="blog-detail-2.html">Graphic Design</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g1.jpg" alt="">
+									<img src="img/g4.jpg" alt="">
+									<img src="img/g9.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-3 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_9.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">2</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">v-a studio</a>
+								<p class="be-user-info">Lisbon, Portugal</p>
+								<div class="be-text-tags">
+									<a href="blog-detail-2.html">Graphic Design</a>,
+									<a href="blog-detail-2.html">Editorial Design</a>,
+									<a href="blog-detail-2.html">Web Design</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g7.jpg" alt="">
+									<img src="img/g8.jpg" alt="">
+									<img src="img/g9.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-1 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_10.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">20</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Leigh Taylor</a>
+								<p class="be-user-info">Barnsley, United Kingdom</p>
+								<div class="be-text-tags">
+									<a href="blog-detail-2.html">UI/UX</a>,
+									<a href="blog-detail-2.html">Web Design</a>,
+									<a href="blog-detail-2.html">Art Direction</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g1.jpg" alt="">
+									<img src="img/g4.jpg" alt="">
+									<img src="img/g5.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="mix category-2 custom-column-5">
+							<div class="be-user-block style-2">
+								<a class="be-ava-user style-2" href="blog-detail-2.html">
+									<img src="img/ava_11.jpg" alt="">
+								</a>
+								<div class="be-user-counter">
+									<div class="c_number">22</div>
+									<div class="c_text">projects</div>
+								</div>
+								<a href="blog-detail-2.html" class="be-use-name">Hoang Nguyen</a>
+								<p class="be-user-info">Ho Chi Minh City, Vietnam</p>
+								<div class="be-text-tags">
+									<a href="blog-detail-2.html">Interaction Design</a>,
+									<a href="blog-detail-2.html">UI/UX</a>,
+									<a href="blog-detail-2.html">Web Designn</a>
+								</div>
+								<div class="info-block">
+									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+									<span><i class="fa fa-eye"></i> 789</span>
+								</div>
+								<a class="btn color-1 size-2 hover-1">Follow</a>
+								<a class="portfolio-link type-1 clearfix" href="blog-detail-2.html">
+									<img src="img/g1.jpg" alt="">
+									<img src="img/g4.jpg" alt="">
+									<img src="img/g5.jpg" alt="">
+									<div class="color_bg">
+										<span>view portfolio</span>
+										<span class="child"></span>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-md-pull-10 left-feild">
 					<div class="be-vidget">
 						<h3 class="letf-menu-article">
 							Popular Creative Filds
@@ -367,342 +681,6 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="col-md-10">
-					<div id="container-mix"  class="row _post-container_">
-						<div class="category-1 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p1.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">The kitsch destruction of our world</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a1.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-2 mix custom-column-5">
-							<div class="be-post">
-								<a href="page2.html" class="be-img-block">
-									<img src="img/p2.jpg" alt="omg">
-								</a>
-								<a href="page2.html" class="be-post-title">Treebeard</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a1.png" alt="" class="ava-author">
-									<span>by <a href="page2.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-3 mix custom-column-5">
-							<div class="be-post">
-								<a href="page3.html" class="be-img-block">
-									<img src="img/p3.jpg" alt="omg">
-								</a>
-								<a href="page3.html" class="be-post-title">Colors of Ramadan</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a2.png" alt="" class="ava-author">
-									<span>by <a href="page3.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-4 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p4.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">Leaving Home - L'Officiel Ukraine</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a3.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-5 mix custom-column-5">
-							<div class="be-post">
-								<a href="page2.html" class="be-img-block">
-									<img src="img/p5.jpg" alt="omg">
-								</a>
-								<a href="page2.html" class="be-post-title">Drive Your World</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a4.png" alt="" class="ava-author">
-									<span>by <a href="page2.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-6 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p13.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">Fran Ewald for The Diaries Project</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a5.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-5 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p7.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">raindrops monochrome</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a6.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-3 mix custom-column-5">
-							<div class="be-post">
-								<a href="page3.html" class="be-img-block">
-									<img src="img/p8.jpg" alt="omg">
-								</a>
-								<a href="page3.html" class="be-post-title">Racing Queensland</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a7.png" alt="" class="ava-author">
-									<span>by <a href="page3.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-2 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p9.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">NAHA Finalist Hairstylist of the Year Allen Ruiz</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a7.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-4 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p10.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">tomorrow</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a8.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-6 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p11.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">Tropicalia</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a5.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-2 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p12.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">Face</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a6.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-1 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p13.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">Stay Ahead Series</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a5.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-3 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p14.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">Faber-Castell / Psychological Problems</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a1.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-						<div class="category-1 mix custom-column-5">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block">
-									<img src="img/p15.jpg" alt="omg">
-								</a>
-								<a href="page1.html" class="be-post-title">Garry Simpson - Bridges - Intelligent Life Magazine</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a9.png" alt="" class="ava-author">
-									<span>by <a href="page1.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
 		</div>
 	</div>
@@ -855,23 +833,23 @@
 						<div class="footer-block">
 							<h1 class="footer-title">Some Links</h1>
 							<div class="row footer-list-footer">
-								<div class="col-md-6">
-								<ul class="link-list">
-									<li><a href="about-us.html">About Us</a></li>
-									<li><a href="contact-us.html">Help</a></li>
-									<li><a href="contact-us.html">Contacts</a></li>
-									<li><a href="activity.html">Job</a></li>
-									<li><a href="activity.html">Projets</a></li>
-								</ul></div>
-								<div class="col-md-6">
-								<ul class="link-list">
-									<li><a href="activity.html">New Works</a></li>
-									<li><a href="author.html">Popular Authors</a></li>
-									<li><a href="author.html">New Authors</a></li>
-									<li><a href="people.html">Career</a></li>
-									<li><a href="faq">FAQ</a></li>
-								</ul>
-								</div>
+							<div class="col-md-6">
+							<ul class="link-list">
+								<li><a href="about-us.html">About Us</a></li>
+								<li><a href="contact-us.html">Help</a></li>
+								<li><a href="contact-us.html">Contacts</a></li>
+								<li><a href="activity.html">Job</a></li>
+								<li><a href="activity.html">Projets</a></li>
+							</ul></div>
+							<div class="col-md-6">
+							<ul class="link-list">
+								<li><a href="activity.html">New Works</a></li>
+								<li><a href="author.html">Popular Authors</a></li>
+								<li><a href="author.html">New Authors</a></li>
+								<li><a href="people.html">Career</a></li>
+								<li><a href="faq">FAQ</a></li>
+							</ul>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -1127,14 +1105,15 @@
 	    </div>
 	   <div class="open"><img src="img/icon-134.png" alt=""></div>
 	</div>
+
 	<!-- SCRIPTS	 -->
 	<script src="script/jquery-2.1.4.min.js"></script>
 	<script src="script/jquery-ui.min.js"></script>
 	<script src="script/bootstrap.min.js"></script>
 	<script src="script/idangerous.swiper.min.js"></script>
 	<script src="script/jquery.mixitup.js"></script>
-	<script src="script/jquery.viewportchecker.min.js"></script>
 	<script src="script/filters.js"></script>
+	<script src="script/jquery.viewportchecker.min.js"></script>
 	<script src="script/global.js"></script>
 	</body>
 </html>
