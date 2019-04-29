@@ -7,21 +7,21 @@ if (!isset($_SESSION['name'])) {
 <html>
 
 <head>
-<title>TheDoctors</title>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link rel="shortcut icon" href="img/fav.png">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="style/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="style/icon.css">
-		<link rel="stylesheet" href="style/loader.css">
-		<link rel="stylesheet" href="style/idangerous.swiper.css">
-		<link rel="stylesheet" href="style/stylesheet.css">
-		<!--[if lt IE 10]>
+	<title>TheDoctors</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" href="img/fav.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="style/icon.css">
+	<link rel="stylesheet" href="style/loader.css">
+	<link rel="stylesheet" href="style/idangerous.swiper.css">
+	<link rel="stylesheet" href="style/stylesheet.css">
+	<!--[if lt IE 10]>
 			<link rel="stylesheet" type="text/css" href="style/ie-9.css" />
 		<![endif]-->
-		<!--[if lt IE 9]>
+	<!--[if lt IE 9]>
 		    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	    <![endif]-->
@@ -47,14 +47,14 @@ if (!isset($_SESSION['name'])) {
 	<header>
 		<div class="container-fluid custom-container">
 			<div class="row no_row row-header">
-<div class="brand-be">
-	<a href="index.php">
-		<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt=" logo">
-		<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
-		<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
-		<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
-	</a>
-</div>
+				<div class="brand-be">
+					<a href="index.php">
+						<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt=" logo">
+						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
+						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
+						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
+					</a>
+				</div>
 				<div class="login-header-block">
 					<div class="login_block">
 						<a class="notofications-popup" href="blog-detail-2.html">
@@ -62,7 +62,7 @@ if (!isset($_SESSION['name'])) {
 							<span class="noto-count">23</span>
 						</a>
 						<div class="noto-popup notofications-block">
-						<div class="m-close"><i class="fa fa-times"></i></div>
+							<div class="m-close"><i class="fa fa-times"></i></div>
 							<div class="noto-label">Your Notification</div>
 							<div class="noto-body">
 								<div class="noto-entry">
@@ -177,7 +177,7 @@ if (!isset($_SESSION['name'])) {
 							<span class="noto-count">4</span>
 						</a>
 						<div class="noto-popup messages-block">
-						<div class="m-close"><i class="fa fa-times"></i></div>
+							<div class="m-close"><i class="fa fa-times"></i></div>
 							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages-2.html">compose</a><a href="messages.html">View all messages</a></span></div>
 							<div class="noto-body">
 								<div class="noto-entry style-2">
@@ -209,7 +209,7 @@ if (!isset($_SESSION['name'])) {
 												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
 											</div>
 											<div class="noto-message">
-											Pellentesque habitant morbi tristique senectus et netus tristique senectus
+												Pellentesque habitant morbi tristique senectus et netus tristique senectus
 											</div>
 										</div>
 									</div>
@@ -254,13 +254,13 @@ if (!isset($_SESSION['name'])) {
 						</div>
 						<div class="be-drop-down login-user-down" style="padding-top: 10px;">
 							<img class="login-user" src="img/login.jpg" alt="">
-							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name'])?></span></span>
+							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
 								<a href="activity.php">My Portfolio</a>
 								<a href="statictics.php">Statistics </a>
 								<a href="about-us.php">Work Experience</a>
 								<a href="author-edit.php">Account Settings</a>
-								<a href="login.php?logout" >Logout</a>
+								<a href="login.php?logout">Logout</a>
 							</div>
 						</div>
 					</div>
@@ -325,50 +325,26 @@ if (!isset($_SESSION['name'])) {
 									<div class="input-col col-xs-12 col-sm-6">
 										<div class="form-group fg_icon focus-2">
 											<div class="form-label">First Name</div>
-											<input class="form-input" type="text" value="Taylor">
+											<input class="form-input" type="text" value="<?php echo ($_SESSION['name']); ?>">
 										</div>
 									</div>
 									<div class="input-col col-xs-12 col-sm-6">
 										<div class="form-group focus-2">
 											<div class="form-label">Last Name</div>
-											<input class="form-input" type="text" value="Leight">
+											<input class="form-input" type="text" value="<?php echo ($_SESSION['last']); ?>">
 										</div>
 									</div>
 									<div class="input-col col-xs-12">
 										<div class="form-group focus-2">
 											<div class="form-label">Occupation</div>
-											<input class="form-input" type="text" value="UI/UX, Web Design, Art Direction">
+											<input class="form-input" type="text" value="<?php echo ($_SESSION['field']); ?>">
 										</div>
 									</div>
-									<div class="input-col col-xs-12">
+
+									<div class="input-col col-xs-12 ">
 										<div class="form-group focus-2">
-											<div class="form-label">Company</div>
-											<input class="form-input" type="text" placeholder="">
-										</div>
-									</div>
-									<div class="input-col col-xs-12 col-sm-6">
-										<div class="form-label">Country</div>
-										<div class="be-drop-down icon-none">
-											<span class="be-dropdown-content"> United Kingdom </span>
-											<ul class="drop-down-list">
-												<li><a>USA</a></li>
-												<li><a>India</a></li>
-												<li><a>Mexica</a></li>
-												<li><a>Russia</a></li>
-												<li><a>Italy</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="input-col col-xs-12 col-sm-6">
-										<div class="form-group focus-2">
-											<div class="form-label">City</div>
-											<input class="form-input" type="text" value="Barnsley">
-										</div>
-									</div>
-									<div class="input-col col-xs-12">
-										<div class="form-group focus-2">
-											<div class="form-label">Website URL</div>
-											<input class="form-input" type="text" value="http:// www.phoenix.cool">
+											<div class="form-label">Country</div>
+											<input class="form-input" type="text" value="<?php echo ($_SESSION['country']); ?>">
 										</div>
 									</div>
 								</div>

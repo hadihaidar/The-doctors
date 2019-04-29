@@ -1,8 +1,8 @@
 <?php
-    session_start();
-    if (isset($_SESSION['name'])){
-		header("location:activity.php");
-	}
+session_start();
+if (isset($_SESSION['name'])) {
+    header("location:activity.php");
+}
 ?>
 <html>
 
@@ -50,7 +50,7 @@
             <div class="row no_row row-header">
                 <div class="brand-be">
                     <a href="index.php">
-                        <img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px"; alt=" logo">
+                        <img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px" ; alt=" logo">
                         <img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
                         <img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
                         <img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
@@ -92,7 +92,7 @@
                             <i class="fa fa-times close-button"></i>
                             <h5 class="large-popup-title">Log in</h5>
                         </div>
-                        <form action="login.php" method ="POST" class="popup-input-search">
+                        <form action="login.php" method="POST" class="popup-input-search">
                             <div class="col-md-6">
                                 <input class="input-signtype" name="email" type="email" required="" placeholder="Your email">
                             </div>
@@ -103,7 +103,7 @@
                                 <a href="forget.php" class="link-large-popup">Forgot password?</a>
                             </div>
                             <div class="col-xs-6 for-signin">
-                                <input name = 'login' type="submit" class="be-popup-sign-button" value="SIGN IN">
+                                <input name='login' type="submit" class="be-popup-sign-button" value="SIGN IN">
                             </div>
                         </form>
                     </div>
@@ -112,12 +112,14 @@
         </div>
     </div>
     <?php
-        if ($_GET['empty']==true){
-    ?>
-    <script>alert("<?php echo($_REQUEST['empty']) ?>");</script>
+    if ($_GET['empty'] == true) {
+        ?>
+        <script>
+            alert("<?php echo ($_REQUEST['empty']) ?>");
+        </script>
     <?php
-        }
-    ?>
+}
+?>
     <div class="large-popup register">
         <div class="large-popup-fixed"></div>
         <div class="container large-popup-container">
@@ -151,6 +153,14 @@
                             </div>
                             <div class="col-md-12 be-date-block">
                                 <span class="large-popup-text">
+
+                                </span>
+                                <div>
+                                    <input class="input-signtype" type="text" name='field' placeholder="Field" required="">
+                                </div>
+                            </div>
+                            <div class="col-md-12 be-date-block">
+                                <span class="large-popup-text">
                                     Date of birth
                                 </span>
                                 <div>
@@ -180,12 +190,13 @@
                                     $last =  $db->quote($_POST["last"]);
                                     $email = $db->quote($_POST["email"]);
                                     $country = $db->quote($_POST["country"]);
+                                    $field = $db->quote($_POST["field"]);
                                     $password = $db->quote($_POST["password"]);
                                     $date = $db->quote($_POST["date"]);
                                     $v = md5(time() . $first);
                                     $vkey = $db->quote($v);
                                     $password = $db->quote(md5($password));
-                                    $query = $db->exec("INSERT INTO user VALUES ($first, $last,$email,$country,$password,$date,$vkey,0);");
+                                    $query = $db->exec("INSERT INTO user VALUES ($first, $last,$email,$country,$password,$date,$vkey,0,$field);");
                                     if ($query) {
                                         $to = $_POST["email"];
                                         $subject = "Email Verification";
