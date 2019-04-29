@@ -401,7 +401,9 @@
                       // Include the database configuration file
 
                       // File upload configuration
-                      mkdir('img/'.$_SESSION['user'], 0755, true);
+                      if (!file_exists('img/'.$_SESSION['user'])) {
+                          mkdir('img/'.$_SESSION['user'], 0755, true);
+}
                       $targetDir = 'img/'.$_SESSION['user'].'/';
                       $allowTypes = array('jpg','png','jpeg','gif', 'PNG');
 
@@ -417,7 +419,7 @@
                               if(in_array($fileType, $allowTypes)){
                                 if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
                                       // Image db insert sql
-                                      $insertValuesSQL .= "('".$fileName."', NOW()),";
+                                      $insertValuesSQL .= '(';
                                   }else{
                                       $errorUpload .= $_FILES['files']['name'][$key].', ';
                                   }
@@ -429,19 +431,34 @@
 
                           if(!empty($insertValuesSQL)){
 
-                              $insertValuesSQL = trim($insertValuesSQL,',');
-                              // Insert image file name into database
-                              $db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
-                              $postinfo = $db->quote($_POST["post2"]);	//user's post
-                              $insert = $db->query("INSERT INTO images (file_name,upload-timee,caption,status,likes,comments,userem) VALUES $insertValuesSQL.$postinfo,0, 0,0, 'hmh75@mail.aub.edu');");
-                              if($insert){
+                              $insertValuesSQL = "";
 
+
+                              // Insert image file name into database
+                              $db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+                              $Data2 = $_POST["post2"];
+                              $user2 = $db2->quote($_SESSION["user"]);	//user's email
+                              $stmt2 ="INSERT INTO images (file_name,upload-timee,caption,status,likes,comments,userem) VALUES (:file, NOW(), :post, :status, :likes, :comments, :email)";
+                              $sth2 = $db2->prepare($stmt2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+                              //
+                              // //
+                              // // // set parameters and execute
+                              $like= 0;
+                              $comment=0;
+                              $state = 1;  //public by default
+
+
+                              $test = $sth2->execute(array(':file' => ".$fileName.", ':post' => $Data2, ':status' => $state, ':likes' => $like, ':comments' => $comment, ':email' => $_SESSION['user']));
+                              //echo("<script>alert('Image Uploaded! You can check it in your profile!');</script>");
+                              if ($test) {
+                                  echo("<script>alert('hi');</script>");
                                   $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
                                   $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
                                   $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
                                   $statusMsg = "Files are uploaded successfully.".$errorMsg;
                               }else{
-                                  echo("<script>alert('hi');</script>");
+
                                   $statusMsg = "Sorry, there was an error uploading your file.";
                               }
                           }
@@ -452,6 +469,7 @@
                       // Display status message
                       echo("<script>alert('$statusMsg');</script>");
         }
+
  ?>
 
 
