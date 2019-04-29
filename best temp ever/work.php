@@ -393,8 +393,7 @@
                      <textarea id="special" name="post2" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>?"></textarea>
 
                             <input type="submit" name="submitIt" class="buttons-navbar btn btn-primary" value="Upload" />
-                         </form>
-                       </div>
+
 
               <?php
                       if(isset($_POST['submitIt'])){
@@ -438,7 +437,7 @@
                               $db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
                               $Data2 = $_POST["post2"];
                               $user2 = $db2->quote($_SESSION["user"]);	//user's email
-                              $stmt2 ="INSERT INTO images (file_name,upload-timee,caption,status,likes,comments,userem) VALUES (:file, NOW(), :post, :status, :likes, :comments, :email)";
+                              $stmt2 ="INSERT INTO images VALUES (NULL,:file, NOW(), :post, :status, :likes, :comments, :email)";
                               $sth2 = $db2->prepare($stmt2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
                               //
@@ -449,10 +448,9 @@
                               $state = 1;  //public by default
 
 
-                              $test = $sth2->execute(array(':file' => ".$fileName.", ':post' => $Data2, ':status' => $state, ':likes' => $like, ':comments' => $comment, ':email' => $_SESSION['user']));
+                              $test = $sth2->execute(array(':file' => $fileName, ':post' => $Data2, ':status' => $state, ':likes' => $like, ':comments' => $comment, ':email' => $_SESSION['user']));
                               //echo("<script>alert('Image Uploaded! You can check it in your profile!');</script>");
                               if ($test) {
-                                  echo("<script>alert('hi');</script>");
                                   $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
                                   $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
                                   $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
@@ -471,6 +469,8 @@
         }
 
  ?>
+</form>
+</div>
 
 
 
