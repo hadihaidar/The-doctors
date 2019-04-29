@@ -17,6 +17,8 @@
 		<link rel="stylesheet" href="style/idangerous.swiper.css">
 		<link rel="stylesheet" href="style/jquery-ui.css">
 		<link rel="stylesheet" href="style/stylesheet.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
 		<!--[if lt IE 10]>
 			<link rel="stylesheet" type="text/css" href="style/ie-9.css" />
 		<![endif]-->
@@ -294,7 +296,7 @@
 			<div class="container">
 				<ul class="editor-nav">
 					<li id="content-w" class="en-nav active">1. Add Status</li>
-					<li id="setting-w" class="en-nav">2. Upload Image</li>
+					<li id="setting-w" name="setting-w" class="en-nav">2. Upload Image</li>
 					<li id="cover-w" class="en-nav">3. Upload Video</li>
 				</ul>
 
@@ -334,7 +336,7 @@
 
 
 
-										<form class="" action="work.php" method="post">
+										<form  class="" action="work.php" method="post">
 											<textarea id="special" name="post" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>?"></textarea>
 
 												<input type="submit" name="submitMe" class="buttons-navbar btn btn-primary" value="POST" />
@@ -344,7 +346,7 @@
                           $Data = $_POST["post"];
 													$postData = $db->quote($_POST["post"]);	//user's post
                           $user = $db->quote($_SESSION["user"]);	//user's email
-												  $stmt = "INSERT INTO post (body,timee,likes,comments,userem) VALUES (:post, NOW(), :likess, :commentss, :email);";
+												  $stmt = "INSERT INTO post (body,timee,likes,comments,status,userem) VALUES (:post, NOW(), :likess, :commentss, :state, :email);";
                           $sth = $db->prepare($stmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 
                           //
@@ -354,16 +356,17 @@
 													$first = ".$postData.";
                           $like= 0;
                           $comment=0;
+                          $status = 1;  //public by default
 
                            //$stmt->bind_param("siis", $first, $like, $comment, $user);
                           // $result = $stmt->get_result();
 													// header("location:activity.php");
                           if (strlen($Data)>3000 || strlen($Data)<1) {
-                            	echo("<script>alert('Make sure your post is of correct length!');</script>");
+                            	echo("<script>alert('Make sure your post has a valid length!');</script>");
 
                           }
                           else{
-                              $sth->execute(array(':post' => $Data, ':likess' => $like, ':commentss' => $comment, ':email' => $_SESSION['user']));
+                              $sth->execute(array(':post' => $Data, ':likess' => $like, ':commentss' => $comment, ':state' => $status, ':email' => $_SESSION['user']));
 													    echo("<script>alert('Post uploaded! You can check it in your profile!');</script>");
 												}
                       }
@@ -376,8 +379,8 @@
 
 								</div>
                 	<div class="be-large-post-align" id="seconddiv"  style="display:none;">
-
                     <form class="" action="work.php" method="post" enctype ="multipart/form-data">
+
                       <!-- <label class="btn btn-primary" for="my-file-selector">
                       <input id="my-file-selector" type="file" multiple="multiple" style="display:none"
                       onchange="$('#upload-file-info').html(this.files[0].name)">
@@ -398,8 +401,9 @@
                       // Include the database configuration file
 
                       // File upload configuration
-                      $targetDir = "img/".$_SESSION['user'];
-                      $allowTypes = array('jpg','png','jpeg','gif');
+                      mkdir('img/'.$_SESSION['user'], 0755, true);
+                      $targetDir = 'img/'.$_SESSION['user'].'/';
+                      $allowTypes = array('jpg','png','jpeg','gif', 'PNG');
 
                       $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
                       if(!empty(array_filter($_FILES['files']['name']))){
@@ -411,8 +415,7 @@
                               // Check whether file type is valid
                               $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
                               if(in_array($fileType, $allowTypes)){
-                                  // Upload file to server
-                                  if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
+                                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
                                       // Image db insert sql
                                       $insertValuesSQL .= "('".$fileName."', NOW()),";
                                   }else{
@@ -423,18 +426,22 @@
                               }
                           }
 
+
                           if(!empty($insertValuesSQL)){
+
                               $insertValuesSQL = trim($insertValuesSQL,',');
                               // Insert image file name into database
                               $db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
                               $postinfo = $db->quote($_POST["post2"]);	//user's post
-                              $insert = $db->query("INSERT INTO images (file_name,caption,upload-timee,likes,comments,userem) VALUES $insertValuesSQL.$postData,0, 0, 'hmh75@mail.aub.edu');");
+                              $insert = $db->query("INSERT INTO images (file_name,upload-timee,caption,status,likes,comments,userem) VALUES $insertValuesSQL.$postinfo,0, 0,0, 'hmh75@mail.aub.edu');");
                               if($insert){
+
                                   $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
                                   $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
                                   $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
                                   $statusMsg = "Files are uploaded successfully.".$errorMsg;
                               }else{
+                                  echo("<script>alert('hi');</script>");
                                   $statusMsg = "Sorry, there was an error uploading your file.";
                               }
                           }
@@ -443,7 +450,7 @@
                       }
 
                       // Display status message
-                      echo $statusMsg;
+                      echo("<script>alert('$statusMsg');</script>");
         }
  ?>
 
