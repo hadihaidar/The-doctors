@@ -1,6 +1,8 @@
 <?php
     session_start();
-
+    if (!isset($_SESSION['name'])){
+      header("location:index.php");
+    }
 
 ?>
 <html>
@@ -394,81 +396,6 @@
 
                             <input type="submit" name="submitIt" class="buttons-navbar btn btn-primary" value="Upload" />
 
-
-              <?php
-                      if(isset($_POST['submitIt'])){
-                      // Include the database configuration file
-
-                      // File upload configuration
-                      if (!file_exists('img/'.$_SESSION['user'])) {
-                          mkdir('img/'.$_SESSION['user'], 0755, true);
-}
-                      $targetDir = 'img/'.$_SESSION['user'].'/';
-                      $allowTypes = array('jpg','png','jpeg','gif', 'PNG');
-
-                      $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
-                      if(!empty(array_filter($_FILES['files']['name']))){
-                          foreach($_FILES['files']['name'] as $key=>$val){
-                              // File upload path
-                              $fileName = basename($_FILES['files']['name'][$key]);
-                              $targetFilePath = $targetDir . $fileName;
-
-                              // Check whether file type is valid
-                              $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-                              if(in_array($fileType, $allowTypes)){
-                                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
-                                      // Image db insert sql
-                                      $insertValuesSQL .= '(';
-                                  }else{
-                                      $errorUpload .= $_FILES['files']['name'][$key].', ';
-                                  }
-                              }else{
-                                  $errorUploadType .= $_FILES['files']['name'][$key].', ';
-                              }
-                          }
-
-
-                          if(!empty($insertValuesSQL)){
-
-                              $insertValuesSQL = "";
-
-
-                              // Insert image file name into database
-                              $db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
-                              $Data2 = $_POST["post2"];
-                              $user2 = $db2->quote($_SESSION["user"]);	//user's email
-                              $stmt2 ="INSERT INTO images VALUES (NULL,:file, NOW(), :post, :status, :likes, :comments, :email)";
-                              $sth2 = $db2->prepare($stmt2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-                              //
-                              // //
-                              // // // set parameters and execute
-                              $like= 0;
-                              $comment=0;
-                              $state = 1;  //public by default
-
-
-                              $test = $sth2->execute(array(':file' => $fileName, ':post' => $Data2, ':status' => $state, ':likes' => $like, ':comments' => $comment, ':email' => $_SESSION['user']));
-                              //echo("<script>alert('Image Uploaded! You can check it in your profile!');</script>");
-                              if ($test) {
-                                  $errorUpload = !empty($errorUpload)?'Upload Error: '.$errorUpload:'';
-                                  $errorUploadType = !empty($errorUploadType)?'File Type Error: '.$errorUploadType:'';
-                                  $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType;
-                                  $statusMsg = "Files are uploaded successfully.".$errorMsg;
-                              }else{
-
-                                  $statusMsg = "Sorry, there was an error uploading your file.";
-                              }
-                          }
-                      }else{
-                          $statusMsg = 'Please select a file to upload.';
-                      }
-
-                      // Display status message
-                      echo("<script>alert('$statusMsg');</script>");
-        }
-
- ?>
 </form>
 </div>
 
@@ -661,6 +588,76 @@
 	<script src="script/colors.js"></script>
 	<script src="script/jqColorPicker.js"></script>
 	<script src="script/global.js"></script>
+
+
+                <?php
+                        if(isset($_POST['submitIt'])){
+                      //  Include the database configuration file
+
+                        if (!file_exists('img/'.$_SESSION['user'])) {
+                            mkdir('img/'.$_SESSION['user'], 0755, true);
+  }
+
+                    //    mkdir('img/'.$_SESSION['user'], 0755, true);
+
+                        $targetDir = 'img/'.$_SESSION['user'].'/';    //creates directory
+                        $allowTypes = array('jpg','png','jpeg','gif', 'PNG'); //allowed file extentions
+
+                        $statusMsg = '';
+                        if(!empty(array_filter($_FILES['files']['name']))){
+                          $test=false;  //insert failure default value changes to true when insert takes place
+                          // $incorrect =true;  //incorrect format variable
+                          foreach($_FILES['files']['name'] as $key=>$val){
+                            $targetFilePath =($_FILES['files']['name'][$key]);
+                            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+                            if(!(in_array($fileType, $allowTypes))){
+                              die("<script>alert('Please Enter a vaild Image!')</script>;");
+                            }
+                          }
+                            foreach($_FILES['files']['name'] as $key=>$val){  //loops over files uploaded
+
+                                $fileName = strtotime("now").'_'.($_FILES['files']['name'][$key]);  //concatenates time with image name
+                                $targetFilePath = $targetDir . $fileName;
+
+                                // Check whether file type is valid
+                                $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+                                  if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
+                                    $db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");    //insert procedure
+                                    $Data2 = $_POST["post2"];
+                                    $user2 = $db2->quote($_SESSION["user"]);	//user's email
+                                    $stmt2 ="INSERT INTO images VALUES (NULL,:file, NOW(), :post, :status, :likes, :comments, :email)";
+                                    $sth2 = $db2->prepare($stmt2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+
+                                    //
+                                    // //
+                                    // // // set parameters and execute
+                                    $like= 0;
+                                    $comment=0;
+                                    $state = 1;  //public by default
+
+
+                                    $test = $sth2->execute(array(':file' => $fileName, ':post' => $Data2, ':status' => $state, ':likes' => $like, ':comments' => $comment, ':email' => $_SESSION['user']));
+
+                                    }
+                            }
+
+                                if ($test) {  //all files are of correct format
+                                    $statusMsg = "Files are uploaded successfully!";
+                                }
+                                else{
+
+                                    $statusMsg = "Sorry, there was an error uploading your file.";  //some error
+                                }
+
+                        }else{
+                            $statusMsg = 'Please select a file to upload.';
+                        }
+
+                        // Display status message
+                        echo("<script>alert('$statusMsg');</script>");
+          }
+
+   ?>
 
 	</body>
 </html>
