@@ -13,6 +13,9 @@ if (isset($_POST['login'])) {
                 if ($row['Password'] == md5($db->quote($_POST["password"]))) {
                     $_SESSION['user'] = $_POST['email'];
                     $_SESSION['name'] = $row['FirstName'];
+                    $_SESSION['last'] = $row['LastName'];
+                    $_SESSION['field'] = $row['Field'];
+                    $_SESSION['country'] = $row['County'];
                     header("location:activity.php");
                 } else {
                     header("location:index.php?empty=Incorrect Password");
