@@ -589,6 +589,8 @@
 	<script src="script/jqColorPicker.js"></script>
 	<script src="script/global.js"></script>
 
+  
+<!---                            PHP SCRIPT FOR IMAGE UPLOAD                                  --->
 
                 <?php
                         if(isset($_POST['submitIt'])){
