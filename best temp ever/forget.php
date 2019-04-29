@@ -72,8 +72,9 @@ if (isset($_SESSION['name'])) {
             foreach ($query as $row) {
                 if ($row['Email'] == $_POST['email']) {
                     $COUNT = 1;
-                    $rand = "random";
-                    $pas = time() . $rand; //to be send to the email
+                    $rand = ['!', '@', '#', '$', '%', '^', '&', '*'];
+                    $let = ['a', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+                    $pas = $let[rand(0, 23)] . $let[rand(0, 23)] . $let[rand(0, 23)] . time() . $rand[rand(0, 7)];
                     $pass = $db->quote(md5($db->quote($pas))); // to be added to db
                     $e = $db->quote($_POST['email']);
                     $query = $db->exec("UPDATE user SET Password= ($pass) where  Email =($e)");
