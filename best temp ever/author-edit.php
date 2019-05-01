@@ -3,6 +3,54 @@ session_start();
 if (!isset($_SESSION['name'])) {
 	header("location:index.php");
 }
+
+if (isset($_POST['profile'])) {
+	$db = new PDO("mysql:dbname=thedoctors", "root", "");
+	$query = $db->query("SELECT * FROM user");
+
+	foreach ($query as $row) {
+		if ($row['Email'] == $_SESSION['user']) {
+			$first = $db->quote($_POST['first']);
+			$last = $db->quote($_POST['last']);
+			$occupation = $db->quote($_POST['occupation']);
+			$country = $db->quote($_POST['country']);
+
+			$e = $db->quote($row['Email']);
+			$query = $db->exec("UPDATE user SET FirstName= ($first), LastName= ($last), County= ($country), Field= ($occupation) where  Email =($e)");
+			if ($query) {
+				echo ('<script>alert("Your data has been changed")</script>');
+
+				$_SESSION['name'] = $_POST['first'];
+				$_SESSION['last'] = $_POST['last'];
+				$_SESSION['field'] = $_POST['occupation'];
+				$_SESSION['country'] = $_POST['country'];
+			} else {
+				echo ('<script>alert("Something went wrong please try again")</script>');
+			}
+		}
+	}
+}
+
+
+if (isset($_POST['about'])) {
+	$db = new PDO("mysql:dbname=thedoctors", "root", "");
+	$query = $db->query("SELECT * FROM user");
+
+	foreach ($query as $row) {
+		if ($row['Email'] == $_SESSION['user']) {
+			$about = $db->quote($_POST['aboutMe']);
+
+			$e = $db->quote($row['Email']);
+			$query = $db->exec("UPDATE user SET about= ($about) where  Email =($e)");
+			if ($query) {
+				echo ('<script>alert("Your data has been changed")</script>');
+				$_SESSION['about'] = $_POST['aboutMe'];
+			} else {
+				echo ('<script>alert("Something went wrong please try again")</script>');
+			}
+		}
+	}
+}
 ?>
 <html>
 
@@ -295,12 +343,10 @@ if (!isset($_SESSION['name'])) {
 							<ul class="ul nav">
 								<li class="edit-ln"><a href="#basic-information">Basic Information</a></li>
 								<li class="edit-ln"><a href="#edit-password">Edit Password</a></li>
-								<li class="edit-ln"><a href="#on-the-web">On The Web</a></li>
 								<li class="edit-ln"><a href="#about-me">About Me</a></li>
-								<li class="edit-ln"><a href="#web-references">Web References</a></li>
 							</ul>
 						</div>
-						<a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i>add sections</a>
+
 					</div>
 
 				</div>
@@ -321,36 +367,44 @@ if (!isset($_SESSION['name'])) {
 								</div>
 							</div>
 							<div class="be-large-post-align">
-								<div class="row">
-									<div class="input-col col-xs-12 col-sm-6">
-										<div class="form-group fg_icon focus-2">
-											<div class="form-label">First Name</div>
-											<input class="form-input" type="text" value="<?php echo ($_SESSION['name']); ?>">
+								<form action="author-edit.php" method="POST">
+									<div class="row">
+										<div class="input-col col-xs-12 col-sm-6">
+											<div class="form-group fg_icon focus-2">
+												<div class="form-label">First Name</div>
+												<input class="form-input" name="first" type="text" value="<?php echo ($_SESSION['name']); ?>">
+											</div>
 										</div>
-									</div>
-									<div class="input-col col-xs-12 col-sm-6">
-										<div class="form-group focus-2">
-											<div class="form-label">Last Name</div>
-											<input class="form-input" type="text" value="<?php echo ($_SESSION['last']); ?>">
+										<div class="input-col col-xs-12 col-sm-6">
+											<div class="form-group focus-2">
+												<div class="form-label">Last Name</div>
+												<input class="form-input" type="text" name="last" value="<?php echo ($_SESSION['last']); ?>">
+											</div>
 										</div>
-									</div>
-									<div class="input-col col-xs-12">
-										<div class="form-group focus-2">
-											<div class="form-label">Occupation</div>
-											<input class="form-input" type="text" value="<?php echo ($_SESSION['field']); ?>">
+										<div class="input-col col-xs-12">
+											<div class="form-group focus-2">
+												<div class="form-label">Occupation</div>
+												<input class="form-input" type="text" name="occupation" value="<?php echo ($_SESSION['field']); ?>">
+											</div>
 										</div>
-									</div>
 
-									<div class="input-col col-xs-12 ">
-										<div class="form-group focus-2">
-											<div class="form-label">Country</div>
-											<input class="form-input" type="text" value="<?php echo ($_SESSION['country']); ?>">
+										<div class="input-col col-xs-12 ">
+											<div class="form-group focus-2">
+												<div class="form-label">Country</div>
+												<input class="form-input" type="text" name="country" value="<?php echo ($_SESSION['country']); ?>">
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<input class="btn color-1 size-2 hover-1 btn-right" name="profile" type="submit" value="Submit changes">
 										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 						</div>
 					</div>
+
+
+
 					<form action="author-edit.php" method='post'>
 						<div class="sec" data-sec="edit-password">
 							<div class="be-large-post">
@@ -390,7 +444,7 @@ if (!isset($_SESSION['name'])) {
 						if (isset($_POST['change'])) {
 							$db = new PDO("mysql:dbname=thedoctors", "root", "");
 							$query = $db->query("SELECT * FROM user");
-							$COUNT = 0;
+
 							foreach ($query as $row) {
 								if ($row['Email'] == $_SESSION['user'] && $row['Password'] == md5($db->quote($_POST['old']))) {
 									if ($_POST['new'] == $_POST['repeat']) {
@@ -414,62 +468,7 @@ if (!isset($_SESSION['name'])) {
 						}
 						?>
 					</form>
-					<div class="sec" data-sec="on-the-web">
-						<div class="be-large-post m-social">
-							<div class="info-block style-2">
-								<div class="be-large-post-align">
-									<h3 class="info-block-label">On The Web</h3>
-								</div>
-							</div>
-							<div class="be-large-post-align">
-								<div class="social-input form-group focus-2">
-									<div class="s_icon">
-										<div class="social-bars"><i class="fa fa-bars"></i></div>
-										<a class="social-btn color-1" href="blog-detail-2.html"><i class="fa fa-facebook"></i></a>
-									</div>
-									<div class="s_input">
-										<input class="form-input" type="text" value="http:// facebook.com/taylor">
-									</div>
-								</div>
-								<div class="social-input form-group focus-2">
-									<div class="s_icon">
-										<div class="social-bars"><i class="fa fa-bars"></i></div>
-										<a class="social-btn color-2" href="blog-detail-2.html"><i class="fa fa-twitter"></i></a>
-									</div>
-									<div class="s_input">
-										<input class="form-input" type="text" value="http:// twitter.com/taylor">
-									</div>
-								</div>
-								<div class="social-input form-group focus-2">
-									<div class="s_icon">
-										<div class="social-bars"><i class="fa fa-bars"></i></div>
-										<a class="social-btn color-3" href="blog-detail-2.html"><i class="fa fa-google-plus"></i></a>
-									</div>
-									<div class="s_input">
-										<input class="form-input" type="text" value="http:// googleplus.com/taylor">
-									</div>
-								</div>
-								<div class="social-input form-group focus-2">
-									<div class="s_icon">
-										<div class="social-bars"><i class="fa fa-bars"></i></div>
-										<a class="social-btn color-4" href="blog-detail-2.html"><i class="fa fa-pinterest-p"></i></a>
-									</div>
-									<div class="s_input">
-										<input class="form-input" type="text" value="http:// pinterest.com/taylor">
-									</div>
-								</div>
-								<div class="social-input form-group focus-2">
-									<div class="s_icon">
-										<div class="social-bars"><i class="fa fa-bars"></i></div>
-										<a class="social-btn color-5" href="blog-detail-2.html"><i class="fa fa-instagram"></i></a>
-									</div>
-									<div class="s_input">
-										<input class="form-input" type="text" value="http:// instagram.com/taylor">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+
 
 					<div class="sec" data-sec="about-me">
 						<div class="be-large-post">
@@ -480,51 +479,22 @@ if (!isset($_SESSION['name'])) {
 							</div>
 							<div class="be-large-post-align">
 								<div class="row">
-									<div class="input-col col-xs-12">
-										<div class="form-group focus-2">
-											<div class="form-label">Section Title</div>
-											<input class="form-input" type="text" placeholder="About Me">
+									<form action="author-edit.php" method="POST">
+										<div class="input-col col-xs-12">
+											<div class="form-group focus-2">
+												<div class="form-label">Description</div>
+												<textarea class="form-input" name="aboutMe" required="" placeholder="Something about you"><?=$_SESSION['about']?></textarea>
+											</div>
 										</div>
-									</div>
-									<div class="input-col col-xs-12">
-										<div class="form-group focus-2">
-											<div class="form-label">Description</div>
-											<textarea class="form-input" required="" placeholder="Something about you"></textarea>
+										<div class="col-xs-12">
+											<input class="btn color-1 size-2 hover-1 btn-right" name="about" type="submit" value="Add about me">
 										</div>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class=" sec" data-sec="web-references">
-						<div class="be-large-post">
-							<div class="info-block style-2">
-								<div class="be-large-post-align">
-									<h3 class="info-block-label">Web References</h3>
-								</div>
-							</div>
-							<div class="be-large-post-align">
-								<div class="row">
-									<div class="input-col col-xs-12 col-sm-5">
-										<div class="form-group focus-2">
-											<div class="form-label">Link Title</div>
-											<input class="form-input" type="text" placeholder="Enter title">
-										</div>
-									</div>
-									<div class="input-col col-xs-12 col-sm-5">
-										<div class="form-group focus-2">
-											<div class="form-label">Link descriprion</div>
-											<input class="form-input" type="text" placeholder="Enter descriprion">
-										</div>
-									</div>
-									<div class="col-xs-12 col-sm-2">
-										<a href="blog-detail-2.html" class="btn full btn-input color-1 size-4 hover-1">add</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 					<a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i>add sections</a>
 				</div>
 			</div>
@@ -532,180 +502,6 @@ if (!isset($_SESSION['name'])) {
 	</div>
 	<div class="be-fixed-filter"></div>
 
-	<div class="large-popup login">
-		<div class="large-popup-fixed"></div>
-		<div class="container large-popup-container">
-			<div class="row">
-				<div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3  large-popup-content">
-					<div class="row">
-						<div class="col-md-12">
-							<i class="fa fa-times close-button"></i>
-							<h5 class="large-popup-title">Log in</h5>
-						</div>
-						<form action="./" class="popup-input-search">
-							<div class="col-md-6">
-								<input class="input-signtype" type="email" required="" placeholder="Your email">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="password" required="" placeholder="Password">
-							</div>
-							<div class="col-xs-6">
-								<div class="be-checkbox">
-									<label class="check-box">
-										<input class="checkbox-input" type="checkbox" /> <span class="check-box-sign"></span>
-									</label>
-									<span class="large-popup-text">
-										Stay signed in
-									</span>
-								</div>
-
-								<a href="blog-detail-2.html" class="link-large-popup">Forgot password?</a>
-							</div>
-							<div class="col-xs-6 for-signin">
-								<input type="submit" class="be-popup-sign-button" value="SIGN IN">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="large-popup register">
-		<div class="large-popup-fixed"></div>
-		<div class="container large-popup-container">
-			<div class="row">
-				<div class="col-md-10 col-md-push-1 col-lg-8 col-lg-push-2 large-popup-content">
-					<div class="row">
-						<div class="col-md-12">
-							<i class="fa fa-times close-button"></i>
-							<h5 class="large-popup-title">Register</h5>
-						</div>
-						<form action="./" class="popup-input-search">
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="First Name">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Last Name">
-							</div>
-							<div class="col-md-6">
-								<div class="be-custom-select-block">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Country
-										</option>
-										<option value="">USA</option>
-										<option value="">Canada</option>
-										<option value="">England</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Email">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Password">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Repeat Password">
-							</div>
-							<div class="col-md-12 be-date-block">
-								<span class="large-popup-text">
-									Date of birth
-								</span>
-								<div class="be-custom-select-block mounth">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Mounth
-										</option>
-										<option value="">January</option>
-										<option value="">February</option>
-										<option value="">March</option>
-										<option value="">April</option>
-										<option value="">May</option>
-										<option value="">June</option>
-										<option value="">July</option>
-										<option value="">August</option>
-										<option value="">September</option>
-										<option value="">October</option>
-										<option value="">November</option>
-										<option value="">December</option>
-									</select>
-								</div>
-								<div class="be-custom-select-block">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Day
-										</option>
-										<option value="">1</option>
-										<option value="">2</option>
-										<option value="">3</option>
-										<option value="">4</option>
-										<option value="">5</option>
-										<option value="">6</option>
-										<option value="">7</option>
-										<option value="">8</option>
-										<option value="">9</option>
-										<option value="">10</option>
-										<option value="">11</option>
-										<option value="">12</option>
-										<option value="">13</option>
-										<option value="">14</option>
-										<option value="">15</option>
-										<option value="">16</option>
-										<option value="">17</option>
-										<option value="">18</option>
-										<option value="">19</option>
-										<option value="">20</option>
-										<option value="">21</option>
-										<option value="">22</option>
-										<option value="">23</option>
-										<option value="">24</option>
-										<option value="">25</option>
-										<option value="">26</option>
-										<option value="">27</option>
-										<option value="">28</option>
-										<option value="">29</option>
-										<option value="">30</option>
-									</select>
-								</div>
-								<div class="be-custom-select-block">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Year
-										</option>
-										<option value="">1996</option>
-										<option value="">1997</option>
-										<option value="">1998</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="be-checkbox">
-									<label class="check-box">
-										<input class="checkbox-input" type="checkbox" required /> <span class="check-box-sign"></span>
-									</label>
-									<span class="large-popup-text">
-										I have read and agree to the <a class="be-popup-terms" href="blog-detail-2.html">Terms of Use</a> and <a class="be-popup-terms" href="blog-detail-2.html">Privacy Policy</a>.
-									</span>
-								</div>
-								<div class="be-checkbox">
-									<label class="check-box">
-										<input class="checkbox-input" type="checkbox" /> <span class="check-box-sign"></span>
-									</label>
-									<span class="large-popup-text">
-										Send me notifications
-									</span>
-								</div>
-							</div>
-							<div class="col-md-6 for-signin">
-								<input type="submit" class="be-popup-sign-button" value="SIGN IN">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="theme-config">
 		<div class="main-color">

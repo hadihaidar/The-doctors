@@ -196,7 +196,7 @@ if (isset($_SESSION['name'])) {
                                     $v = md5(time() . $first);
                                     $vkey = $db->quote($v);
                                     $password = $db->quote(md5($password));
-                                    $query = $db->exec("INSERT INTO user VALUES ($first, $last,$email,$country,$password,$date,$vkey,0,$field);");
+                                    $query = $db->exec("INSERT INTO user VALUES ($first, $last,$email,$country,$password,$date,$vkey,0,$field,NULL);");
                                     if ($query) {
                                         $to = $_POST["email"];
                                         $subject = "Email Verification";
