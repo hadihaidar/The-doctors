@@ -360,8 +360,8 @@ if (isset($_POST['about'])) {
 							</div>
 							<div class="be-large-post-align">
 								<div class="be-change-ava">
-									<a class="be-ava-user style-2" href="blog-detail-2.php">
-										<img src="img/ava_10.jpg" alt="">
+									<a class="be-ava-user style-2">
+										<img src="img/defaultprofile.png" alt="">
 									</a>
 									<a class="btn color-4 size-2 hover-7">replace image</a>
 								</div>

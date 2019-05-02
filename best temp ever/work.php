@@ -261,7 +261,7 @@
 				<a href="activity.php">My Portfolio</a>
 				<a href="statictics.html">Statistics </a>
 				<a href="about-us.html">Work Experience</a>
-				<a href="author-edit.html">Account Settings</a>
+				<a href="author-edit.php">Account Settings</a>
 				<a href="login.php?logout">Logout</a>
 			</div>
 		</div>
