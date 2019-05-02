@@ -390,13 +390,15 @@
                       </label>
                       <span class='label label-info' id="upload-file-info"></span> -->
 
-                      Select Image Files to Upload:
+                      Select Files to Upload:
                      <input type="file" name="files[]" multiple >
                      <textarea id="special" name="post2" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>?"></textarea>
 
                             <input type="submit" name="submitIt" class="buttons-navbar btn btn-primary" value="Upload" />
 
 </form>
+
+
 </div>
 
 
@@ -588,78 +590,87 @@
 	<script src="script/colors.js"></script>
 	<script src="script/jqColorPicker.js"></script>
 	<script src="script/global.js"></script>
+  <!---                            PHP SCRIPT FOR IMAGE UPLOAD                                  --->
 
-  
-<!---                            PHP SCRIPT FOR IMAGE UPLOAD                                  --->
-
-                <?php
+                  <?php
                         if(isset($_POST['submitIt'])){
-                      //  Include the database configuration file
+                          if((strlen($_POST['post2'])<1) && empty(array_filter($_FILES['files']['name'])) ){  //nothing to upload
+                            echo "<script>alert('Please Add Something to upload!');</script>";
 
-                        if (!file_exists('img/'.$_SESSION['user'])) {
-                            mkdir('img/'.$_SESSION['user'], 0755, true);
-  }
+                          }
 
-                    //    mkdir('img/'.$_SESSION['user'], 0755, true);
-
-                        $targetDir = 'img/'.$_SESSION['user'].'/';    //creates directory
-                        $allowTypes = array('jpg','png','jpeg','gif', 'PNG'); //allowed file extentions
-
-                        $statusMsg = '';
-                        if(!empty(array_filter($_FILES['files']['name']))){
-                          $test=false;  //insert failure default value changes to true when insert takes place
-                          // $incorrect =true;  //incorrect format variable
-                          foreach($_FILES['files']['name'] as $key=>$val){
-                            $targetFilePath =($_FILES['files']['name'][$key]);
-                            $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-                            if(!(in_array($fileType, $allowTypes))){
-                              die("<script>alert('Please Enter a vaild Image!')</script>;");
+                          else{ //either post or file or both
+                            if(empty(array_filter($_FILES['files']['name']))){  //post is only text
+                            if((strlen($_POST['post2'])>9999) || (strlen($_POST['post2'])<1) ){ //check restrictions
+                              echo "<script>alert('Make sure your post have a valid length!');</script>";
                             }
                           }
-                            foreach($_FILES['files']['name'] as $key=>$val){  //loops over files uploaded
+                          else{
+                            //creates a post
+                            $db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");    //insert procedure
+                            $user2 = $db2->quote($_SESSION["user"]);	//user's email
+                            $ID = $_SESSION["user"].strtotime("now");
+                            $Data2 = $_POST["post2"];
+                            $stmt2 ="INSERT INTO post1(ID,timee,UserEmail,likee,comments,body) VALUES (:id, NOW(), :email, :likes, :comments, :body)";
+                            $sth2 = $db2->prepare($stmt2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                            $like= 0;
+                            $comment=0;
 
-                                $fileName = strtotime("now").'_'.($_FILES['files']['name'][$key]);  //concatenates time with image name
-                                $targetFilePath = $targetDir . $fileName;
-
-                                // Check whether file type is valid
-                                $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-                                  if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
-                                    $db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");    //insert procedure
-                                    $Data2 = $_POST["post2"];
-                                    $user2 = $db2->quote($_SESSION["user"]);	//user's email
-                                    $stmt2 ="INSERT INTO images VALUES (NULL,:file, NOW(), :post, :status, :likes, :comments, :email)";
-                                    $sth2 = $db2->prepare($stmt2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-
-                                    //
-                                    // //
-                                    // // // set parameters and execute
-                                    $like= 0;
-                                    $comment=0;
-                                    $state = 1;  //public by default
-
-
-                                    $test = $sth2->execute(array(':file' => $fileName, ':post' => $Data2, ':status' => $state, ':likes' => $like, ':comments' => $comment, ':email' => $_SESSION['user']));
-
+                            $sth2->execute(array(':id' => $ID, ':email' =>  $_SESSION['user'], ':likes' => $like, ':comments' => $comment, ':body' =>$Data2));
+                            $msg="Your Post is uploaded successfuly!";
+                              if (!file_exists('media/'.$_SESSION['user'])) {
+                                  mkdir('media/'.$_SESSION['user'], 0755, true);
                                     }
-                            }
 
-                                if ($test) {  //all files are of correct format
-                                    $statusMsg = "Files are uploaded successfully!";
+                          //    mkdir('img/'.$_SESSION['user'], 0755, true);
+                              if(!empty(array_filter($_FILES['files']['name']))){
+                              $targetDir = 'media/'.$_SESSION['user'].'/';    //creates directory
+                              $allowTypes = array('jpg','png','jpeg','gif', 'PNG', 'mp4', 'm4a', 'm4v', 'f4v', 'f4a', 'm4b', 'f4b', 'mov', 'avi', 'AVI', 'flv', 'FLV', 'MOV', 'mov'); //allowed file extentions
+                              $testing =false;  //check if a caption is added
+                              if (strlen($_POST['post2'])>=1){$testing=true;} //post exists
+
+                                foreach($_FILES['files']['name'] as $key=>$val){
+                                  $targetFilePath =($_FILES['files']['name'][$key]);
+                                  $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+                                  if(!(in_array($fileType, $allowTypes))){
+                                    if($testing===false){   //deletes post already created if the file is not valid and text is empty
+                                      $db3 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+                                      $ID2 = $_SESSION["user"].strtotime("now");
+                                      $stmt3 ="DELETE FROM post1 WHERE ID= :id ";
+                                      $sth3 = $db3->prepare($stmt3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                      $sth3->execute(array(':id' => $ID2));
+                                    }
+                                    die("<script>alert('Please Enter a valid file!')</script>;");
+                                  }
                                 }
-                                else{
 
-                                    $statusMsg = "Sorry, there was an error uploading your file.";  //some error
+                                //add files to media table
+                                  foreach($_FILES['files']['name'] as $key=>$val){  //loops over files uploaded
+
+                                      $fileName = strtotime("now").'_'.($_FILES['files']['name'][$key]);  //concatenates time with image name
+                                      $targetFilePath = $targetDir . $fileName;
+
+                                      // Check whether file type is valid
+                                      $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+                                        if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){
+                                          $db4 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");    //insert procedure
+                                          $statement=("SELECT ID FROM post1 WHERE timee= NOW()");
+                                          $res = $db4->query($statement);
+                                          foreach ($res as $row) {
+                                            $stmt4 ="INSERT INTO media VALUES (NULL,$row,':file')";
+                                            $sth4 = $db4->prepare($stmt4, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                                            $sth4->execute(array(':file'=>$fileName));
+                                            $msg="Your files are uploaded successfully";
+                                        }
+                                        }
+
+                                          }
+                                  }
                                 }
+                                echo("<script>alert('$msg')</script>;");
+  }
+}
 
-                        }else{
-                            $statusMsg = 'Please select a file to upload.';
-                        }
-
-                        // Display status message
-                        echo("<script>alert('$statusMsg');</script>");
-          }
-
-   ?>
-
+     ?>
 	</body>
 </html>
