@@ -133,11 +133,11 @@ if (!isset($_SESSION['name'])) {
 									?>
 									<div class="category-1 mix custom-column-5">
 										<div class="be-post">
-											<a href="page1.html" class="be-img-block">
+											<a href="page1.php?account=<?=$row['Email']?>" class="be-img-block">
 												<img src="img/p1.jpg" alt="omg">
 											</a>
 											<div class="author-post" style = "font-size: 16px;" >
-												<span><a  href="page1.html"><b><?php echo($row['FirstName']." ".$row['LastName']);?></b></a></span>
+												<span><a  href="page1.php?account=<?=$row['Email']?>"><b><?php echo($row['FirstName']." ".$row['LastName']);?></b></a></span>
 											</div>
 										
 										</div>
