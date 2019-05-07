@@ -1,4 +1,5 @@
-
+		<a href="#"><i class="btn color-4 size-2 hover-7"></i>Replace Image </a><input class="file" type="file"/>
+    <a class="btn color-4 size-2 hover-7" onclick="">replace image</a>
 <?php
     session_start();
     if (!isset($_SESSION['name'])){

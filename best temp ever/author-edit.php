@@ -357,13 +357,15 @@ if (isset($_POST['about'])) {
 								<div class="be-large-post-align ">
 									<h3 class="info-block-label">Basic Information</h3>
 								</div>
-							</div>
+
+							</div><?php
+							$default="media/defaultprofile.png"; ?>
 							<div class="be-large-post-align">
 								<div class="be-change-ava">
 									<a class="be-ava-user style-2">
-										<img src="img/defaultprofile.png" alt="">
+										<img src=<?=$default?> alt="">
 									</a>
-									<a class="btn color-4 size-2 hover-7">replace image</a>
+									<a href="#">Replace Image </a><input class="file" type="file" style="height:18;width:94;padding-top: 0px;margin-top: 18%;margin-left: 25%;"/>
 								</div>
 							</div>
 							<div class="be-large-post-align">

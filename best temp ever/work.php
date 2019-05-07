@@ -298,9 +298,7 @@
 		<div class="editor-menu">
 			<div class="container">
 				<ul class="editor-nav">
-					<li id="content-w" class="en-nav active">1. Add Status</li>
-					<li id="setting-w" name="setting-w" class="en-nav">2. Upload Image</li>
-					<li id="cover-w" class="en-nav">3. Upload Video</li>
+					<li id="setting-w" name="setting-w" class="en-nav active">Upload Post</li>
 				</ul>
 
 			</div>
@@ -308,25 +306,6 @@
 	</div>
 			<div class="container be-detail-container">
 				<div class="row">
-					<div class="col-xs-12 col-md-3 st-col left-feild">
-						<div class="be-vidget behance-style" >
-							<h3 class="letf-menu-article">
-								ADD MEDIA
-							</h3>
-							<div class="creative_filds_block">
-								<ul class="ul nav b-work-list">
-									<li ><a href="#"><i class="fa fa-cloud-upload "></i>Upload Files</a><input class="file" type="file"/></li>
-									<li id="media" ><a href="#"><i class="fa fa-pencil-square-o"></i>Embed media</a></li>
-									<li ><a href="#"><i class="fa fa-text-width"></i>Add text</a></li>
-									<li ><a href="#"><i class="fa fa-cloud"></i>Creative cloud</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="be-vidget  behance-style">
-
-						</div>
-
-					</div>
 					<div class="col-xs-12 col-md-9 _editor-content_">
 						<div class="sec"  data-sec="basic-information">
 							<div class="be-large-post large-area" id="main">
@@ -334,7 +313,7 @@
 
 									<div class="be-large-post-align "><h3 class="info-block-label">Post Info</h3></div>
 								</div>
-								<div class="be-large-post-align" id="firstdiv">
+								<!-- <div class="be-large-post-align" id="firstdiv">
 
 
 
@@ -380,8 +359,8 @@
 
 
 
-								</div>
-                	<div class="be-large-post-align" id="seconddiv"  style="display:none;">
+								</div> -->
+                	<div class="be-large-post-align" id="seconddiv" >
                     <form class="" action="work.php" method="post" enctype ="multipart/form-data">
 
                       <!-- <label class="btn btn-primary" for="my-file-selector">
@@ -401,14 +380,6 @@
 
 
 </div>
-
-
-
-
-
-
-                  <div class="be-large-post-align" id="thirddiv" style="display:none;">this is working! </div>
-
                   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
                   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
                   <script type="text/javascript">
