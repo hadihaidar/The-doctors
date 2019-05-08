@@ -44,137 +44,90 @@
 	<header>
 		<div class="container-fluid custom-container">
 			<div class="row no_row row-header">
-<div class="brand-be">
-	<a href="index.php">
-		<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt=" logo">
-		<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
-		<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
-		<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
-	</a>
-</div>
+				<div class="brand-be">
+					<a href="index.php">
+						<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt=" logo">
+						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
+						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
+						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
+					</a>
+				</div>
 				<div class="login-header-block">
 					<div class="login_block">
-						<a class="notofications-popup" href="blog-detail-2.html">
+						<?php
+						$db = new PDO("mysql:dbname=thedoctors", "root", "");
+						$user = $db->quote($_SESSION['user']);
+						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
+						$c = 0;
+						foreach ($not as $r) {
+							$c = $c + 1;
+						}
+						?>
+						<a class="notofications-popup" href="">
 							<i class="fa fa-bell-o"></i>
-							<span class="noto-count">23</span>
+							<span class="noto-count"><?= $c ?></span>
 						</a>
 						<div class="noto-popup notofications-block">
-						<div class="m-close"><i class="fa fa-times"></i></div>
+							<div class="m-close"><i class="fa fa-times"></i></div>
 							<div class="noto-label">Your Notification</div>
-							<div class="noto-body">
-								<div class="noto-entry">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c1.png" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">Ravi Sah</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+							<?php
+							$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user) ORDER BY time DESC;");
+							foreach ($not as $r) {
+								?>
+								<div class="noto-body">
+									<div class="noto-entry">
+										<div class="noto-content clearfix">
+											<div class="noto-img">
+												<a href="page1.php?account=<?=$r['f']?>">
+													<img src="img/c1.png" alt="" class="be-ava-comment">
+												</a>
 											</div>
-											<a href="blog-detail-2.html" class="noto-message">Start following your work</a>
-										</div>
-									</div>
-								</div>
-								<div class="noto-entry">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c6.jpg" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">Louis Paquet</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
-											</div>
-											<div class="noto-message">
-												Saved “<a href="blog-detail-2.html">Omni-onepage app template</a>” to Inspiration
-												<a class="portfolio-link type-2 clearfix" href="blog-detail-2.html">
-													<img src="img/p_link_23.jpg" alt="">
-													<img src="img/p_link_31.jpg" alt="">
-													<img src="img/p_link_32.jpg" alt="">
-													<img src="img/p_link_33.jpg" alt="">
-													<img src="img/p_link_34.jpg" alt="">
-													<div class="color_bg">
-														<span>view portfolio</span>
-														<span class="child"></span>
-													</div>
+											<div class="noto-text">
+												<div class="noto-text-top">
+													<?php
+														$fr = $db->quote($r['f']);
+														$u = $db->query("SELECT FirstName,LastName FROM `user` WHERE (Email=$fr)");
+														$n="";
+														foreach($u as $name){
+															$n=$name[0]." ".$name[1];
+														}
+													?>
+													<span class="noto-name"><a href="page1.php?account=<?=$r['f']?>"><?=$n?></a></span>
+													<span class="noto-date"><i class="fa fa-clock-o"></i> <?=$r['time']?></span>
+												</div>
+												<a  class="noto-message">
+												<?php
+													if($r['type']=='sent'){
+														echo("Sent you a friend request");
+													}
+													if($r['type']=='accepted'){
+														echo("Accepted your friend request");
+													}
+													if($r['type']=='Liked'){
+														echo("Liked a post of yours");
+													}
+													if($r['type']=='commented'){
+														echo("Commented on your post");
+													}
+													if($r['type']=='shared'){
+														echo("Shared your post");
+													}
+												?>
 												</a>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="noto-entry">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c7.jpg" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">v-a studio</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
-											</div>
-											<div class="noto-message">
-												<a class="noto-left" href="blog-detail-2.html">
-													<img src="img/n_pop_1.jpg" alt="">
-												</a>
-												Saved “<a href="blog-detail-2.html">Omni-onepage app template</a>” to Inspiration
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="noto-entry">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c8.jpg" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">Hoang Nguyen</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
-											</div>
-											<div class="noto-message">
-												<a class="noto-left" href="blog-detail-2.html">
-													<img src="img/n_pop_2.jpg" alt="">
-												</a>
-												Awesome, love the big whitespace and also everything between :)
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="noto-entry">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c9.jpg" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">Cüneyt ŞEN</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
-											</div>
-											<a href="blog-detail-2.html" class="noto-message">
-												Start following your work
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
+							<?php
+						}
+						?>
 						</div>
 						<a class="messages-popup" href="blog-detail-2.html">
 							<i class="fa fa-envelope-o"></i>
 							<span class="noto-count">4</span>
 						</a>
 						<div class="noto-popup messages-block">
-						<div class="m-close"><i class="fa fa-times"></i></div>
+							<div class="m-close"><i class="fa fa-times"></i></div>
 							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages-2.html">compose</a><a href="messages.html">View all messages</a></span></div>
 							<div class="noto-body">
 								<div class="noto-entry style-2">
@@ -206,7 +159,7 @@
 												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
 											</div>
 											<div class="noto-message">
-											Pellentesque habitant morbi tristique senectus et netus tristique senectus
+												Pellentesque habitant morbi tristique senectus et netus tristique senectus
 											</div>
 										</div>
 									</div>
@@ -251,13 +204,13 @@
 						</div>
 						<div class="be-drop-down login-user-down" style="padding-top: 10px;">
 							<img class="login-user" src="img/login.jpg" alt="">
-							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name'])?></span></span>
+							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
 								<a href="activity.php">My Portfolio</a>
 								<a href="statictics.php">Statistics </a>
 								<a href="about-us.php">Work Experience</a>
 								<a href="author-edit.php">Account Settings</a>
-								<a href="login.php?logout" >Logout</a>
+								<a href="login.php?logout">Logout</a>
 							</div>
 						</div>
 					</div>
@@ -275,6 +228,8 @@
 			</div>
 		</div>
 	</header>
+
+
 
 	<!-- MAIN CONTENT -->
 	<div id="content-block">

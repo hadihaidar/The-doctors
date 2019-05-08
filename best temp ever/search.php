@@ -128,21 +128,23 @@ if (!isset($_SESSION['name'])) {
 							$query = $db->query("SELECT * FROM user ");
 							$COUNT = 0;
 							foreach ($query as $row) {
-								if (strtolower($row['FirstName']) == $name[0] || strtolower($row['LastName']) == $name[1] || strtolower($row['FirstName']) == $name[1] || strtolower($row['LastName']) == $name[0]) {
-									$COUNT = 1;
-									?>
-									<div class="category-1 mix custom-column-5">
-										<div class="be-post">
-											<a href="page1.php?account=<?=$row['Email']?>" class="be-img-block">
-												<img src="img/p1.jpg" alt="omg">
-											</a>
-											<div class="author-post" style = "font-size: 16px;" >
-												<span><a  href="page1.php?account=<?=$row['Email']?>"><b><?php echo($row['FirstName']." ".$row['LastName']);?></b></a></span>
+								if ($row['verified'] == 1) {
+									if (strtolower($row['FirstName']) == $name[0] || strtolower($row['LastName']) == $name[1] || strtolower($row['FirstName']) == $name[1] || strtolower($row['LastName']) == $name[0]) {
+										$COUNT = 1;
+										?>
+										<div class="category-1 mix custom-column-5">
+											<div class="be-post">
+												<a href="page1.php?account=<?= $row['Email'] ?>" class="be-img-block">
+													<img src="img/p1.jpg" alt="omg">
+												</a>
+												<div class="author-post" style="font-size: 16px;">
+													<span><a href="page1.php?account=<?= $row['Email'] ?>"><b><?php echo ($row['FirstName'] . " " . $row['LastName']); ?></b></a></span>
+												</div>
+
 											</div>
-										
 										</div>
-									</div>
-								<?php
+									<?php
+								}
 							}
 						}
 					}
