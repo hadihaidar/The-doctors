@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (isset($_POST['login'])) {
     $db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
     $query = $db->query("SELECT * FROM user");
@@ -18,6 +17,20 @@ if (isset($_POST['login'])) {
                     $_SESSION['field'] = $row['Field'];
                     $_SESSION['country'] = $row['County'];
                     $_SESSION['about'] = $row['about'];
+										$sqlstmt="SELECT image from user where  Email =(:em)";
+										$res = $db->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+										$res->execute(array(':em'=>$_SESSION['user']));
+										$id = $res->fetchColumn(0);
+										if ($id !== false) {
+												if($id!=="default.png"){
+												$default= "media/".$_SESSION['user']."/"."ProfilePictures/".$id;
+										}
+											else{
+												$default="media/".$id;
+											}
+
+									}
+										$_SESSION['img']=$default;
                     header("location:activity.php");
                 } else {
                     header("location:index.php?empty=Incorrect Password");

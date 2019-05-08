@@ -419,26 +419,8 @@ if (isset($_POST['about'])) {
 
 								<form action="author-edit.php" method="POST"  enctype ="multipart/form-data">
 									<div class="be-change-ava">
-										<?php
-										$db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
-										$sqlstmt="SELECT image from user where  Email =(:em)";
-										$res = $db2->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-										$res->execute(array(':em'=>$_SESSION['user']));
-										$id = $res->fetchColumn(0);
-										if ($id !== false) {
-												if($id!=="default.png"){
-										    $default= "media/".$_SESSION['user']."/"."ProfilePictures/".$id;
-										}
-											else{
-												$default="media/".$id;
-											}
-
-									}
-
-										 ?>
-
 										<a class="be-ava-user style-2">
-											<img src="<?=$default?>" alt="">
+											<img src="<?=$_SESSION['img']?>" alt="">
 										</a>
 										<a>Replace Image </a><input class="file"  type="file" name="img" id="img" style="height:18;width:94;padding-top: 0px;margin-top: 18%;margin-left: 25%;"/>
 									</div>
