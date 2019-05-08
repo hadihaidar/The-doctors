@@ -354,7 +354,7 @@ if (isset($_POST['about'])) {
 							</div>
 						</div>
 						<div class="be-drop-down login-user-down" style="padding-top: 10px;">
-							<img class="login-user" src="img/login.jpg" alt="">
+							<img class="login-user" height="20" width="24" src="<?=$_SESSION['img']?>" alt="">
 							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
 								<a href="activity.php">My Portfolio</a>
