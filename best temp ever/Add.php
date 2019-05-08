@@ -13,6 +13,7 @@
         $x= 'accepted';
         $x=$db->quote($x);
         $query = $db->exec("UPDATE friends SET s=$x where (t=$from)AND(f=$to) ;");
+        $query = $db->exec("INSERT INTO notifications VALUES (NULL,$from,$to,'accepted');");
         header("location:page1.php?account=$go");
     }
     if (isset($_POST['reject'])) {
