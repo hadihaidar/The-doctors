@@ -43,7 +43,7 @@ if (!isset($_SESSION['name'])) {
 			<div class="row no_row row-header">
 				<div class="brand-be">
 					<a href="index.php">
-						<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px; alt=" logo">
+						<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt=" logo">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
@@ -78,7 +78,7 @@ if (!isset($_SESSION['name'])) {
 					<div class="be-user-block style-3">
 						<div class="be-user-detail">
 							<a class="be-ava-user style-2" href="page1.html">
-								<img src="img/ava_10.jpg" alt=""><!-- should be the profile picture of the user-->
+								<img  height="115" width="115" src="<?=$_SESSION['img']?>" alt=""><!-- should be the profile picture of the user-->
 							</a>
 							<p class="be-use-name"><?php echo($_SESSION['name']." ".$_SESSION['last']);?></p>
 							<div class="be-user-info">
@@ -133,7 +133,7 @@ if (!isset($_SESSION['name'])) {
 								<div class="nav-tab-item active">
 									<span>Posts</span>
 								</div>
-								
+
 							</div>
 						</div>
 						<div class="tabs-content clearfix">
