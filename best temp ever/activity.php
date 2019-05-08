@@ -55,7 +55,7 @@
 				<div class="login-header-block">
 					<div class="login_block">
 						<?php
-						$db = new PDO("mysql:dbname=thedoctors", "root", "");
+						$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 						$user = $db->quote($_SESSION['user']);
 						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
 						$c = 0;
