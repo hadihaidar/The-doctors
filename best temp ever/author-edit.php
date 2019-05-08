@@ -5,7 +5,7 @@ if (!isset($_SESSION['name'])) {
 }
 
 	if (isset($_POST['profile'])) {
-		$db = new PDO("mysql:dbname=thedoctors", "root", "");
+		$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 		$query = $db->query("SELECT * FROM user");
 
 		foreach ($query as $row) {
@@ -86,7 +86,7 @@ if (!isset($_SESSION['name'])) {
 	}
 };
 if (isset($_POST['about'])) {
-	$db = new PDO("mysql:dbname=thedoctors", "root", "");
+	$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 	$query = $db->query("SELECT * FROM user");
 
 	foreach ($query as $row) {
@@ -420,7 +420,7 @@ if (isset($_POST['about'])) {
 								<form action="author-edit.php" method="POST"  enctype ="multipart/form-data">
 									<div class="be-change-ava">
 										<?php
-										$db2 = new PDO("mysql:dbname=thedoctors", "root", "");
+										$db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 										$sqlstmt="SELECT image from user where  Email =(:em)";
 										$res = $db2->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 										$res->execute(array(':em'=>$_SESSION['user']));
@@ -516,7 +516,7 @@ if (isset($_POST['about'])) {
 						</div>
 						<?php
 						if (isset($_POST['change'])) {
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$query = $db->query("SELECT * FROM user");
 
 							foreach ($query as $row) {
