@@ -593,9 +593,9 @@
                           }
                           else{
                             if (!file_exists('media/'.$_SESSION['user'])) {
-                                mkdir('media/'.$_SESSION['user'], 0755, true);
+                                mkdir('media/'.$_SESSION['user'], 0755, true);  //creates directory
                                   }
-                            $targetDir = 'media/'.$_SESSION['user'].'/';    //creates directory
+                            $targetDir = 'media/'.$_SESSION['user'].'/';
                             $allowTypes = array('jpg','png','jpeg','gif', 'PNG', 'mp4', 'm4a', 'm4v', 'f4v', 'f4a', 'm4b', 'f4b', 'mov', 'avi', 'AVI', 'flv', 'FLV', 'MOV', 'mov'); //allowed file extentions
                             foreach($_FILES['files']['name'] as $key=>$val){
                               $targetFilePath =($_FILES['files']['name'][$key]);

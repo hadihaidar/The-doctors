@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 
 --
 -- Table structure for table `user`
+ style="height:18;width:94;padding-top: 0px;margin-top: 18%;margin-left: 25%;"
 --
 
 CREATE TABLE `user` (

@@ -4,34 +4,87 @@ if (!isset($_SESSION['name'])) {
 	header("location:index.php");
 }
 
-if (isset($_POST['profile'])) {
-	$db = new PDO("mysql:dbname=thedoctors", "root", "");
-	$query = $db->query("SELECT * FROM user");
+	if (isset($_POST['profile'])) {
+		$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+		$query = $db->query("SELECT * FROM user");
 
-	foreach ($query as $row) {
-		if ($row['Email'] == $_SESSION['user']) {
-			$first = $db->quote($_POST['first']);
-			$last = $db->quote($_POST['last']);
-			$occupation = $db->quote($_POST['occupation']);
-			$country = $db->quote($_POST['country']);
+		foreach ($query as $row) {
+				$msg="";
+			if ($row['Email'] == $_SESSION['user']) {
+				$first = $db->quote($_POST['first']);
+				$last = $db->quote($_POST['last']);
+				$occupation = $db->quote($_POST['occupation']);
+				$country = $db->quote($_POST['country']);
+				$e = $db->quote($row['Email']);
+				$query = $db->exec("UPDATE user SET FirstName= ($first), LastName= ($last), County= ($country), Field= ($occupation) where  Email =($e)");
+				if ($query) {
+					$msg.="1";	//success
 
-			$e = $db->quote($row['Email']);
-			$query = $db->exec("UPDATE user SET FirstName= ($first), LastName= ($last), County= ($country), Field= ($occupation) where  Email =($e)");
-			if ($query) {
-				echo ('<script>alert("Your data has been changed")</script>');
+					$_SESSION['name'] = $_POST['first'];
+					$_SESSION['last'] = $_POST['last'];
+					$_SESSION['field'] = $_POST['occupation'];
+					$_SESSION['country'] = $_POST['country'];
+				}
 
-				$_SESSION['name'] = $_POST['first'];
-				$_SESSION['last'] = $_POST['last'];
-				$_SESSION['field'] = $_POST['occupation'];
-				$_SESSION['country'] = $_POST['country'];
-			} else {
-				echo ('<script>alert("Something went wrong please try again")</script>');
+				if ((empty($msg)) && empty($_FILES['img']['name'])) {	//no update
+					 	echo ('<script>alert("No changes have been made!")</script>');
+					}
+				if ((!empty($msg)) && empty($_FILES['img']['name'])) {	// Data update only
+						echo '<script>alert("Your Data has been saved!")</script>';
+						}
+				if(!empty($_FILES['img']['name'])){
+						$e = $db->quote($row['Email']);
+						if (!file_exists('media/'.$_SESSION['user'].'/ProfilePictures'.'/')) {
+								mkdir('media/'.$_SESSION['user'].'/ProfilePictures'.'/', 0755, true);	  //creates directory
+							}
+					if(true){
+
+							$targetFilePath =$_FILES['img']['name'];
+							$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+							$targetDir = 'media/'.$_SESSION['user'].'/ProfilePictures'.'/';
+					  	$allowTypes = array('jpg','png','jpeg', 'PNG');
+							if ($_FILES['img']['size'] <=(1024*11) || $_FILES['img']['size'] > (125*1048576))  {	//image size restrictions
+									if(empty($msg)){
+												 	echo ('<script>alert("Your image is too large or too short!")</script>');
+									}
+									else{
+												echo ('<script>alert("Data successfuly updated but the image is too large or too short!")</script>');
+									}
+	}
+							elseif(!(in_array($fileType, $allowTypes))){		//image format restrictions
+										if(empty($msg)){
+											echo ('<script>alert("Please Enter a valid image format!")</script>');
+										}
+										else{
+											echo ('<script>alert("Data successfuly updated but the image is of invalid format!")</script>');
+										}
+
+									}
+							else{	//no restrictions
+							$fileName = strtotime("now").'_'.($_FILES['img']['name']);  //concatenates time with image name
+							$targetFilePath = $targetDir . $fileName;
+								if(move_uploaded_file($_FILES["img"]["tmp_name"], $targetFilePath)){
+									$e = ($row['Email']);
+									$sqlstmt="UPDATE user SET image = :img where  Email =(:email)";
+									$res = $db->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+									$res->execute(array(':img' => $fileName, ':email'=>$e));
+									if(empty($msg)){
+											echo ('<script>alert("Profile Picture successfuly updated")</script>');
+									}
+									else{
+											echo ('<script>alert("Your data and profile picture are successfuly updated")</script>');
+									}
+
+								}
+
+
+						}
+
+				}
 			}
 		}
 	}
-}
-
-
+};
 if (isset($_POST['about'])) {
 	$db = new PDO("mysql:dbname=thedoctors", "root", "");
 	$query = $db->query("SELECT * FROM user");
@@ -358,18 +411,37 @@ if (isset($_POST['about'])) {
 									<h3 class="info-block-label">Basic Information</h3>
 								</div>
 
-							</div><?php
-							$default="media/defaultprofile.png"; ?>
-							<div class="be-large-post-align">
-								<div class="be-change-ava">
-									<a class="be-ava-user style-2">
-										<img src=<?=$default?> alt="">
-									</a>
-									<a href="#">Replace Image </a><input class="file" type="file" style="height:18;width:94;padding-top: 0px;margin-top: 18%;margin-left: 25%;"/>
-								</div>
 							</div>
 							<div class="be-large-post-align">
-								<form action="author-edit.php" method="POST">
+
+							</div>
+							<div class="be-large-post-align">
+
+								<form action="author-edit.php" method="POST"  enctype ="multipart/form-data">
+									<div class="be-change-ava">
+										<?php
+										$db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+										$sqlstmt="SELECT image from user where  Email =(:em)";
+										$res = $db2->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+										$res->execute(array(':em'=>$_SESSION['user']));
+										$id = $res->fetchColumn(0);
+										if ($id !== false) {
+												if($id!=="default.png"){
+										    $default= "media/".$_SESSION['user']."/"."ProfilePictures/".$id;
+										}
+											else{
+												$default="media/".$id;
+											}
+
+									}
+
+										 ?>
+
+										<a class="be-ava-user style-2">
+											<img src=<?=$default?> alt="">
+										</a>
+										<a>Replace Image </a><input class="file"  type="file" name="img" id="img" style="height:18;width:94;padding-top: 0px;margin-top: 18%;margin-left: 25%;"/>
+									</div>
 									<div class="row">
 										<div class="input-col col-xs-12 col-sm-6">
 											<div class="form-group fg_icon focus-2">
@@ -444,7 +516,7 @@ if (isset($_POST['about'])) {
 						</div>
 						<?php
 						if (isset($_POST['change'])) {
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$query = $db->query("SELECT * FROM user");
 
 							foreach ($query as $row) {
@@ -530,6 +602,8 @@ if (isset($_POST['about'])) {
 	<script src="script/isotope.pkgd.min.js"></script>
 	<script src="script/jquery.viewportchecker.min.js"></script>
 	<script src="script/global.js"></script>
+
+
 </body>
 
 </html>
