@@ -49,6 +49,169 @@ if (!isset($_SESSION['name'])) {
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
 					</a>
 				</div>
+				<div class="login-header-block">
+					<div class="login_block">
+						<?php
+						$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+						$user = $db->quote($_SESSION['user']);
+						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
+						$c = 0;
+						foreach ($not as $r) {
+							$c = $c + 1;
+						}
+						?>
+						<a class="notofications-popup" href="">
+							<i class="fa fa-bell-o"></i>
+							<span class="noto-count"><?= $c ?></span>
+						</a>
+						<div class="noto-popup notofications-block">
+							<div class="m-close"><i class="fa fa-times"></i></div>
+							<div class="noto-label">Your Notification</div>
+							<?php
+							$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user) ORDER BY time DESC;");
+							foreach ($not as $r) {
+								?>
+								<div class="noto-body">
+									<div class="noto-entry">
+										<div class="noto-content clearfix">
+											<div class="noto-img">
+												<a href="page1.php?account=<?=$r['f']?>">
+													<img src="img/c1.png" alt="" class="be-ava-comment">
+												</a>
+											</div>
+											<div class="noto-text">
+												<div class="noto-text-top">
+													<?php
+														$fr = $db->quote($r['f']);
+														$u = $db->query("SELECT FirstName,LastName FROM `user` WHERE (Email=$fr)");
+														$n="";
+														foreach($u as $name){
+															$n=$name[0]." ".$name[1];
+														}
+													?>
+													<span class="noto-name"><a href="page1.php?account=<?=$r['f']?>"><?=$n?></a></span>
+													<span class="noto-date"><i class="fa fa-clock-o"></i> <?=$r['time']?></span>
+												</div>
+												<a  class="noto-message">
+												<?php
+													if($r['type']=='sent'){
+														echo("Sent you a friend request");
+													}
+													if($r['type']=='accepted'){
+														echo("Accepted your friend request");
+													}
+													if($r['type']=='Liked'){
+														echo("Liked a post of yours");
+													}
+													if($r['type']=='commented'){
+														echo("Commented on your post");
+													}
+													if($r['type']=='shared'){
+														echo("Shared your post");
+													}
+												?>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php
+						}
+						?>
+						</div>
+						<a class="messages-popup" href="blog-detail-2.html">
+							<i class="fa fa-envelope-o"></i>
+							<span class="noto-count">4</span>
+						</a>
+						<div class="noto-popup messages-block">
+							<div class="m-close"><i class="fa fa-times"></i></div>
+							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages-2.html">compose</a><a href="messages.html">View all messages</a></span></div>
+							<div class="noto-body">
+								<div class="noto-entry style-2">
+									<div class="noto-content clearfix">
+										<div class="noto-img">
+											<a href="blog-detail-2.html">
+												<img src="img/c1.png" alt="" class="be-ava-comment">
+											</a>
+										</div>
+										<div class="noto-text">
+											<div class="noto-text-top">
+												<span class="noto-name"><a href="blog-detail-2.html">Ravi Sah</a></span>
+												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+											</div>
+											<div class="noto-message">Sed velit mauris, pulvinar sit amet accumsan vitae, egestas, pulvinar sit amet accumsan vitae, egestas</div>
+										</div>
+									</div>
+								</div>
+								<div class="noto-entry style-2">
+									<div class="noto-content clearfix">
+										<div class="noto-img">
+											<a href="blog-detail-2.html">
+												<img src="img/c6.jpg" alt="" class="be-ava-comment">
+											</a>
+										</div>
+										<div class="noto-text">
+											<div class="noto-text-top">
+												<span class="noto-name"><a href="blog-detail-2.html">Louis Paquet</a></span>
+												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+											</div>
+											<div class="noto-message">
+												Pellentesque habitant morbi tristique senectus et netus tristique senectus
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="noto-entry style-2">
+									<div class="noto-content clearfix">
+										<div class="noto-img">
+											<a href="blog-detail-2.html">
+												<img src="img/c9.jpg" alt="" class="be-ava-comment">
+											</a>
+										</div>
+										<div class="noto-text">
+											<div class="noto-text-top">
+												<span class="noto-name"><a href="blog-detail-2.html">Cüneyt ŞEN</a></span>
+												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+											</div>
+											<div class="noto-message">
+												Sed id erat vitae libero malesuada dictum vel sit amet eros
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="noto-entry style-2">
+									<div class="noto-content clearfix">
+										<div class="noto-img">
+											<a href="blog-detail-2.html">
+												<img src="img/c10.jpg" alt="" class="be-ava-comment">
+											</a>
+										</div>
+										<div class="noto-text">
+											<div class="noto-text-top">
+												<span class="noto-name"><a href="blog-detail-2.html">Tomasz Mazurczak</a></span>
+												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+											</div>
+											<div class="noto-message">
+												In molestie libero quis cursus ullamcorper eu rhoncus magna
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="be-drop-down login-user-down" style="padding-top: 10px;">
+							<img class="login-user" height="20" width="24" src="<?=$_SESSION['img']?>" alt="">
+							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
+							<div class="drop-down-list a-list">
+								<a href="activity.php">My Portfolio</a>
+								<a href="statictics.php">Statistics </a>
+								<a href="about-us.php">Work Experience</a>
+								<a href="author-edit.php">Account Settings</a>
+								<a href="login.php?logout">Logout</a>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="header-menu-block">
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
 					<ul class="header-menu" id="one">
@@ -59,12 +222,7 @@ if (!isset($_SESSION['name'])) {
 						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Posts </a></li>
 					</ul>
 				</div>
-				<div class="login-header-block">
-					<div class="login_block">
-						<a class="btn-login btn color-1 size-2 hover-2" href="page1.html"><i class="fa fa-user"></i>
-							Log in</a>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</header>
@@ -1045,44 +1203,7 @@ if (!isset($_SESSION['name'])) {
 
 	<div class="be-fixed-filter"></div>
 
-	<div class="large-popup login">
-		<div class="large-popup-fixed"></div>
-		<div class="container large-popup-container">
-			<div class="row">
-				<div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3  large-popup-content">
-					<div class="row">
-						<div class="col-md-12">
-							<i class="fa fa-times close-button"></i>
-							<h5 class="large-popup-title">Log in</h5>
-						</div>
-						<form action="./" class="popup-input-search">
-							<div class="col-md-6">
-								<input class="input-signtype" type="email" required="" placeholder="Your email">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="password" required="" placeholder="Password">
-							</div>
-							<div class="col-xs-6">
-								<div class="be-checkbox">
-									<label class="check-box">
-										<input class="checkbox-input" type="checkbox" /> <span class="check-box-sign"></span>
-									</label>
-									<span class="large-popup-text">
-										Stay signed in
-									</span>
-								</div>
 
-								<a href="page1.html" class="link-large-popup">Forgot password?</a>
-							</div>
-							<div class="col-xs-6 for-signin">
-								<input type="submit" class="be-popup-sign-button" value="SIGN IN">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="large-popup register">
 		<div class="large-popup-fixed"></div>
 		<div class="container large-popup-container">
