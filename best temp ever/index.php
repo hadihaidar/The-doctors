@@ -185,7 +185,7 @@ if (isset($_SESSION['name'])) {
                                 /*should do some regex here*/
                                 /////////////////////////////////////
                                 if (isset($_POST["submit"])) {
-                                    $db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+                                    $db = new PDO("mysql:dbname=thedoctors", "root", "");
                                     $first = $db->quote($_POST["first"]);
                                     $last =  $db->quote($_POST["last"]);
                                     $email = $db->quote($_POST["email"]);

@@ -5,7 +5,7 @@ if (!isset($_SESSION['name'])) {
 }
 
 	if (isset($_POST['profile'])) {
-		$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+		$db = new PDO("mysql:dbname=thedoctors", "root", "");
 		$query = $db->query("SELECT * FROM user");
 
 		foreach ($query as $row) {
@@ -42,7 +42,7 @@ if (!isset($_SESSION['name'])) {
 							$targetFilePath =$_FILES['img']['name'];
 							$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 							$targetDir = 'media/'.$_SESSION['user'].'/ProfilePictures'.'/';
-					  	$allowTypes = array('jpg','png','jpeg', 'PNG');
+					  	$allowTypes = array('jpg','png','jpeg', 'PNG','JPG');
 							if ($_FILES['img']['size'] <=(1024*11) || $_FILES['img']['size'] > (125*1048576))  {	//image size restrictions
 									if(empty($msg)){
 												 	echo ('<script>alert("Your image is too large or too short!")</script>');
@@ -68,6 +68,7 @@ if (!isset($_SESSION['name'])) {
 									$sqlstmt="UPDATE user SET image = :img where  Email =(:email)";
 									$res = $db->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 									$res->execute(array(':img' => $fileName, ':email'=>$e));
+									$_SESSION['img']=$targetFilePath;
 									if(empty($msg)){
 											echo ('<script>alert("Profile Picture successfuly updated")</script>');
 									}
@@ -86,7 +87,7 @@ if (!isset($_SESSION['name'])) {
 	}
 };
 if (isset($_POST['about'])) {
-	$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+	$db = new PDO("mysql:dbname=thedoctors", "root", "");
 	$query = $db->query("SELECT * FROM user");
 
 	foreach ($query as $row) {
@@ -498,7 +499,7 @@ if (isset($_POST['about'])) {
 						</div>
 						<?php
 						if (isset($_POST['change'])) {
-							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:dbname=thedoctors", "root", "");
 							$query = $db->query("SELECT * FROM user");
 
 							foreach ($query as $row) {
