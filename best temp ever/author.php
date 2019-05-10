@@ -238,6 +238,7 @@ if (!isset($_SESSION['name'])) {
 							<a class="be-ava-user style-2" href="page1.html">
 								<img  height="115" width="115" src="<?=$_SESSION['img']?>" alt=""><!-- should be the profile picture of the user-->
 							</a>
+							<a class="be-ava-left btn color-1 size-2 hover-1" href="author-edit.php"><i class="fa fa-pencil"></i>Edit</a>
 							<p class="be-use-name"><?php echo($_SESSION['name']." ".$_SESSION['last']);?></p>
 							<div class="be-user-info">
 								<?= $_SESSION['country'] ?>
@@ -297,28 +298,72 @@ if (!isset($_SESSION['name'])) {
 						<div class="tabs-content clearfix">
 							<div class="tab-info active">
 								<div class="row">
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p1.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">The kitsch destruction of our world</a>
-											<span>
-												<a href="page1.html" class="be-post-tag">Interaction Design</a>,
-												<a href="page1.html" class="be-post-tag">UI/UX</a>,
-												<a href="page1.html" class="be-post-tag">Web Design</a>
-											</span>
-											<div class="author-post">
-												<img src="img/a1.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-											</div>
-											<div class="info-block">
-												<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-												<span><i class="fa fa-eye"></i> 789</span>
-												<span><i class="fa fa-comment-o"></i> 20</span>
-											</div>
-										</div>
-									</div>
+									<?php
+									$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+									$user = $db->quote($_SESSION['user']);
+									$user2=$_SESSION['user'];
+									$posts = $db->query("SELECT * FROM post1 WHERE (UserEmail=$user);");	//all posts for this user
+
+									foreach ($posts as $rows) {
+
+											$id =$db->quote($rows['ID']);
+											$media=$db->prepare("SELECT * FROM media WHERE (PostId= $id);");
+											$media->execute();
+											$count=$media->rowCount();
+
+
+											if ($count!=0){
+													$row = $media->fetch();
+												//	echo ("<script>alert('$row[2]')</script>");
+													$file="media/".$user2."/".$row['file'];
+												?><div class="col-ml-12 col-xs-6 col-sm-4">
+														<div class="be-post">
+															<a href="page1.html" class="be-img-block">
+																<?=$rows['body']?> <br /><img src=<?=$file?>>
+															</a>
+															<a href="page1.html" class="be-post-title">The kitsch destruction of our world</a>
+															<span>
+																<a href="page1.html" class="be-post-tag">Interaction Design</a>,
+																<a href="page1.html" class="be-post-tag">UI/UX</a>,
+																<a href="page1.html" class="be-post-tag">Web Design</a>
+															</span>
+															<div class="author-post">
+																<img src="img/a1.png" alt="" class="ava-author">
+																<span>by <a href="page1.html">Hoang Nguyen</a></span>
+															</div>
+															<div class="info-block">
+																<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+																<span><i class="fa fa-comment-o"></i> 20</span>
+															</div>
+														</div>
+													</div>;
+<?php
+											}
+											else{	//no media for this post so it is just text
+												?>
+												<div class="col-ml-12 col-xs-6 col-sm-4">
+														<div class="be-post">
+															<a href="page1.html" class="be-img-block">
+																<?=$rows['body']?>
+															</a>
+															<a href="page1.html" class="be-post-title">The kitsch destruction of our world</a>
+															<span>
+																<a href="page1.html" class="be-post-tag">Interaction Design</a>,
+																<a href="page1.html" class="be-post-tag">UI/UX</a>,
+																<a href="page1.html" class="be-post-tag">Web Design</a>
+															</span>
+															<div class="author-post">
+																<img src="img/a1.png" alt="" class="ava-author">
+																<span>by <a href="page1.html">Hoang Nguyen</a></span>
+															</div>
+															<div class="info-block">
+																<span><i class="fa fa-thumbs-o-up"></i> 360</span>
+																<span><i class="fa fa-comment-o"></i> 20</span>
+															</div>
+														</div>
+										<?php 	}
+									} ?>
+
 									<div class="col-ml-12 col-xs-6 col-sm-4">
 										<div class="be-post">
 											<a href="page1.html" class="be-img-block">

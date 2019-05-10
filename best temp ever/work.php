@@ -626,7 +626,7 @@
                                         $ID4 = $_SESSION["user"].strtotime("now");
                                         $stmt4 ="INSERT INTO media VALUES (NULL,:id,:file)";
                                         $sth4 = $db2->prepare($stmt4, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                                        $sth4->execute(array(':id' => $ID4, ':file'=>$fileName));
+                                        $sth4->execute(array(':id' => $ID, ':file'=>$fileName));
                                         $msg="Your files are uploaded successfully";
                                     }
                               }

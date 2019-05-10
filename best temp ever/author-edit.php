@@ -5,7 +5,7 @@ if (!isset($_SESSION['name'])) {
 }
 
 	if (isset($_POST['profile'])) {
-		$db = new PDO("mysql:dbname=thedoctors", "root", "");
+		$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 		$query = $db->query("SELECT * FROM user");
 
 		foreach ($query as $row) {
@@ -87,7 +87,7 @@ if (!isset($_SESSION['name'])) {
 	}
 };
 if (isset($_POST['about'])) {
-	$db = new PDO("mysql:dbname=thedoctors", "root", "");
+	$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 	$query = $db->query("SELECT * FROM user");
 
 	foreach ($query as $row) {
@@ -499,7 +499,7 @@ if (isset($_POST['about'])) {
 						</div>
 						<?php
 						if (isset($_POST['change'])) {
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$query = $db->query("SELECT * FROM user");
 
 							foreach ($query as $row) {
