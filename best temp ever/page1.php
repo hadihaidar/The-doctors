@@ -84,41 +84,41 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 									<div class="noto-entry">
 										<div class="noto-content clearfix">
 											<div class="noto-img">
-												<a href="page1.php?account=<?=$r['f']?>">
+												<a href="page1.php?account=<?= $r['f'] ?>">
 													<img src="img/c1.png" alt="" class="be-ava-comment">
 												</a>
 											</div>
 											<div class="noto-text">
 												<div class="noto-text-top">
 													<?php
-														$fr = $db->quote($r['f']);
-														$u = $db->query("SELECT FirstName,LastName FROM `user` WHERE (Email=$fr)");
-														$n="";
-														foreach($u as $name){
-															$n=$name[0]." ".$name[1];
-														}
+													$fr = $db->quote($r['f']);
+													$u = $db->query("SELECT FirstName,LastName FROM `user` WHERE (Email=$fr)");
+													$n = "";
+													foreach ($u as $name) {
+														$n = $name[0] . " " . $name[1];
+													}
 													?>
-													<span class="noto-name"><a href="page1.php?account=<?=$r['f']?>"><?=$n?></a></span>
-													<span class="noto-date"><i class="fa fa-clock-o"></i> <?=$r['time']?></span>
+													<span class="noto-name"><a href="page1.php?account=<?= $r['f'] ?>"><?= $n ?></a></span>
+													<span class="noto-date"><i class="fa fa-clock-o"></i> <?= $r['time'] ?></span>
 												</div>
-												<a  class="noto-message">
-												<?php
-													if($r['type']=='sent'){
-														echo("Sent you a friend request");
+												<a class="noto-message">
+													<?php
+													if ($r['type'] == 'sent') {
+														echo ("Sent you a friend request");
 													}
-													if($r['type']=='accepted'){
-														echo("Accepted your friend request");
+													if ($r['type'] == 'accepted') {
+														echo ("Accepted your friend request");
 													}
-													if($r['type']=='Liked'){
-														echo("Liked a post of yours");
+													if ($r['type'] == 'Liked') {
+														echo ("Liked a post of yours");
 													}
-													if($r['type']=='commented'){
-														echo("Commented on your post");
+													if ($r['type'] == 'commented') {
+														echo ("Commented on your post");
 													}
-													if($r['type']=='shared'){
-														echo("Shared your post");
+													if ($r['type'] == 'shared') {
+														echo ("Shared your post");
 													}
-												?>
+													?>
 												</a>
 											</div>
 										</div>
@@ -128,66 +128,31 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 						}
 						?>
 						</div>
+
+
 						<a class="messages-popup" href="blog-detail-2.html">
 							<i class="fa fa-envelope-o"></i>
-							<span class="noto-count">4</span>
+							<!-- Go to the db get the number of unread messages-->
+							<?php
+							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$user = $db->quote($_SESSION['user']);
+							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
+							$c = 0;
+							foreach ($not as $r) {
+								$c = $c + 1;
+							}
+							?>
+							<span class="noto-count"><?=$c?></span>
 						</a>
 						<div class="noto-popup messages-block">
 							<div class="m-close"><i class="fa fa-times"></i></div>
-							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages-2.html">compose</a><a href="messages.html">View all messages</a></span></div>
+							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages.html">View all messages</a></span></div>
 							<div class="noto-body">
-								<div class="noto-entry style-2">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c1.png" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">Ravi Sah</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
-											</div>
-											<div class="noto-message">Sed velit mauris, pulvinar sit amet accumsan vitae, egestas, pulvinar sit amet accumsan vitae, egestas</div>
-										</div>
-									</div>
-								</div>
-								<div class="noto-entry style-2">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c6.jpg" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">Louis Paquet</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
-											</div>
-											<div class="noto-message">
-												Pellentesque habitant morbi tristique senectus et netus tristique senectus
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="noto-entry style-2">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c9.jpg" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">Cüneyt ŞEN</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
-											</div>
-											<div class="noto-message">
-												Sed id erat vitae libero malesuada dictum vel sit amet eros
-											</div>
-										</div>
-									</div>
-								</div>
+								<!-- on click take him to the messages page and change it to read-->
+								<?php
+									$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
+									foreach ($not as $r) {
+								?>
 								<div class="noto-entry style-2">
 									<div class="noto-content clearfix">
 										<div class="noto-img">
@@ -197,15 +162,24 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 										</div>
 										<div class="noto-text">
 											<div class="noto-text-top">
-												<span class="noto-name"><a href="blog-detail-2.html">Tomasz Mazurczak</a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> May 27, 2015</span>
+												<?php
+												$u = $db->quote($r['f']);
+												$u = $db->query("SELECT FirstName,LastName FROM `user` WHERE (Email=$u)");
+													$n = "";
+													foreach ($u as $name) {
+														$n = $name[0] . " " . $name[1];
+													}
+												?>
+												<span class="noto-name"><a href="page1.php?account=<?=$r['f']?>"><?=$n?></a></span>
+												<span class="noto-date"><i class="fa fa-clock-o"></i> <?=$r['time']?></span>
 											</div>
 											<div class="noto-message">
-												In molestie libero quis cursus ullamcorper eu rhoncus magna
+												<?= $r['body']?>
 											</div>
 										</div>
 									</div>
 								</div>
+								<?php }?>
 							</div>
 						</div>
 						<div class="be-drop-down login-user-down" style="padding-top: 10px;">
@@ -365,180 +339,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 
 	<div class="be-fixed-filter"></div>
 
-	<div class="large-popup login">
-		<div class="large-popup-fixed"></div>
-		<div class="container large-popup-container">
-			<div class="row">
-				<div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3  large-popup-content">
-					<div class="row">
-						<div class="col-md-12">
-							<i class="fa fa-times close-button"></i>
-							<h5 class="large-popup-title">Log in</h5>
-						</div>
-						<form action="./" class="popup-input-search">
-							<div class="col-md-6">
-								<input class="input-signtype" type="email" required="" placeholder="Your email">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="password" required="" placeholder="Password">
-							</div>
-							<div class="col-xs-6">
-								<div class="be-checkbox">
-									<label class="check-box">
-										<input class="checkbox-input" type="checkbox" value="" /> <span class="check-box-sign"></span>
-									</label>
-									<span class="large-popup-text">
-										Stay signed in
-									</span>
-								</div>
 
-								<a href="blog-detail-2.html" class="link-large-popup">Forgot password?</a>
-							</div>
-							<div class="col-xs-6 for-signin">
-								<input type="submit" class="be-popup-sign-button" value="SIGN IN">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="large-popup register">
-		<div class="large-popup-fixed"></div>
-		<div class="container large-popup-container">
-			<div class="row">
-				<div class="col-md-10 col-md-push-1 col-lg-8 col-lg-push-2 large-popup-content">
-					<div class="row">
-						<div class="col-md-12">
-							<i class="fa fa-times close-button"></i>
-							<h5 class="large-popup-title">Register</h5>
-						</div>
-						<form action="./" class="popup-input-search">
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="First Name">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Last Name">
-							</div>
-							<div class="col-md-6">
-								<div class="be-custom-select-block">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Country
-										</option>
-										<option value="">USA</option>
-										<option value="">Canada</option>
-										<option value="">England</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Email">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Password">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Repeat Password">
-							</div>
-							<div class="col-md-12 be-date-block">
-								<span class="large-popup-text">
-									Date of birth
-								</span>
-								<div class="be-custom-select-block mounth">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Mounth
-										</option>
-										<option value="">January</option>
-										<option value="">February</option>
-										<option value="">March</option>
-										<option value="">April</option>
-										<option value="">May</option>
-										<option value="">June</option>
-										<option value="">July</option>
-										<option value="">August</option>
-										<option value="">September</option>
-										<option value="">October</option>
-										<option value="">November</option>
-										<option value="">December</option>
-									</select>
-								</div>
-								<div class="be-custom-select-block">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Day
-										</option>
-										<option value="">1</option>
-										<option value="">2</option>
-										<option value="">3</option>
-										<option value="">4</option>
-										<option value="">5</option>
-										<option value="">6</option>
-										<option value="">7</option>
-										<option value="">8</option>
-										<option value="">9</option>
-										<option value="">10</option>
-										<option value="">11</option>
-										<option value="">12</option>
-										<option value="">13</option>
-										<option value="">14</option>
-										<option value="">15</option>
-										<option value="">16</option>
-										<option value="">17</option>
-										<option value="">18</option>
-										<option value="">19</option>
-										<option value="">20</option>
-										<option value="">21</option>
-										<option value="">22</option>
-										<option value="">23</option>
-										<option value="">24</option>
-										<option value="">25</option>
-										<option value="">26</option>
-										<option value="">27</option>
-										<option value="">28</option>
-										<option value="">29</option>
-										<option value="">30</option>
-									</select>
-								</div>
-								<div class="be-custom-select-block">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Year
-										</option>
-										<option value="">1996</option>
-										<option value="">1997</option>
-										<option value="">1998</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="be-checkbox">
-									<label class="check-box">
-										<input class="checkbox-input" type="checkbox" required="" value="" /> <span class="check-box-sign"></span>
-									</label>
-									<span class="large-popup-text">
-										I have read and agree to the <a class="be-popup-terms" href="blog-detail-2.html">Terms of Use</a> and <a class="be-popup-terms" href="blog-detail-2.html">Privacy Policy</a>.
-									</span>
-								</div>
-								<div class="be-checkbox">
-									<label class="check-box">
-										<input class="checkbox-input" type="checkbox" value="" /> <span class="check-box-sign"></span>
-									</label>
-									<span class="large-popup-text">
-										Send me notifications
-									</span>
-								</div>
-							</div>
-							<div class="col-md-6 for-signin">
-								<input type="submit" class="be-popup-sign-button" value="SIGN IN">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="large-popup send-m">
 		<div class="large-popup-fixed"></div>
 		<div class="container large-popup-container">
@@ -549,33 +350,12 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 							<i class="fa fa-times close-m close-button"></i>
 							<h5 class="large-popup-title">Send message</h5>
 						</div>
-						<form action="./" class="popup-input-search">
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="First Name">
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="text" required="" placeholder="Last Name">
-							</div>
-							<div class="col-md-6">
-								<div class="be-custom-select-block">
-									<select class="be-custom-select">
-										<option value="" disabled selected>
-											Country
-										</option>
-										<option value="">USA</option>
-										<option value="">Canada</option>
-										<option value="">England</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<input class="input-signtype" type="email" required="" placeholder="Email">
-							</div>
+						<form action="send.php?to=<?= $_REQUEST['account'] ?>" method="post" class="popup-input-search">
 							<div class="col-md-12">
-								<textarea class="message-area" placeholder="Message"></textarea>
+								<textarea class="message-area" placeholder="Message" name='message'></textarea>
 							</div>
 							<div class="col-md-12 for-signin">
-								<input type="submit" class="be-popup-sign-button" value="SEND">
+								<input type="submit" value="SEND" name='send'>
 							</div>
 						</form>
 					</div>
