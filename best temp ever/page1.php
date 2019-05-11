@@ -142,7 +142,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 								$c = $c + 1;
 							}
 							?>
-							<span class="noto-count"><?=$c?></span>
+							<span class="noto-count"><?= $c ?></span>
 						</a>
 						<div class="noto-popup messages-block">
 							<div class="m-close"><i class="fa fa-times"></i></div>
@@ -150,40 +150,40 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 							<div class="noto-body">
 								<!-- on click take him to the messages page and change it to read-->
 								<?php
-									$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
-									foreach ($not as $r) {
-								?>
-								<div class="noto-entry style-2">
-									<div class="noto-content clearfix">
-										<div class="noto-img">
-											<a href="blog-detail-2.html">
-												<img src="img/c10.jpg" alt="" class="be-ava-comment">
-											</a>
-										</div>
-										<div class="noto-text">
-											<div class="noto-text-top">
-												<?php
-												$u = $db->quote($r['f']);
-												$u = $db->query("SELECT FirstName,LastName FROM `user` WHERE (Email=$u)");
+								$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
+								foreach ($not as $r) {
+									?>
+									<div class="noto-entry style-2">
+										<div class="noto-content clearfix">
+											<div class="noto-img">
+												<a href="blog-detail-2.html">
+													<img src="img/c10.jpg" alt="" class="be-ava-comment">
+												</a>
+											</div>
+											<div class="noto-text">
+												<div class="noto-text-top">
+													<?php
+													$u = $db->quote($r['f']);
+													$u = $db->query("SELECT FirstName,LastName FROM `user` WHERE (Email=$u)");
 													$n = "";
 													foreach ($u as $name) {
 														$n = $name[0] . " " . $name[1];
 													}
-												?>
-												<span class="noto-name"><a href="page1.php?account=<?=$r['f']?>"><?=$n?></a></span>
-												<span class="noto-date"><i class="fa fa-clock-o"></i> <?=$r['time']?></span>
-											</div>
-											<div class="noto-message">
-												<?= $r['body']?>
+													?>
+													<span class="noto-name"><a href="page1.php?account=<?= $r['f'] ?>"><?= $n ?></a></span>
+													<span class="noto-date"><i class="fa fa-clock-o"></i> <?= $r['time'] ?></span>
+												</div>
+												<div class="noto-message">
+													<?= $r['body'] ?>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-								<?php }?>
+								<?php } ?>
 							</div>
 						</div>
 						<div class="be-drop-down login-user-down" style="padding-top: 10px;">
-							<img class="login-user" src="img/login.jpg" alt="">
+							<img class="login-user" height="20" width="24" src="<?= $_SESSION['img'] ?>" alt="">
 							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
 								<a href="activity.php">My Portfolio</a>

@@ -93,27 +93,6 @@ if (!isset($_SESSION['name'])) {
 						<input type="submit" name="search" value="">
 					</form>
 				</div>
-				<div class="col-md-10 ">
-					<div class="for-be-dropdowns">
-
-						<div class="be-drop-down">
-							<i class="icon-creative"></i>
-							<span class="be-dropdown-content">Field
-							</span>
-							<ul class="drop-down-list">
-								<li class="filter"><a>Eyes</a></li>
-								<li class="filter"><a>E.N.T.</a></li>
-								<li class="filter"><a>Heart</a></li>
-							</ul>
-						</div>
-
-						<div class="col-md-2 left-feild">
-							<form class="input-search">
-								<input type="text" required placeholder="Country">
-							</form>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class="container-fluid custom-container">
