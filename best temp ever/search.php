@@ -98,7 +98,7 @@ if (!isset($_SESSION['name'])) {
 					<div id="container-mix" class="row _post-container_">
 						<?php
 						if (isset($_POST['search'])) {
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$name = strtolower($_POST['name']) . " !@#$%^&&";
 							$name = explode(" ", $name);
 							$query = $db->query("SELECT * FROM user ");

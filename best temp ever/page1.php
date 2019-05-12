@@ -244,7 +244,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 														?><div class="row">
 															<div class="col-ml-12 col-xs-6 col-sm-8">
 																<div class="be-post">
-																	<a  href="page1.html"><?=$rows['body']?> </a>
+																	<a style="color:black;"><?=$rows['body']?> </a>
 																	<a href="page1.html" class="be-img-block">
 																	<br>
 																	<?php
@@ -276,7 +276,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 						<div class="row">
 						<div class="col-ml-12 col-xs-6 col-sm-12">
 								<div class="be-post">
-									<a href="page1.html" style="color:black;">
+									<a style="color:black;">
 										<?=$rows['body']?> <br> <br>
 									</a>
 
