@@ -258,9 +258,7 @@
 			<img class="login-user" height="20" width="24" src="<?=$_SESSION['img']?>" alt="">
 			<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name'])?></span></span>
 			<div class="drop-down-list a-list">
-				<a href="activity.php">My Portfolio</a>
-				<a href="statictics.html">Statistics </a>
-				<a href="about-us.html">Work Experience</a>
+				<a href="activity.php">My Profile</a>
 				<a href="author-edit.php">Account Settings</a>
 				<a href="login.php?logout">Logout</a>
 			</div>
@@ -271,15 +269,10 @@
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
 					<ul class="header-menu" id="one">
 						<li><a href="activity.php">Activity</a></li>
-						<li><a href="search.html">Discover</a>
-							<ul>
-								<li><a href="search.html">Explore</a></li>
-								<li><a href="people.html">People</a></li>
-								<li><a href="gallery.html">Galleries</a></li>
-							</ul>
+						<li><a href="search.php">Search</a>
+
 						</li>
-						<li><a href="author.php">My Portfolio</a></li>
-						<li><a href="site-map.html">Site Map</a></li>
+						<li><a href="author.php">My Profile</a></li>
 
 					</ul>
 				</div>
@@ -369,9 +362,27 @@
                       Button Text Here
                       </label>
                       <span class='label label-info' id="upload-file-info"></span> -->
+                      <div style="text-align:right;" >
+                        <button style="border:none; background:none;" type="button" name="button" onclick="showlist()"><img width="40px" height="40px"src="media/icon.jpg"  alt=""></button>
+                        <div id="mobidrop" style="display:none;float:right;" onchange="hidelist()">
+                          <select class="" name="status">
+                            <option value="Public">Public</option>
+                            <option value="Private">Private</option>
+                          </select>
+                       </div>
 
+                      </div>
+                      <script>
+                        function showlist(){
+                          document.getElementById("mobidrop").style.display="";
+                        }
+                        function hidelist(){
+                          document.getElementById("mobidrop").style.display="none";
+                        }
+                      </script>
                       Select Files to Upload:
                      <input type="file" name="files[]" multiple >
+
                      <textarea id="special" name="post2" rows="10" cols="80" placeholder="What's on your mind, <?=$_SESSION['name']?>?"></textarea>
 
                             <input type="submit" name="submitIt" class="buttons-navbar btn btn-primary" value="Upload" />
@@ -582,12 +593,13 @@
                               $user2 = $db2->quote($_SESSION["user"]);	//user's email
                               $ID = $_SESSION["user"].strtotime("now");
                               $Data2 = $_POST["post2"];
-                              $stmt2 ="INSERT INTO post1(ID,timee,UserEmail,likee,comments,body) VALUES (:id, NOW(), :email, :likes, :comments, :body)";
+                              $state=$_POST['status'];
+                              $stmt2 ="INSERT INTO post1(ID,timee,UserEmail,status,likee,comments,body) VALUES (:id, NOW(), :email, :s, :likes, :comments, :body)";
                               $sth2 = $db2->prepare($stmt2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                               $like= 0;
                               $comment=0;
 
-                              $sth2->execute(array(':id' => $ID, ':email' =>  $_SESSION['user'], ':likes' => $like, ':comments' => $comment, ':body' =>$Data2));
+                              $sth2->execute(array(':id' => $ID, ':email' =>  $_SESSION['user'], ':s' =>  $state,':likes' => $like, ':comments' => $comment, ':body' =>$Data2));
                               $msg="Your Post is uploaded successfuly!";
                             }
                           }
@@ -608,12 +620,13 @@
                             $user2 = $db2->quote($_SESSION["user"]);	//user's email
                             $ID = $_SESSION["user"].strtotime("now");
                             $Data2 = $_POST["post2"];
-                            $stmt2 ="INSERT INTO post1(ID,timee,UserEmail,likee,comments,body) VALUES (:id, NOW(), :email, :likes, :comments, :body)";
+                            $state=$_POST['status'];
+                            $stmt2 ="INSERT INTO post1(ID,timee,UserEmail,status,likee,comments,body) VALUES (:id, NOW(), :email, :s, :likes, :comments, :body)";
                             $sth2 = $db2->prepare($stmt2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                             $like= 0;
                             $comment=0;
 
-                            $sth2->execute(array(':id' => $ID, ':email' =>  $_SESSION['user'], ':likes' => $like, ':comments' => $comment, ':body' =>$Data2));
+                            $sth2->execute(array(':id' => $ID, ':email' =>  $_SESSION['user'], ':s' =>  $state, ':likes' => $like, ':comments' => $comment, ':body' =>$Data2));
                             //add files to media table
                               foreach($_FILES['files']['name'] as $key=>$val){  //loops over files uploaded
 

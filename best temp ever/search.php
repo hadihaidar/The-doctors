@@ -51,7 +51,7 @@ if (!isset($_SESSION['name'])) {
 			<div class="row no_row row-header">
 				<div class="brand-be">
 					<a href="index.php">
-						<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px; alt=" logo">
+						<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px"; alt=" logo">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
@@ -61,9 +61,8 @@ if (!isset($_SESSION['name'])) {
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
 					<ul class="header-menu" id="one">
 						<li><a href="activity.php">Activity</a></li>
-						<li><a href="search.php">Discover</a></li>
-						<li><a href="author-login.html">My Portfolio</a></li>
-						<li><a href="site-map.html">Site Map</a></li>
+						<li><a href="search.php">Search</a></li>
+						<li><a href="author.php">My Profile</a></li>
 						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Work </a></li>
 					</ul>
 				</div>
@@ -71,9 +70,7 @@ if (!isset($_SESSION['name'])) {
 					<img class="login-user" src="img/login.jpg" alt="">
 					<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 					<div class="drop-down-list a-list">
-						<a href="activity.php">My Portfolio</a>
-						<a href="statictics.php">Statistics </a>
-						<a href="about-us.php">Work Experience</a>
+						<a href="author.php">My Profile</a>
 						<a href="author-edit.php">Account Settings</a>
 						<a href="login.php?logout">Logout</a>
 					</div>
@@ -101,7 +98,7 @@ if (!isset($_SESSION['name'])) {
 					<div id="container-mix" class="row _post-container_">
 						<?php
 						if (isset($_POST['search'])) {
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$name = strtolower($_POST['name']) . " !@#$%^&&";
 							$name = explode(" ", $name);
 							$query = $db->query("SELECT * FROM user ");
