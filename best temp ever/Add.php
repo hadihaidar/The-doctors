@@ -37,7 +37,7 @@
     }
     if (isset($_POST['delete'])) {
         //delete the request from the table
-        $query = $db->exec("DELETE FROM friends WHERE (t=$from)AND(f=$to);");
+        $query = $db->exec("DELETE FROM friends WHERE (t=$from AND f=$to) OR (f=$from AND t=$to);");
         header("location:page1.php?account=$go");
     }
     if (isset($_POST['add'])) {

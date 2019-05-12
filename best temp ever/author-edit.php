@@ -358,7 +358,9 @@ if (isset($_POST['about'])) {
 							<img class="login-user" height="20" width="24" src="<?=$_SESSION['img']?>" alt="">
 							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
-								<a href="author.php">My Profile</a>
+								<a href="activity.php">My Portfolio</a>
+								<a href="statictics.php">Statistics </a>
+								<a href="about-us.php">Work Experience</a>
 								<a href="author-edit.php">Account Settings</a>
 								<a href="login.php?logout">Logout</a>
 							</div>
@@ -370,7 +372,8 @@ if (isset($_POST['about'])) {
 					<ul class="header-menu" id="one">
 						<li><a href="activity.php">Activity</a></li>
 						<li><a href="search.php">Search</a></li>
-						<li><a href="author.php">My Profile</a></li>
+						<li><a href="author-login.html">My Portfolio</a></li>
+						<li><a href="site-map.html">Site Map</a></li>
 						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Posts </a></li>
 					</ul>
 				</div>
