@@ -314,7 +314,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 									?>
 									</div>
 									<div class="col-lg-6">
-										<a href="/" class="col-lg-6 be-user-activity-button send-btn be-message-type"><i class="fa fa-envelope-o"></i>MESSAGE</a>
+										<a href="message.php?from=<?=$_REQUEST['account']?>" class="col-lg-6 be-user-activity-button  be-message-type"><!--send-btn add it to the class before --><i class="fa fa-envelope-o"></i>MESSAGE</a>
 									</div>
 								</div>
 							</div>
