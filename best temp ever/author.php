@@ -358,20 +358,20 @@ if (!isset($_SESSION['name'])) {
 														<span style=" margin-left : 27px; ">On <a href="author.php"><?= $rows['timee'] ?></a></span>
 													</div>
 													<div class="info-block">
-														<?php
+													<?php
+															$pos = $db->quote($rows['ID']);
+															$query = $db->prepare("SELECT COUNT(Post_ID) FROM likes WHERE Post_ID=$pos");
+															 $query->execute();
+															 $count=$query->fetch();
+														?>
+														<span><i class="fa fa-thumbs-o-up" id="like<?= $x ?>_<?= $rows['ID'] ?>" style="color:#b4b7c1" onclick="like(this.id)"></i> <?= $count[0] ?></span>
+													<?php
+
 															$query = $db->query("SELECT * FROM likes");
 															foreach ($query as $row) {
-																if($row['User']==$_SESSION['user'] && $row['Post_ID']==$_REQUEST['post']){
-																?>
-																<span><i class="fa fa-thumbs-o-up" id="like<?= $x ?>_<?= $rows['ID'] ?>" style="color:blue" onclick="like(this.id)"></i> <?= $rows['likee'] ?></span>
+																if($row['User']==$_SESSION['user'] && $row['Post_ID']==$rows['ID']){
+																	echo('<script>document.getElementById("like'.$x."_".$rows['ID'].'").style.color="blue"</script>');
 
-																<?php
-																}else{
-																	?>
-
-																<span><i class="fa fa-thumbs-o-up" id="like<?= $x ?>_<?= $rows['ID'] ?>" style="color:#b4b7c1" onclick="like(this.id)"></i> <?= $rows['likee'] ?></span>
-
-																<?php
 																}
 															}
 															?>
@@ -442,19 +442,7 @@ if (!isset($_SESSION['name'])) {
 				//send ajax request to like.php?unlike=true
 			}
 		}
-		function x(){
-			var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						if(this.responseText=='true'){
-							document.getElementById(id).style.color = 'blue';
-						}
-						else{alert();}
-					}
-				};
-				xhttp.open("GET", 'like.php?is=true&post=' + post, false);
-				xhttp.send();
-		}
+	
 	</script>
 
 </body>
