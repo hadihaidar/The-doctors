@@ -198,7 +198,7 @@ if (!isset($_SESSION['name'])) {
 							<img class="login-user" height="20" width="24" src="<?= $_SESSION['img'] ?>" alt="">
 							<span class="be-dropdown-content">Hi, <?php echo ($_SESSION['name']) ?></span>
 							<div class="drop-down-list a-list">
-								<a href="author.php">My Portfolio</a>
+								<a href="author.php">My Profile</a>
 								<a href="author-edit.php">Account Settings</a>
 								<a href="login.php?logout">Logout</a>
 							</div>
