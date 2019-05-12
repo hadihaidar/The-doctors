@@ -58,7 +58,7 @@ if (!isset($_SESSION['name'])) {
 				<div class="login-header-block">
 					<div class="login_block">
 						<?php
-						$db = new PDO("mysql:dbname=thedoctors", "root", "");
+						$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 						$user = $db->quote($_SESSION['user']);
 						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
 						$c = 0;
@@ -137,7 +137,7 @@ if (!isset($_SESSION['name'])) {
 							<i class="fa fa-envelope-o"></i>
 							<!-- Go to the db get the number of unread messages-->
 							<?php
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$user = $db->quote($_SESSION['user']);
 							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
 							$c = 0;
@@ -224,10 +224,109 @@ if (!isset($_SESSION['name'])) {
 	<!-- MAIN CONTENT -->
 	<div id="content-block">
 		<div class="container-fluid custom-container be-detail-container">
-			<div class="isotope-grid row">
-				
+			<div class="isotope-grid row" style="text-align:center">
+				<div class="tab-info active">
+
+						<?php
+						$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+						$user = $db->quote($_SESSION['user']);
+						$user2=$_SESSION['user'];
+						$friends = $db->query("SELECT * FROM friends WHERE ((f=$user or t=$user) and s='accepted');");	//all posts for this user
+						$array=[];		//filles with friends
+						foreach ($friends as $p) {
+							if ($p['f']===$user2){
+									$array[]=$p['t'];
+							}
+							else{
+								$array[]=$p['f'];
+							}
+						}
+						$posts = $db->query("SELECT * FROM post1 WHERE(status='Public')  Order BY timee DESC;");	//all posts for all users
+
+						$images = array('jpg','png','jpeg','gif', 'PNG');
+						//$video = array('mp4', 'm4a', 'm4v', 'f4v', 'f4a', 'm4b', 'f4b', 'mov', 'avi', 'AVI', 'flv', 'FLV', 'MOV', 'mov');
+						foreach ($posts as $rows) {
+							if (in_array($rows['UserEmail'],$array)){
+
+								$em =$db->quote($rows['UserEmail']);
+								$Q=$db->prepare("Select * FROM user WHERE (Email=$em);");
+								$Q->execute();
+								$res= $Q->fetch();
+								$FullName=$res['FirstName']." ". $res['LastName'];
+								$id =$db->quote($rows['ID']);
+
+								$media=$db->prepare("SELECT * FROM media WHERE (PostId= $id);");
+								$media->execute();
+								$count=$media->rowCount();
+
+								if ($count!=0){
+
+										$row = $media->fetch();
+									//	echo ("<script>alert('$row[2]')</script>");
+										$file="media/".$rows['UserEmail']."/".$row['file'];
+
+									?><div class="row">
+										<div class="col-ml-12 col-xs-6 col-sm-12">
+											<div class="be-post">
+												<a  href="page1.html" style="color:black;"><?=$rows['body']?> </a>
+												<a href="page1.html" class="be-img-block">
+												<br>
+												<?php
+													$ext = pathinfo($row['file'], PATHINFO_EXTENSION);
+													if (in_array($ext,$images)){ ?>
+															<img style="width:489.98px;height:600px;" src="<?=$file?>" >
+														<?php }
+												else{	//It is a video ?>
+														<video style="object-fit:fill;" width="489.98px" height="600px" controls>
+														<source src="<?=$file?>" type="video/mp4">
+
+														</video>
+																							<?php } ?>
+												</a>
+
+												<div class="author-post">
+														<img src="<?=$_SESSION['img']?>" alt="" class="ava-author">
+													<span>By <a href="page1.php?account=<?= $rows['UserEmail'] ?>"><?=$FullName?></a></span><br>
+													<span style=" margin-left : 27px; ">On <a><?=$rows['timee']?></a></span>
+												</div>
+
+												<div class="info-block">
+													<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
+													<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
+
+													</div>
+												</div>
+											</div>
+										</div>
+<?php
+								}
+								else{	//no media for this post so it is just text
+									?>
+									<div class="row">
+									<div class="col-ml-12 col-xs-6 col-sm-12">
+											<div class="be-post">
+												<a href="page1.html" style="color:black;">
+													<?=$rows['body']?> <br> <br>
+												</a>
+
+												<div class="author-post">
+													<img src="<?=$_SESSION['img']?>" alt="" class="ava-author">
+													<span>By <a href="page1.php?account=<?= $rows['UserEmail'] ?>"><?=$FullName?></a></span><br>
+													<span style=" margin-left : 27px; ">On <a><?=$rows['timee']?></a></span>
+												</div>
+												<div class="info-block">
+													<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
+													<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
+												</div>
+											</div>
+										</div>
+									</div>
+							<?php }	}
+						} ?>
 		</div>
 	</div>
+</div>
+</div>
 
 	<div class="theme-config">
 		<div class="main-color">

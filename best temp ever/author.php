@@ -334,16 +334,6 @@ if (!isset($_SESSION['name'])) {
 															<div class="info-block">
 																<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
 																<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
-
-																<script>
-					                        function showlist(elem){
-					                          document.getElementById(elem).style.display="";
-					                        }
-					                        function hidelist(element){
-					                          document.getElementById(element).style.display="none";
-					                        }
-					                      </script>
-
 																</div>
 															</div>
 														</div>

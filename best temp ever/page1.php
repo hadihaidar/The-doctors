@@ -61,7 +61,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 				<div class="login-header-block">
 					<div class="login_block">
 						<?php
-						$db = new PDO("mysql:dbname=thedoctors", "root", "");
+						$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 						$user = $db->quote($_SESSION['user']);
 						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
 						$c = 0;
@@ -134,7 +134,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 							<i class="fa fa-envelope-o"></i>
 							<!-- Go to the db get the number of unread messages-->
 							<?php
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$user = $db->quote($_SESSION['user']);
 							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
 							$c = 0;
@@ -146,7 +146,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 						</a>
 						<div class="noto-popup messages-block">
 							<div class="m-close"><i class="fa fa-times"></i></div>
-							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages.html">View all messages</a></span></div>
+							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages.php">View all messages</a></span></div>
 							<div class="noto-body">
 								<!-- on click take him to the messages page and change it to read-->
 								<?php
@@ -186,9 +186,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 							<img class="login-user" height="20" width="24" src="<?= $_SESSION['img'] ?>" alt="">
 							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
-								<a href="activity.php">My Portfolio</a>
-								<a href="statictics.php">Statistics </a>
-								<a href="about-us.php">Work Experience</a>
+								<a href="author.php">My Profile</a>
 								<a href="author-edit.php">Account Settings</a>
 								<a href="login.php?logout">Logout</a>
 							</div>
@@ -200,8 +198,8 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 					<ul class="header-menu" id="one">
 						<li><a href="activity.php">Activity</a></li>
 						<li><a href="search.php">Search</a></li>
-						<li><a href="author-login.html">My Portfolio</a></li>
-						<li><a href="site-map.html">Site Map</a></li>
+						<li><a href="author.php">My Profile</a></li>
+
 						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Posts </a></li>
 					</ul>
 				</div>
@@ -220,28 +218,88 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 					<div class="row">
 
 
-						<div class="col-md-4">
-							<div class="be-post">
-								<a href="blog-detail-2.html" class="be-img-block">
-									<img src="img/p5.jpg" alt="omg">
-								</a>
-								<a href="blog-detail-2.html" class="be-post-title">Drive Your World</a>
-								<span>
-									<a href="blog-detail-2.html" class="be-post-tag">Interaction Design</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">UI/UX</a>,
-									<a href="blog-detail-2.html" class="be-post-tag">Web Design</a>
-								</span>
-								<div class="author-post">
-									<img src="img/a9.png" alt="" class="ava-author">
-									<span>by <a href="blog-detail-2.html">Hoang Nguyen</a></span>
-								</div>
-								<div class="info-block">
-									<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-									<span><i class="fa fa-eye"></i> 789</span>
-									<span><i class="fa fa-comment-o"></i> 20</span>
+
+								<?php
+										$email = $db->quote($_REQUEST['account']);
+										$images = array('jpg','png','jpeg','gif', 'PNG');
+										$thiss=$_REQUEST['account'];
+										$posts = $db->query("SELECT * FROM post1 WHERE(status='Public' and UserEmail=$email)  Order BY timee DESC;");	//all posts for this user and set public
+										if ($posts->rowCount()==0){	//all posts are private
+											echo"<h2 style='text-align:center;'>No posts to show</h2>";
+										}
+										else{
+											foreach ($posts as $rows) {
+
+													$id =$db->quote($rows['ID']);
+													$media=$db->prepare("SELECT * FROM media WHERE (PostId= $id);");
+													$media->execute();
+													$count=$media->rowCount();
+
+													if ($count!=0){
+
+															$row = $media->fetch();
+														//	echo ("<script>alert('$row[2]')</script>");
+															$file="media/".$thiss."/".$row['file'];
+
+														?><div class="row">
+															<div class="col-ml-12 col-xs-6 col-sm-8">
+																<div class="be-post">
+																	<a  href="page1.html"><?=$rows['body']?> </a>
+																	<a href="page1.html" class="be-img-block">
+																	<br>
+																	<?php
+																		$ext = pathinfo($row['file'], PATHINFO_EXTENSION);
+																		if (in_array($ext,$images)){ ?>
+																				<img style="width:489.98px;height:600px;" src="<?=$file?>" >
+																			<?php }
+																	else{	//It is a video ?>
+																			<video style="object-fit:fill;" width="489.98px" height="600px" controls>
+																			<source src="<?=$file?>" type="video/mp4">
+
+																			</video>
+																												<?php } ?>
+																	</a>
+
+																	<div class="author-post">
+																			<img src="<?=$_SESSION['img']?>" alt="" class="ava-author">
+																		<span>By <a href="author.php"><?=$n?></a></span><br>
+																		<span style=" margin-left : 27px; ">On <a href="author.php"><?=$rows['timee']?></a></span>
+																	</div>
+
+																	<div class="info-block">
+																		<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
+																		<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
+																	</div></div></div></div>
+
+					<?php 					}
+					else{?>
+						<div class="row">
+						<div class="col-ml-12 col-xs-6 col-sm-12">
+								<div class="be-post">
+									<a href="page1.html" style="color:black;">
+										<?=$rows['body']?> <br> <br>
+									</a>
+
+									<div class="author-post">
+										<img src="<?=$_SESSION['img']?>" alt="" class="ava-author">
+										<span>By <a href="page1.php?account=<?= $rows['UserEmail'] ?>"><?=$FullName?></a></span><br>
+										<span style=" margin-left : 27px; ">On <a><?=$rows['timee']?></a></span>
+									</div>
+									<div class="info-block">
+										<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
+										<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
+									</div>
 								</div>
 							</div>
 						</div>
+
+			<?php 	}
+		}}
+
+										?>
+
+
+
 					</div>
 					<div class="be-comment-block" style="border-color:white">
 
