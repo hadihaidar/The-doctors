@@ -143,7 +143,7 @@ if (isset($_SESSION['name'])) {
                             </div>
 
                             <div class="col-md-6">
-                                <input class="input-signtype" type="text" required="" name='email' placeholder="Email">
+                                <input class="input-signtype" type="email" required="" name='email' placeholder="Email">
                             </div>
                             <div class="col-md-6">
                                 <input class="input-signtype" type="password" required="" name='password' placeholder="Password">

@@ -244,6 +244,7 @@ if (!isset($_SESSION['name'])) {
 
 					$images = array('jpg', 'png', 'jpeg', 'gif', 'PNG');
 					//$video = array('mp4', 'm4a', 'm4v', 'f4v', 'f4a', 'm4b', 'f4b', 'mov', 'avi', 'AVI', 'flv', 'FLV', 'MOV', 'mov');
+						$x=0;
 					foreach ($posts as $rows) {
 						if (in_array($rows['UserEmail'], $array)) {
 
@@ -343,7 +344,7 @@ if (!isset($_SESSION['name'])) {
 														echo ('<script>document.getElementById("like' . $x . "_" . $rows['ID'] . '").style.color="blue"</script>');
 													}
 												}
-												?>
+											?>
 												<span><i class="fa fa-comment-o"></i> <?= $rows['comments'] ?></span>
 											</div>
 										</div>

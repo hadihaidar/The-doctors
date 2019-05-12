@@ -43,7 +43,7 @@ if (!isset($_SESSION['name'])) {
 							$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 							$targetDir = 'media/'.$_SESSION['user'].'/ProfilePictures'.'/';
 					  	$allowTypes = array('jpg','png','jpeg', 'PNG','JPG');
-							if ($_FILES['img']['size'] <=(1024*11) || $_FILES['img']['size'] > (125*1048576))  {	//image size restrictions
+							if ($_FILES['img']['size'] <=(1024*1) || $_FILES['img']['size'] > (125*1048576))  {	//image size restrictions
 									if(empty($msg)){
 												 	echo ('<script>alert("Your image is too large or too short!")</script>');
 									}
@@ -358,9 +358,7 @@ if (isset($_POST['about'])) {
 							<img class="login-user" height="20" width="24" src="<?=$_SESSION['img']?>" alt="">
 							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
-								<a href="activity.php">My Portfolio</a>
-								<a href="statictics.php">Statistics </a>
-								<a href="about-us.php">Work Experience</a>
+								<a href="author.php">My Profile</a>
 								<a href="author-edit.php">Account Settings</a>
 								<a href="login.php?logout">Logout</a>
 							</div>
@@ -372,8 +370,7 @@ if (isset($_POST['about'])) {
 					<ul class="header-menu" id="one">
 						<li><a href="activity.php">Activity</a></li>
 						<li><a href="search.php">Search</a></li>
-						<li><a href="author-login.html">My Portfolio</a></li>
-						<li><a href="site-map.html">Site Map</a></li>
+						<li><a href="author.php">My Profile</a></li>
 						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Posts </a></li>
 					</ul>
 				</div>
@@ -552,7 +549,7 @@ if (isset($_POST['about'])) {
 						</div>
 					</div>
 
-					<a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i>add sections</a>
+					<a  href="delete.php?acc=<?=$_SESSION['user']?>" class="btn full color-1 size-1 hover-1 "><i class="fa fa-plus"></i>DELETE ACCOUNT</a>
 				</div>
 			</div>
 		</div>
