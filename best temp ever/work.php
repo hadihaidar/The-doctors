@@ -278,7 +278,7 @@
 								<li><a href="gallery.html">Galleries</a></li>
 							</ul>
 						</li>
-						<li><a href="author-login.html">My Portfolio</a></li>
+						<li><a href="author.php">My Portfolio</a></li>
 						<li><a href="site-map.html">Site Map</a></li>
 
 					</ul>
@@ -596,7 +596,7 @@
                                 mkdir('media/'.$_SESSION['user'], 0755, true);  //creates directory
                                   }
                             $targetDir = 'media/'.$_SESSION['user'].'/';
-                            $allowTypes = array('jpg','png','jpeg','gif', 'PNG', 'mp4', 'm4a', 'm4v', 'f4v', 'f4a', 'm4b', 'f4b', 'mov', 'avi', 'AVI', 'flv', 'FLV', 'MOV', 'mov'); //allowed file extentions
+                            $allowTypes = array('jpg','png','jpeg','gif', 'PNG', 'mp4', 'm4a', 'm4v'); //allowed file extentions
                             foreach($_FILES['files']['name'] as $key=>$val){
                               $targetFilePath =($_FILES['files']['name'][$key]);
                               $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
