@@ -137,7 +137,7 @@ if (!isset($_SESSION['name'])) {
 							<i class="fa fa-envelope-o"></i>
 							<!-- Go to the db get the number of unread messages-->
 							<?php
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:3302;dbname=thedoctors", "root", "");
 							$user = $db->quote($_SESSION['user']);
 							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
 							$c = 0;
@@ -228,7 +228,7 @@ if (!isset($_SESSION['name'])) {
 				<div class="tab-info active">
 
 					<?php
-					$db = new PDO("mysql:dbname=thedoctors", "root", "");
+					$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 					$user = $db->quote($_SESSION['user']);
 					$user2 = $_SESSION['user'];
 					$friends = $db->query("SELECT * FROM friends WHERE ((f=$user or t=$user) and s='accepted');");	//all posts for this user
