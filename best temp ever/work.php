@@ -317,7 +317,7 @@
 												<input type="submit" name="submitMe" class="buttons-navbar btn btn-primary" value="POST" />
 												<?php
 												if (isset($_POST["submitMe"])) {
-													$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+													$db = new PDO("mysql:dbname=thedoctors", "root", "");
                           $Data = $_POST["post"];
 													$postData = $db->quote($_POST["post"]);	//user's post
                           $user = $db->quote($_SESSION["user"]);	//user's email
@@ -576,7 +576,7 @@
   <!---                            PHP SCRIPT FOR FILE UPLOAD                                  --->
 
                   <?php
-                        $db2 = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+                        $db2 = new PDO("mysql:dbname=thedoctors", "root", "");
                         if(isset($_POST['submitIt'])){
                           if((strlen($_POST['post2'])<1) && empty(array_filter($_FILES['files']['name'])) ){  //nothing to upload
                             echo "<script>alert('Please Add Something to upload!');</script>";
