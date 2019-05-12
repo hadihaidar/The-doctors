@@ -203,9 +203,7 @@ if (!isset($_SESSION['name'])) {
 							<img class="login-user" height="20" width="24" src="<?=$_SESSION['img']?>" alt="">
 							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
-								<a href="activity.php">My Portfolio</a>
-								<a href="statictics.php">Statistics </a>
-								<a href="about-us.php">Work Experience</a>
+								<a href="author.php">My Profile</a>
 								<a href="author-edit.php">Account Settings</a>
 								<a href="login.php?logout">Logout</a>
 							</div>
@@ -217,8 +215,7 @@ if (!isset($_SESSION['name'])) {
 					<ul class="header-menu" id="one">
 						<li><a href="activity.php">Activity</a></li>
 						<li><a href="search.php">Search</a></li>
-						<li><a href="author-login.html">My Portfolio</a></li>
-						<li><a href="site-map.html">Site Map</a></li>
+						<li><a href="author.php">My Profile</a></li>
 						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Posts </a></li>
 					</ul>
 				</div>
@@ -244,21 +241,11 @@ if (!isset($_SESSION['name'])) {
 								<?= $_SESSION['country'] ?>
 							</div>
 
-							<div class="be-user-social">
-								<a class="social-btn color-1" href="page1.html"><i class="fa fa-facebook"></i></a>
-								<a class="social-btn color-2" href="page1.html"><i class="fa fa-twitter"></i></a>
-								<a class="social-btn color-3" href="page1.html"><i class="fa fa-google-plus"></i></a>
-								<a class="social-btn color-4" href="page1.html"><i class="fa fa-pinterest-p"></i></a>
-								<a class="social-btn color-5" href="page1.html"><i class="fa fa-instagram"></i></a>
-								<a class="social-btn color-6" href="page1.html"><i class="fa fa-linkedin"></i></a>
-							</div>
-							<a class="be-user-site" href="http://www.phoenix.cool"><i class="fa fa-link"></i> www.phoenix.cool</a>
+
 						</div>
 						<div class="be-user-statistic">
-							<div class="stat-row clearfix"><i class="stat-icon icon-views-b"></i> Projects views<span class="stat-counter">218098</span></div>
-							<div class="stat-row clearfix"><i class="stat-icon icon-like-b"></i>Appreciations<span class="stat-counter">14335</span></div>
-							<div class="stat-row clearfix"><i class="stat-icon icon-followers-b"></i>Followers<span class="stat-counter">2208</span></div>
-							<div class="stat-row clearfix"><i class="stat-icon icon-following-b"></i>Following<span class="stat-counter">0</span></div>
+
+							<div class="stat-row clearfix"><i class="stat-icon icon-followers-b"></i>Friends<span class="stat-counter">2208</span></div>
 						</div>
 					</div>
 					<div class="be-desc-block">
@@ -312,16 +299,16 @@ if (!isset($_SESSION['name'])) {
 											$media->execute();
 											$count=$media->rowCount();
 
-
 											if ($count!=0){
 
 													$row = $media->fetch();
 												//	echo ("<script>alert('$row[2]')</script>");
 													$file="media/".$user2."/".$row['file'];
 
-												?><div class="row"><div class="col-ml-12 col-xs-6 col-sm-8">
+												?><div class="row">
+													<div class="col-ml-12 col-xs-6 col-sm-8">
 														<div class="be-post">
-															<a style="word-wrap: break-word;color:black;"href="page1.html"><?=$rows['body']?> </a>
+															<a  href="page1.html"><?=$rows['body']?> </a>
 															<a href="page1.html" class="be-img-block">
 															<br>
 															<?php
@@ -345,10 +332,31 @@ if (!isset($_SESSION['name'])) {
 															<div class="info-block">
 																<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
 																<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
+																<div style="text-align:right;" >
+																	<button style="border:none; background:none;" type="button" name="button" onclick="showlist()"><img width="40px" height="40px"src="media/icon.jpg"  alt=""></button>
+																	<div id="mobidrop" style="display:none;float:right;" onchange="hidelist(this)">
+																		<select class="" name="status">
+																			<option value="Public">Public</option>
+																			<option value="Private">Private</option>
+																		</select>
+																 </div>
+
+																</div>
+
+
+																<script>
+					                        function showlist(){
+					                          document.getElementById("mobidrop").style.display="";
+					                        }
+					                        function hidelist(element){
+					                          document.getElementById("mobidrop").style.display="none";
+					                        }
+					                      </script>
+
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
 <?php
 											}
 											else{	//no media for this post so it is just text
@@ -368,6 +376,16 @@ if (!isset($_SESSION['name'])) {
 															<div class="info-block">
 																<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
 																<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
+																<div style="text-align:right;" >
+																	<button style="border:none; background:none;" type="button" name="button" onclick="showlist()"><img width="40px" height="40px"src="media/icon.jpg"  alt=""></button>
+																	<div id="mobidrop" style="display:none;float:right;" onchange="hidelist()">
+																		<select class="" name="status">
+																			<option value="Public">Public</option>
+																			<option value="Private">Private</option>
+																		</select>
+																 </div>
+
+																</div>
 															</div>
 														</div>
 													</div>
@@ -375,284 +393,13 @@ if (!isset($_SESSION['name'])) {
 										<?php 	}
 									} ?>
 
-
 								</div>
-
-							<div class="tab-info">
-								<div class="row">
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p16.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Wisdom For My Children, Life Lessons Through</a>
-
-											<div class="author-post clearfix">
-												<img src="img/a1.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p17.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Créations Namale</a>
-											<div class="author-post clearfix">
-												<img src="img/a2.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p18.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Crossfit : 15.4 Open Workout</a>
-											<div class="author-post clearfix">
-												<img src="img/a3.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p15.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Garry Simpson - Bridges - Intelligent Life Magazine</a>
-											<div class="author-post clearfix">
-												<img src="img/a6.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p14.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Faber-Castell / Psychological Problems</a>
-											<div class="author-post clearfix">
-												<img src="img/a7.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p13.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Stay Ahead Series</a>
-											<div class="author-post clearfix">
-												<img src="img/a7.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p12.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Face</a>
-											<div class="author-post clearfix">
-												<img src="img/a6.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p19.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Promoção Facas Extra</a>
-											<div class="author-post clearfix">
-												<img src="img/a5.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p11.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Tropicalia</a>
-											<div class="author-post clearfix">
-												<img src="img/a1.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p10.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">tomorrow</a>
-											<div class="author-post clearfix">
-												<img src="img/a1.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p9.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">NAHA Finalist Hairstylist of the Year Allen Ruiz</a>
-											<div class="author-post clearfix">
-												<img src="img/a1.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-									<div class="col-ml-12 col-xs-6 col-sm-4">
-										<div class="be-post style-4">
-											<a href="page1.html" class="be-img-block">
-												<img src="img/p8.jpg" alt="omg">
-											</a>
-											<a href="page1.html" class="be-post-title">Racing Queensland</a>
-											<div class="author-post clearfix">
-												<img src="img/a1.png" alt="" class="ava-author">
-												<span>by <a href="page1.html">Hoang Nguyen</a></span>
-												<span class="like-counter"><i class="fa fa-thumbs-o-up"></i> 405</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="tab-info">
-								<div class="collection">
-									<h3 class="menu-article">Creative Ideas</h3>
-									<div class="collection-header">
-										<span><i class="fa fa-user"></i>by <a href="page1.html">Leigh Taylor</a> </span>
-										<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-										<span><i class="fa fa-eye"></i> 789</span>
-									</div>
-									<div class="collection-entry">
-										<a href="page1.html" class="portfolio-link type-2 clearfix">
-											<img src="img/collection_1.jpg" alt="">
-											<img src="img/collection_2.jpg" alt="">
-											<img src="img/collection_3.jpg" alt="">
-											<img src="img/collection_4.jpg" alt="">
-											<img src="img/collection_5.jpg" alt="">
-											<div class="color_bg">
-												<span>view gallery</span>
-												<span class="child"></span>
-											</div>
-										</a>
-									</div>
-								</div>
-								<div class="collection">
-									<h3 class="menu-article">Creative Agency</h3>
-									<div class="collection-header">
-										<span><i class="fa fa-user"></i>by <a href="page1.html">Leigh Taylor</a> </span>
-										<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-										<span><i class="fa fa-eye"></i> 789</span>
-									</div>
-									<div class="collection-entry">
-										<a href="page1.html" class="portfolio-link type-2 clearfix">
-											<img src="img/collection_6.jpg" alt="">
-											<img src="img/collection_7.jpg" alt="">
-											<img src="img/collection_8.jpg" alt="">
-											<img src="img/collection_9.jpg" alt="">
-											<img src="img/collection_10.jpg" alt="">
-											<div class="color_bg">
-												<span>view gallery</span>
-												<span class="child"></span>
-											</div>
-										</a>
-									</div>
-								</div>
-								<div class="collection">
-									<h3 class="menu-article">Creative Agency</h3>
-									<div class="collection-header">
-										<span><i class="fa fa-user"></i>by <a href="page1.html">Inspiration Art</a> </span>
-										<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-										<span><i class="fa fa-eye"></i> 789</span>
-									</div>
-									<div class="collection-entry">
-										<a href="page1.html" class="portfolio-link type-2 clearfix">
-											<img src="img/collection_11.jpg" alt="">
-											<img src="img/collection_12.jpg" alt="">
-											<img src="img/collection_13.jpg" alt="">
-											<img src="img/collection_14.jpg" alt="">
-											<img src="img/collection_15.jpg" alt="">
-											<div class="color_bg">
-												<span>view gallery</span>
-												<span class="child"></span>
-											</div>
-										</a>
-									</div>
-								</div>
-								<div class="collection">
-									<h3 class="menu-article">Ideas For Personal Site</h3>
-									<div class="collection-header">
-										<span><i class="fa fa-user"></i>by <a href="page1.html">Inspiration Art</a> </span>
-										<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-										<span><i class="fa fa-eye"></i> 789</span>
-									</div>
-									<div class="collection-entry">
-										<a href="page1.html" class="portfolio-link type-2 clearfix">
-											<img src="img/collection_16.jpg" alt="">
-											<img src="img/collection_17.jpg" alt="">
-											<img src="img/collection_18.jpg" alt="">
-											<img src="img/collection_19.jpg" alt="">
-											<img src="img/collection_20.jpg" alt="">
-											<div class="color_bg">
-												<span>view gallery</span>
-												<span class="child"></span>
-											</div>
-										</a>
-									</div>
-								</div>
-								<div class="collection">
-									<h3 class="menu-article">Inspiration Photos</h3>
-									<div class="collection-header">
-										<span><i class="fa fa-user"></i>by <a href="page1.html">Inspiration Art</a> </span>
-										<span><i class="fa fa-thumbs-o-up"></i> 360</span>
-										<span><i class="fa fa-eye"></i> 789</span>
-									</div>
-									<div class="collection-entry">
-										<a href="page1.html" class="portfolio-link type-2 clearfix">
-											<img src="img/collection_16.jpg" alt="">
-											<img src="img/collection_17.jpg" alt="">
-											<img src="img/collection_18.jpg" alt="">
-											<img src="img/collection_19.jpg" alt="">
-											<img src="img/collection_20.jpg" alt="">
-											<div class="color_bg">
-												<span>view gallery</span>
-												<span class="child"></span>
-											</div>
-										</a>
-									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
 	<footer>
 		<div class="footer_slider">
 			<div class="swiper-container" data-autoplay="0" data-loop="1" data-speed="500" data-center="0" data-slides-per-view="responsive" data-xs-slides="4" data-sm-slides="8" data-md-slides="14" data-lg-slides="19" data-add-slides="19">

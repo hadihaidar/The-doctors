@@ -611,13 +611,13 @@ form.input-search { position: relative; margin-bottom: 50px; }
 	06 - POST BLOCK
 ==================================
 */
-.be-post { border: 1px solid #edeff2; border-radius: 2px; width: 100%; margin-bottom: 30px !important; }
+.be-post { word-wrap: break-word;border: 1px solid #edeff2; border-radius: 2px; width: 100%; margin-bottom: 30px !important; }
 
 .be-img-block { overflow: hidden; display: block; }
 
 .be-post .be-img-block { margin-bottom: 15px; position: relative; }
 
-.be-post .be-img-block img { width: 100%; height: auto; position: relative; -webkit-transition: all ease-out 0.3s; transition: all 0.3s; }
+.be-post .be-img-block img {  position: relative; -webkit-transition: all ease-out 0.3s; transition: all 0.3s; }
 
 .be-post .be-img-block img:hover { -webkit-transform: scale(1.1); -ms-transform: scale(1.1); transform: scale(1.1); }
 
