@@ -43,7 +43,7 @@ if (!isset($_SESSION['name'])) {
 							$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 							$targetDir = 'media/'.$_SESSION['user'].'/ProfilePictures'.'/';
 					  	$allowTypes = array('jpg','png','jpeg', 'PNG','JPG');
-							if ($_FILES['img']['size'] <=(1024*11) || $_FILES['img']['size'] > (125*1048576))  {	//image size restrictions
+							if ($_FILES['img']['size'] <=(1024*1) || $_FILES['img']['size'] > (125*1048576))  {	//image size restrictions
 									if(empty($msg)){
 												 	echo ('<script>alert("Your image is too large or too short!")</script>');
 									}

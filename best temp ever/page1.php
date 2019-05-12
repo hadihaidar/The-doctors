@@ -223,11 +223,12 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 										$email = $db->quote($_REQUEST['account']);
 										$images = array('jpg','png','jpeg','gif', 'PNG');
 										$thiss=$_REQUEST['account'];
+
 										$posts = $db->query("SELECT * FROM post1 WHERE(status='Public' and UserEmail=$email)  Order BY timee DESC;");	//all posts for this user and set public
 										if ($posts->rowCount()==0){	//all posts are private
 											echo"<h2 style='text-align:center;'>No posts to show</h2>";
 										}
-										else{
+										else{$x=0;
 											foreach ($posts as $rows) {
 
 													$id =$db->quote($rows['ID']);
@@ -258,16 +259,59 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 
 																			</video>
 																												<?php } ?>
+
 																	</a>
+																	<?php 	$email = $db->quote($_REQUEST['account']);
+																		$email2 = $_REQUEST['account'];
+																		$query = $db->query("SELECT * FROM user WHERE (Email=$email);");
+																		foreach ($query as $row) {
+																			$FullName= $row['FirstName'] . " " . $row['LastName'];
+
+																		} ?>
 
 																	<div class="author-post">
-																			<img src="<?=$_SESSION['img']?>" alt="" class="ava-author">
-																		<span>By <a href="author.php"><?=$n?></a></span><br>
-																		<span style=" margin-left : 27px; ">On <a href="author.php"><?=$rows['timee']?></a></span>
+
+																		<?php
+																		$sqlstmt="SELECT image from user where  Email =(:em)";
+																		$res = $db->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+																		$res->execute(array(':em'=>$email2));
+																		$id = $res->fetchColumn(0);
+																		$default="";
+																		if ($id !== false) {
+																				if($id!=="default.png"){
+																				$default= "media/".$email2."/"."ProfilePictures/".$id;
+																		}
+																			else{
+																				$default="media/".$id;
+																			}
+																		}
+
+																		 ?>
+
+
+
+																			<img src="<?=$default?>" alt="" class="ava-author">
+																		<span>By <a href="page1.php?account=<?= $rows['UserEmail'] ?>"><?=$FullName?></a></span><br>
+																		<span style=" margin-left : 27px; ">On <a><?=$rows['timee']?></a></span>
 																	</div>
 
 																	<div class="info-block">
-																		<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
+																		<?php
+																		$pos = $db->quote($rows['ID']);
+																		$query = $db->prepare("SELECT COUNT(Post_ID) FROM likes WHERE Post_ID=$pos");
+																		$query->execute();
+																		$count = $query->fetch();
+																		?>
+																		<span><i class="fa fa-thumbs-o-up" id="like<?= $x ?>_<?= $rows['ID'] ?>" style="color:#b4b7c1" onclick="like(this.id)"></i> <?= $count[0] ?></span>
+																		<?php
+
+																		$query = $db->query("SELECT * FROM likes");
+																		foreach ($query as $row) {
+																			if ($row['User'] == $_SESSION['user'] && $row['Post_ID'] == $rows['ID']) {
+																				echo ('<script>document.getElementById("like' . $x . "_" . $rows['ID'] . '").style.color="blue"</script>');
+																			}
+																		}
+																	?>
 																		<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
 																	</div></div></div></div>
 
@@ -281,7 +325,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 									</a>
 
 									<div class="author-post">
-										<img src="<?=$_SESSION['img']?>" alt="" class="ava-author">
+										<img src="<?=$default?>" alt="" class="ava-author">
 										<span>By <a href="page1.php?account=<?= $rows['UserEmail'] ?>"><?=$FullName?></a></span><br>
 										<span style=" margin-left : 27px; ">On <a><?=$rows['timee']?></a></span>
 									</div>
@@ -310,15 +354,32 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 				<div class="col-md-3 col-md-pull-9 left-feild">
 					<?php
 					$email = $db->quote($_REQUEST['account']);
+					$email2 = $_REQUEST['account'];
 					$query = $db->query("SELECT * FROM user WHERE (Email=$email);");
 					foreach ($query as $row) {
 						?>
 						<div class="be-user-block">
 							<div class="be-user-detail">
-								<a class="be-ava-user" href="blog-detail-2.html">
-									<img src="img/ava.png" alt="">
+								<a class="be-ava-user style-2">
+									<?php
+									$sqlstmt="SELECT image from user where  Email =(:em)";
+									$res = $db->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+									$res->execute(array(':em'=>$email2));
+									$id = $res->fetchColumn(0);
+									$default="";
+									if ($id !== false) {
+											if($id!=="default.png"){
+											$default= "media/".$email2."/"."ProfilePictures/".$id;
+									}
+										else{
+											$default="media/".$id;
+										}
+									}
+									$FullName= $row['FirstName'] . " " . $row['LastName'];
+									 ?>
+									<img src="<?=$default?>" alt="">
 								</a>
-								<p class="be-use-name"><?= $row['FirstName'] . " " . $row['LastName'] ?></p>
+								<p class="be-use-name"><?= $FullName?></p>
 								<span class="be-user-info">
 									<?= $row['County'] ?>
 								</span>
@@ -447,6 +508,31 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 	<script src="script/jquery.viewportchecker.min.js"></script>
 	<script src="script/magnific.js"></script>
 	<script src="script/global.js"></script>
+	<script>
+		function like(id) {
+			post = id.split("_")[1];
+			if (document.getElementById(id).style.color != 'blue') {
+				document.getElementById(id).style.color = 'blue';
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {}
+				};
+				xhttp.open("GET", 'like.php?post=' + post, false);
+				xhttp.send();
+				//send ajax request to like.php
+			} else {
+				document.getElementById(id).style.color = '#b4b7c1';
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {}
+				};
+				xhttp.open("GET", 'like.php?unlike=true&post=' + post, false);
+				xhttp.send();
+				//send ajax request to like.php?unlike=true
+			}
+		}
+	</script>
+
 </body>
 
 </html>

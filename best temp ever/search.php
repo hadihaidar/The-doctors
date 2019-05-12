@@ -111,7 +111,23 @@ if (!isset($_SESSION['name'])) {
 										<div class="category-1 mix custom-column-5">
 											<div class="be-post">
 												<a href="page1.php?account=<?= $row['Email'] ?>" class="be-img-block">
-													<img src="img/p1.jpg" alt="omg">
+													<?php
+														$sqlstmt="SELECT image from user where  Email =(:em)";
+														$res = $db->prepare($sqlstmt, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+														$res->execute(array(':em'=>$row['Email']));
+														$id = $res->fetchColumn(0);
+														$default="";
+														if ($id !== false) {
+																if($id!=="default.png"){
+																$default= "media/".$row['Email']."/"."ProfilePictures/".$id;
+														}
+															else{
+																$default="media/".$id;
+															}
+														}
+													?>
+
+													<img height="300px;" width="305.25px"src="<?=$default?>" alt="omg">
 												</a>
 												<div class="author-post" style="font-size: 16px;">
 													<span><a href="page1.php?account=<?= $row['Email'] ?>"><b><?php echo ($row['FirstName'] . " " . $row['LastName']); ?></b></a></span>
