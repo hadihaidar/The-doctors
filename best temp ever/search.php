@@ -51,11 +51,161 @@ if (!isset($_SESSION['name'])) {
 			<div class="row no_row row-header">
 				<div class="brand-be">
 					<a href="index.php">
-						<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px"; alt=" logo">
+						<img class="logo-c active be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt=" logo">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo2">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo3">
 						<img class="logo-c  be_logo" src="img/Doctors.png" style="width:121px;height:37px;" alt="logo4">
 					</a>
+				</div>
+				<div class="login-header-block">
+					<div class="login_block">
+						<?php
+						$db = new PDO("mysql:dbname=thedoctors", "root", "");
+						$user = $db->quote($_SESSION['user']);
+						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
+						$c = 0;
+						foreach ($not as $r) {
+							$c = $c + 1;
+						}
+						?>
+						<a class="notofications-popup" href="">
+							<i class="fa fa-bell-o"></i>
+							<span class="noto-count"><?= $c ?></span>
+						</a>
+						<div class="noto-popup notofications-block">
+							<div class="m-close"><i class="fa fa-times"></i></div>
+							<div class="noto-label">Your Notification</div>
+							<?php
+							$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user) ORDER BY time DESC;");
+							foreach ($not as $r) {
+								?>
+								<div class="noto-body">
+									<div class="noto-entry">
+										<div class="noto-content clearfix">
+											<div class="noto-img">
+												<?php
+												$fr = $db->quote($r['f']);
+												$u = $db->query("SELECT FirstName,LastName,image FROM `user` WHERE (Email=$fr)");
+												$n = "";
+												$image = "media/";
+												foreach ($u as $name) {
+													$n = $name[0] . " " . $name[1];
+													if ($name[2] == 'default.png') {
+														$image = $image . $name[2];
+													} else {
+														$image = $image . $r['f'] . '/ProfilePictures/' . $name[2];
+													}
+												}
+												?>
+												<a href="page1.php?account=<?= $r['f'] ?>">
+													<img class="be-ava-comment" height="20" width="24" src="<?= $image ?>" alt="">
+												</a>
+											</div>
+											<div class="noto-text">
+												<div class="noto-text-top">
+													<span class="noto-name"><a href="page1.php?account=<?= $r['f'] ?>"><?= $n ?></a></span>
+													<span class="noto-date"><i class="fa fa-clock-o"></i> <?= $r['time'] ?></span>
+												</div>
+												<a class="noto-message">
+													<?php
+													if ($r['type'] == 'sent') {
+														echo ("Sent you a friend request");
+													}
+													if ($r['type'] == 'accepted') {
+														echo ("Accepted your friend request");
+													}
+													if ($r['type'] == 'Liked') {
+														echo ("Liked a post of yours");
+													}
+													if ($r['type'] == 'commented') {
+														echo ("Commented on your post");
+													}
+													if ($r['type'] == 'shared') {
+														echo ("Shared your post");
+													}
+													?>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php
+						}
+						?>
+						</div>
+
+
+						<a class="messages-popup" href="blog-detail-2.html">
+							<i class="fa fa-envelope-o"></i>
+							<!-- Go to the db get the number of unread messages-->
+							<?php
+							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$user = $db->quote($_SESSION['user']);
+							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
+							$c = 0;
+							foreach ($not as $r) {
+								$c = $c + 1;
+							}
+							?>
+							<span class="noto-count"><?= $c ?></span>
+						</a>
+						<div class="noto-popup messages-block">
+							<div class="m-close"><i class="fa fa-times"></i></div>
+							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages.php">View all messages</a></span></div>
+							<div class="noto-body">
+								<!-- on click take him to the messages page and change it to read-->
+								<?php
+								$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
+								foreach ($not as $r) {
+									?>
+									<div class="noto-entry style-2">
+										<div class="noto-content clearfix">
+											<div class="noto-img">
+												<a href="blog-detail-2.html">
+													<?php
+													$u = $db->quote($r['f']);
+													$u = $db->query("SELECT FirstName,LastName,image FROM `user` WHERE (Email=$u)");
+													$n = "";
+													$image = "media/";
+													foreach ($u as $name) {
+														$n = $name[0] . " " . $name[1];
+														if ($name[2] == 'default.png') {
+															$image = $image . $name[2];
+														} else {
+															$image = $image . $r['f'] . '/ProfilePictures/' . $name[2];
+														}
+													}
+													?>
+													<img class="be-ava-comment" height="20" width="24" src="<?= $image ?>" alt="">
+
+												</a>
+											</div>
+											<div class="noto-text">
+												<div class="noto-text-top">
+													<span class="noto-name"><a href="page1.php?account=<?= $r['f'] ?>"><?= $n ?></a></span>
+													<span class="noto-date"><i class="fa fa-clock-o"></i> <?= $r['time'] ?></span>
+												</div>
+												<div class="noto-message">
+													<a href="message.php?from=<?= $r['f'] ?>">
+														<?= $r['body'] ?>
+														<a>
+												</div>
+											</div>
+										</div>
+									</div>
+								<?php } ?>
+							</div>
+						</div>
+						<div class="be-drop-down login-user-down" style="padding-top: 10px;">
+							<img class="login-user" height="20" width="24" src="<?= $_SESSION['img'] ?>" alt="">
+							<span class="be-dropdown-content">Hi, <?php echo ($_SESSION['name']) ?></span>
+							<div class="drop-down-list a-list">
+								<a href="author.php">My Profile</a>
+								<a href="author-edit.php">Account Settings</a>
+								<a href="login.php?logout">Logout</a>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="header-menu-block">
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx"><span></span></button>
@@ -63,17 +213,9 @@ if (!isset($_SESSION['name'])) {
 						<li><a href="activity.php">Activity</a></li>
 						<li><a href="search.php">Search</a></li>
 						<li><a href="author.php">My Profile</a></li>
-						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Work </a></li>
+
+						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1" href="work.php">Add Posts </a></li>
 					</ul>
-				</div>
-				<div class="be-drop-down login-user-down" style="width: max-content;float: right;padding-top: 25px;">
-					<img class="login-user" src="img/login.jpg" alt="">
-					<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
-					<div class="drop-down-list a-list">
-						<a href="author.php">My Profile</a>
-						<a href="author-edit.php">Account Settings</a>
-						<a href="login.php?logout">Logout</a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -98,7 +240,7 @@ if (!isset($_SESSION['name'])) {
 					<div id="container-mix" class="row _post-container_">
 						<?php
 						if (isset($_POST['search'])) {
-							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:dbname=thedoctors", "root", "");
 							$name = strtolower($_POST['name']) . " !@#$%^&&";
 							$name = explode(" ", $name);
 							$query = $db->query("SELECT * FROM user ");

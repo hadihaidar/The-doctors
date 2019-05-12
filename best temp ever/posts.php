@@ -9,6 +9,7 @@ if (!isset($_SESSION['name'])) {
     ?>
 <h1> Posts</h1>
 
+<a href="login.php?logout">Logout</a>
 <table border="1" style="text-align: center">
     <tr><th><?=$_REQUEST['user']?></th></tr>
     <tr><th>ID </th> <th>Time</th><th>Actions</td></tr>

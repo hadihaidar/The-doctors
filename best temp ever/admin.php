@@ -8,7 +8,7 @@
     $teams = $db->query("SELECT * From user");
     ?>
 <h1> Users</h1>
-
+<a href="login.php?logout">Logout</a>
 <table border="1" style="text-align: center">
     <tr><th>Users</th></tr>
     <tr><th>Email </th><th>First Name</th><th>last Name</th> <th>Country</th><th>Field</th><th>Actions</td></tr>

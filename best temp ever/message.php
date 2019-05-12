@@ -3,7 +3,7 @@ if (!isset($_SESSION['name'])) {
     header("location:index.php");
 }
 $user = $_SESSION['user'];
-$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+$db = new PDO("mysql:dbname=thedoctors", "root", "");
 $sender = $db->quote($_REQUEST['from']);
 $u = $db->query("SELECT FirstName,LastName,image FROM `user` WHERE (Email=$sender)");
 $n = "";
