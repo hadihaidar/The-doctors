@@ -201,7 +201,7 @@ if (!isset($_SESSION['name'])) {
 						</div>
 						<div class="be-drop-down login-user-down" style="padding-top: 10px;">
 							<img class="login-user" height="20" width="24" src="<?=$_SESSION['img']?>" alt="">
-							<span class="be-dropdown-content">Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
+							<span >Hi, <span><?php echo ($_SESSION['name']) ?></span></span>
 							<div class="drop-down-list a-list">
 								<a href="author.php">My Profile</a>
 								<a href="author-edit.php">Account Settings</a>
@@ -292,6 +292,7 @@ if (!isset($_SESSION['name'])) {
 									$posts = $db->query("SELECT * FROM post1 WHERE (UserEmail=$user);");	//all posts for this user
 									$images = array('jpg','png','jpeg','gif', 'PNG');
 									//$video = array('mp4', 'm4a', 'm4v', 'f4v', 'f4a', 'm4b', 'f4b', 'mov', 'avi', 'AVI', 'flv', 'FLV', 'MOV', 'mov');
+									$x=0;
 									foreach ($posts as $rows) {
 
 											$id =$db->quote($rows['ID']);
@@ -329,27 +330,17 @@ if (!isset($_SESSION['name'])) {
 																<span>By <a href="author.php"><?=$_SESSION['name']." ".$_SESSION['last']?></a></span><br>
 																<span style=" margin-left : 27px; ">On <a href="author.php"><?=$rows['timee']?></a></span>
 															</div>
+
 															<div class="info-block">
 																<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
 																<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
-																<div style="text-align:right;" >
-																	<button style="border:none; background:none;" type="button" name="button" onclick="showlist()"><img width="40px" height="40px"src="media/icon.jpg"  alt=""></button>
-																	<div id="mobidrop" style="display:none;float:right;" onchange="hidelist(this)">
-																		<select class="" name="status">
-																			<option value="Public">Public</option>
-																			<option value="Private">Private</option>
-																		</select>
-																 </div>
-
-																</div>
-
 
 																<script>
-					                        function showlist(){
-					                          document.getElementById("mobidrop").style.display="";
+					                        function showlist(elem){
+					                          document.getElementById(elem).style.display="";
 					                        }
 					                        function hidelist(element){
-					                          document.getElementById("mobidrop").style.display="none";
+					                          document.getElementById(element).style.display="none";
 					                        }
 					                      </script>
 
@@ -357,7 +348,7 @@ if (!isset($_SESSION['name'])) {
 															</div>
 														</div>
 													</div>
-<?php
+<?php 							$x=$x+1;
 											}
 											else{	//no media for this post so it is just text
 												?>
@@ -376,16 +367,6 @@ if (!isset($_SESSION['name'])) {
 															<div class="info-block">
 																<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>
 																<span><i class="fa fa-comment-o"></i> <?=$rows['comments']?></span>
-																<div style="text-align:right;" >
-																	<button style="border:none; background:none;" type="button" name="button" onclick="showlist()"><img width="40px" height="40px"src="media/icon.jpg"  alt=""></button>
-																	<div id="mobidrop" style="display:none;float:right;" onchange="hidelist()">
-																		<select class="" name="status">
-																			<option value="Public">Public</option>
-																			<option value="Private">Private</option>
-																		</select>
-																 </div>
-
-																</div>
 															</div>
 														</div>
 													</div>
