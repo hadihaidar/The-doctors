@@ -137,7 +137,7 @@ if (!isset($_SESSION['name'])) {
 							<i class="fa fa-envelope-o"></i>
 							<!-- Go to the db get the number of unread messages-->
 							<?php
-							$db = new PDO("mysql:3302;dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:dbname=thedoctors", "root", "");
 							$user = $db->quote($_SESSION['user']);
 							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
 							$c = 0;

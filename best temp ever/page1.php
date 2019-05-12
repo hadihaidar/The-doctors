@@ -3,7 +3,7 @@ if (!isset($_SESSION['name'])) {
 	header("location:index.php");
 }
 if ($_REQUEST['account'] == $_SESSION['user']) {
-	header("location:author-login.php");
+	header("location:author.php");
 }
 ?>
 <!DOCTYPE html>
@@ -61,7 +61,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 				<div class="login-header-block">
 					<div class="login_block">
 						<?php
-						$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+						$db = new PDO("mysql:dbname=thedoctors", "root", "");
 						$user = $db->quote($_SESSION['user']);
 						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
 						$c = 0;
@@ -134,7 +134,7 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 							<i class="fa fa-envelope-o"></i>
 							<!-- Go to the db get the number of unread messages-->
 							<?php
-							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:dbname=thedoctors", "root", "");
 							$user = $db->quote($_SESSION['user']);
 							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
 							$c = 0;
@@ -326,8 +326,15 @@ if ($_REQUEST['account'] == $_SESSION['user']) {
 
 									<div class="author-post">
 										<img src="<?=$default?>" alt="" class="ava-author">
+										<?php 	$email = $db->quote($_REQUEST['account']);
+																		$email2 = $_REQUEST['account'];
+																		$query = $db->query("SELECT * FROM user WHERE (Email=$email);");
+																		foreach ($query as $row) {
+																			$FullName= $row['FirstName'] . " " . $row['LastName'];
+
+																		} ?>
 										<span>By <a href="page1.php?account=<?= $rows['UserEmail'] ?>"><?=$FullName?></a></span><br>
-										<span style=" margin-left : 27px; ">On <a><?=$rows['timee']?></a></span>
+										<span style=" margin-left : 8px; ">On <a><?=$rows['timee']?></a></span>
 									</div>
 									<div class="info-block">
 										<span><i class="fa fa-thumbs-o-up"></i> <?=$rows['likee']?></span>

@@ -232,8 +232,14 @@ if (!isset($_SESSION['name'])) {
 
 						</div>
 						<div class="be-user-statistic">
-
-							<div class="stat-row clearfix"><i class="stat-icon icon-followers-b"></i>Friends<span class="stat-counter">2208</span></div>
+							<?php
+								$fr=0;
+								$friends = $db->query("SELECT * FROM `friends` WHERE (t=$user OR f=$user)AND (s='accepted')");
+								foreach($friends as $f){
+									$fr = $fr +1;
+								}
+							?>
+							<div class="stat-row clearfix"><i class="stat-icon icon-followers-b"></i>Friends<span class="stat-counter"><?=$fr?></span></div>
 						</div>
 					</div>
 					<div class="be-desc-block">

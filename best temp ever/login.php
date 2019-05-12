@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_POST['login'])) {
-    $db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+    $db = new PDO("mysql:dbname=thedoctors", "root", "");
     $query = $db->query("SELECT * FROM user");
     $COUNT = 0;
     if($_POST['email']=='admin@admin.com' && $_POST['password']=='admin'){

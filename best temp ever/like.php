@@ -4,7 +4,7 @@ if (!isset($_SESSION['name'])) {
     header("location:index.php");
 }
 
-$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+$db = new PDO("mysql:dbname=thedoctors", "root", "");
 $id = $db->quote($_REQUEST['post']);
 $user = $db->quote($_SESSION['user']);
 if (isset($_REQUEST['post'])&& !isset($_REQUEST['is'])) {
