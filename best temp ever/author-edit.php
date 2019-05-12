@@ -552,7 +552,7 @@ if (isset($_POST['about'])) {
 						</div>
 					</div>
 
-					<a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i>add sections</a>
+					<a class="btn full color-1 size-1 hover-1 "><i class="fa fa-plus"></i>DELETE ACCOUNT</a>
 				</div>
 			</div>
 		</div>

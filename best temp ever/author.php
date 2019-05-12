@@ -241,23 +241,19 @@ if (!isset($_SESSION['name'])) {
 							<div class="be-desc-label">About Me</div>
 							<div class="clearfix"></div>
 							<div class="be-desc-text">
-								Nam sit amet massa commodo, tristique metus at, consequat turpis. In vulputate justo at auctor mollis. Aliquam non sagittis tortor. Duis tristique suscipit risus, quis facilisis nisl congue vitae. Nunc varius pellentesque scelerisque. Etiam quis massa vitae lectus placerat ullamcorper pellentesque vel nisl.
+							<?php
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+							$user = $db->quote($_SESSION['user']);
+							$user2 = $_SESSION['user'];
+							$media = $db->prepare("SELECT * FROM user WHERE (Email= $user);");
+							$media->execute();
+							$row=$media->fetch();
+							echo $row['about'];
+
+							 ?>
 							</div>
 						</div>
-						<div class="be-desc-author">
-							<div class="be-desc-label">My Values</div>
-							<div class="clearfix"></div>
-							<div class="be-desc-text">
-								Sed dignissim scelerisque pretium. Vestibulum vel lacus laoreet nunc fermentum maximus. Proin id sodales sem, at consectetur urna. Proin vestibulum, erat a hendrerit sodales, nulla libero ornare dolor.
-							</div>
-						</div>
-						<div class="be-desc-author">
-							<div class="be-desc-label">My Skills</div>
-							<div class="clearfix"></div>
-							<div class="be-desc-text">
-								Praesent pharetra eget ante nec sodales. Sed et orci sit amet justo lobortis luctus. Curabitur sit amet congue purus. Sed arcu lectus, suscipit in finibus id, consequat sagittis arcu.
-							</div>
-						</div>
+
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-8">
@@ -442,7 +438,7 @@ if (!isset($_SESSION['name'])) {
 				//send ajax request to like.php?unlike=true
 			}
 		}
-	
+
 	</script>
 
 </body>
