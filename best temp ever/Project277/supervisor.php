@@ -24,7 +24,7 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
             ?>
         </select><br><br>
 
-        <table id="tab1"border="1" style="text-align: center; ">
+        <table id="tab1"border="1" style="text-align: center; display:none;">
             <tr><th>Employees</th></tr>
             <tr><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th></tr>
             <?php
@@ -54,7 +54,7 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
 
 
 }
-            ?>            
+            ?>
         </table>
 
 
@@ -63,7 +63,7 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
 
     <script type="text/javascript">
       function showTable(){
-      //  document.getElementById('tab1').display.style="";
+        document.getElementById('tab1').display.style="";
     }
     </script>
 </div>
