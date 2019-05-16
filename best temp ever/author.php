@@ -52,7 +52,7 @@ if (!isset($_SESSION['name'])) {
 				<div class="login-header-block">
 					<div class="login_block">
 						<?php
-						$db = new PDO("mysql:dbname=thedoctors", "root", "");
+						$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 						$user = $db->quote($_SESSION['user']);
 						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
 						$c = 0;
@@ -131,7 +131,7 @@ if (!isset($_SESSION['name'])) {
 							<i class="fa fa-envelope-o"></i>
 							<!-- Go to the db get the number of unread messages-->
 							<?php
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$user = $db->quote($_SESSION['user']);
 							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
 							$c = 0;
@@ -248,7 +248,7 @@ if (!isset($_SESSION['name'])) {
 							<div class="clearfix"></div>
 							<div class="be-desc-text">
 							<?php
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$user = $db->quote($_SESSION['user']);
 							$user2 = $_SESSION['user'];
 							$media = $db->prepare("SELECT * FROM user WHERE (Email= $user);");
@@ -276,7 +276,7 @@ if (!isset($_SESSION['name'])) {
 							<div class="tab-info active">
 
 								<?php
-								$db = new PDO("mysql:dbname=thedoctors", "root", "");
+								$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 								$user = $db->quote($_SESSION['user']);
 								$user2 = $_SESSION['user'];
 								$posts = $db->query("SELECT * FROM post1 WHERE (UserEmail=$user) ORDER BY timee DESC");	//all posts for this user

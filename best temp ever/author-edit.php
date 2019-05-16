@@ -5,7 +5,7 @@ if (!isset($_SESSION['name'])) {
 }
 
 	if (isset($_POST['profile'])) {
-		$db = new PDO("mysql:dbname=thedoctors", "root", "");
+		$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 		$query = $db->query("SELECT * FROM user");
 
 		foreach ($query as $row) {
@@ -87,7 +87,7 @@ if (!isset($_SESSION['name'])) {
 	}
 };
 if (isset($_POST['about'])) {
-	$db = new PDO("mysql:dbname=thedoctors", "root", "");
+	$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 	$query = $db->query("SELECT * FROM user");
 
 	foreach ($query as $row) {
@@ -160,7 +160,7 @@ if (isset($_POST['about'])) {
 				<div class="login-header-block">
 					<div class="login_block">
 						<?php
-						$db = new PDO("mysql:dbname=thedoctors", "root", "");
+						$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 						$user = $db->quote($_SESSION['user']);
 						$not = $db->query("SELECT * FROM `notifications` WHERE (t=$user)");
 						$c = 0;
@@ -239,7 +239,7 @@ if (isset($_POST['about'])) {
 							<i class="fa fa-envelope-o"></i>
 							<!-- Go to the db get the number of unread messages-->
 							<?php
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$user = $db->quote($_SESSION['user']);
 							$not = $db->query("SELECT * FROM `messages` WHERE (t=$user AND r='unread')");
 							$c = 0;
@@ -251,7 +251,7 @@ if (isset($_POST['about'])) {
 						</a>
 						<div class="noto-popup messages-block">
 							<div class="m-close"><i class="fa fa-times"></i></div>
-							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages.php">View all messages</a></span></div>
+							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="message.php">View all messages</a></span></div>
 							<div class="noto-body">
 								<!-- on click take him to the messages page and change it to read-->
 								<?php
@@ -439,7 +439,7 @@ if (isset($_POST['about'])) {
 						</div>
 						<?php
 						if (isset($_POST['change'])) {
-							$db = new PDO("mysql:dbname=thedoctors", "root", "");
+							$db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
 							$query = $db->query("SELECT * FROM user");
 
 							foreach ($query as $row) {
