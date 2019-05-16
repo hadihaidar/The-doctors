@@ -67,7 +67,4 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
 </div>
 </body>
 </html>
-        <?php
-        if (isset($_POST['ssn'])){?>
-            <script> document.getElementById('tab1').display.style='';</script>
-        <?php }?>
+      
