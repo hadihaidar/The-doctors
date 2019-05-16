@@ -26,19 +26,19 @@ $db = new PDO("mysql:dbname=restaurant", "root", "");
         
         <input type='submit' value="Get Employees" name= "submit">
     </form>
-        <table id="tab1"border="1" style="text-align: center;">
-            <tr><th>Employees</th></tr>
-            <tr><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th><th>Actions</th></tr>
-            <?php
+    <?php
             if (isset($_POST['ssn'])){
                 $SSN = $db->quote($_POST['ssn']);
                 $get = $db->query("SELECT * FROM employee WHERE `SSN` IN(SELECT Employee_SSN FROM supervises WHERE (Superviser_SSN =$SSN)) ");
-                
+                ?><table id="tab1"border="1" style="text-align: center;">
+                    <tr><th>Employees</th></tr>
+                    <tr><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th><th>Actions</th></tr>
+                <?php
                 foreach ($get as $emplo){
                     ?>
                 <tr>
-                            <td><?=$emplo['SSN']?></td>
-                            <td><?=$emplo['FirstName']?></td>
+                    <td><?=$emplo['SSN']?></td>
+                    <td><?=$emplo['FirstName']?></td>
                             <td><?=$emplo['LastName']?></td>
                             <td><?=$emplo['DateOfBirth']?></td>
                             <td><?=$emplo['Shift']?></td>
