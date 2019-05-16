@@ -1,5 +1,5 @@
 <?php
-    $db = new PDO("mysql:dbname=restaurant", "root", "");
+    $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
     if (isset($_POST['inplace'])){
         $item = $db->quote($_POST["meal"]);
         $price = $db->quote($_POST['price']);

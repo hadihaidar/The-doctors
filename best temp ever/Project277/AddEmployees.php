@@ -9,7 +9,7 @@
 
 <body>
   <?php
-  $db = new PDO("mysql:dbname=restaurant", "root", "");
+  $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
   if (isset($_POST['submit'])){
     $resto = $db->quote($_POST["resto"]);
     $pos = $db->quote($_POST["positions"]);
@@ -23,16 +23,20 @@
     $tag = $db->quote($_POST['tag']);
     $query = $db->exec("INSERT INTO employee VALUES ($resto,$ssn,$shift,$salary,$years,$tag,$date,$first,$last)");
     if($_POST['positions'] == 'SuperVisor'){
-      $query = $db->exec("INSERT INTO supervisor VALUES ($ssn)");  
+      $query = $db->exec("INSERT INTO supervisor VALUES ($ssn)");
+      echo "<script>alert('Employee successfully added!')</script>";
     }
     if($_POST['positions'] == 'Waiter'){
-      $query = $db->exec("INSERT INTO waiter VALUES ($ssn)");  
+      $query = $db->exec("INSERT INTO waiter VALUES ($ssn)");
+        echo "<script>alert('Employee successfully added!')</script>";
     }
     if($_POST['positions'] == 'Cashier'){
-      $query = $db->exec("INSERT INTO cashier VALUES ($ssn)");  
+      $query = $db->exec("INSERT INTO cashier VALUES ($ssn)");
+        echo "<script>alert('Employee successfully added!')</script>";
     }
     if($_POST['positions'] == 'headchef'){
-      $query = $db->exec("INSERT INTO headchef VALUES ($ssn)");  
+      $query = $db->exec("INSERT INTO headchef VALUES ($ssn)");
+      echo "<script>alert('Employee successfully added!')</script>";
     }
   }
   ?>

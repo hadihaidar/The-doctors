@@ -1,6 +1,6 @@
 <?php
   if(isset($_POST['create'])){
-    $db = new PDO("mysql:dbname=restaurant", "root", "");
+    $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
     $name = $db->quote($_POST["Name"]);
     $address = $db->quote($_POST["address"]);
     $website = $db->quote($_POST["website"]);

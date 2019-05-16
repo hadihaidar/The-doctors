@@ -1,6 +1,7 @@
 <?php
-$db = new PDO("mysql:dbname=restaurant", "root", "");
+$db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
 if (isset($_POST['submit'])){
+
 $cashier = $db->quote($_POST["cashier"]);
 $head = $db->quote($_POST["headchef"]);
 $order = $db->quote($_POST['order']);
@@ -17,7 +18,7 @@ $query = $db->exec("INSERT INTO gives VALUES ($head,$cashier,$order)");}
             ?>
             <option value="<?= $cashier[0] ?>"><?= $cashier[0] ?></option>
             <?php
-                } 
+                }
             ?>
         </select><br><br>
         Head Chef <select name="headchef">
@@ -28,7 +29,7 @@ $query = $db->exec("INSERT INTO gives VALUES ($head,$cashier,$order)");}
             ?>
             <option value="<?= $cashier[0] ?>"><?= $cashier[0] ?></option>
             <?php
-                } 
+                }
             ?>
         </select><br><br>
         Order<select name="order">
@@ -39,7 +40,7 @@ $query = $db->exec("INSERT INTO gives VALUES ($head,$cashier,$order)");}
             ?>
             <option value="<?= $order[0] ?>"><?= $order[0] ?></option>
             <?php
-                } 
+                }
             ?>
         </select><br><br>
         <input type='submit' value="give order" name= "submit">

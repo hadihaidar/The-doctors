@@ -1,10 +1,6 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['name']) ) {
-        session_destroy();
-        header("location:index.php");
-    }
-    $db = new PDO("mysql:dbname=thedoctors", "root", "");
+
+    $db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
     $teams = $db->query("SELECT * From user");
     ?>
 <h1> Users</h1>
@@ -15,11 +11,11 @@
     <?php foreach ($teams as $row){
         ?>
         <tr><td><a href="posts.php?user=<?=$row['Email']?>"><?=$row['Email']?></td> <td><?=$row['FirstName']?></a></td>
-            
+
                     <td><?=$row['LastName']?></td>
                     <td><?=$row['County']?></td>
                     <td><?=$row['Field']?></td>
-                                      
+
         <td>
             <a href="delete.php?user=<?=$row['Email']?>">DELETE</a>
         </td>
