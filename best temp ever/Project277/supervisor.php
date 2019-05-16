@@ -23,6 +23,7 @@ $db = new PDO("mysql:dbname=restaurant", "root", "");
                 }
                 ?>
         </select><br><br>
+
         
         <input type='submit' value="Get Employees" name= "submit">
     </form>
@@ -33,7 +34,7 @@ $db = new PDO("mysql:dbname=restaurant", "root", "");
             if (isset($_POST['ssn'])){
                 $SSN = $db->quote($_POST['ssn']);
                 $get = $db->query("SELECT * FROM employee WHERE `SSN` IN(SELECT Employee_SSN FROM supervises WHERE (Superviser_SSN =$SSN)) ");
-                
+
                 foreach ($get as $emplo){
                     ?>
                 <tr>
@@ -54,8 +55,8 @@ $db = new PDO("mysql:dbname=restaurant", "root", "");
                 </tr>
                 <?php
             }
-            
-            
+
+
         }
         ?>
         </table>
