@@ -7,33 +7,35 @@
   <body>
 
 <?php
-$db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
+$db = new PDO("mysql:dbname=restaurant", "root", "");
 ?>
 <div style="text-align: center">
     <h1> Manage Your Employees!</h1>
     <form action='supervisor.php' method='post'>
-        Enter SSN <select onchange="showTable()"name="ssn">
+        Enter SSN <select name="ssn">
             <option value=-1>Employee</option>
             <?php
                 $employee = $db->query("SELECT SSN FROM employee");
                 foreach ($employee as $emp) {
-            ?>
+                    ?>
             <option value="<?= $emp[0] ?>"><?= $emp[0] ?></option>
             <?php
                 }
-            ?>
+                ?>
         </select><br><br>
-
-        <table id="tab1"border="1" style="text-align: center; display:none;">
+        
+        <input type='submit' value="Get Employees" name= "submit">
+    </form>
+        <table id="tab1"border="1" style="text-align: center;">
             <tr><th>Employees</th></tr>
-            <tr><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th></tr>
+            <tr><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th><th>Actions</th></tr>
             <?php
             if (isset($_POST['ssn'])){
-              $SSN = $db->quote($_POST['ssn']);
-              $get = $db->query("SELECT * FROM employee WHERE `SSN` IN(SELECT Employee_SSN FROM supervises WHERE (Superviser_SSN =$SSN)) ");
-
-             foreach ($get as $emplo){
-                ?>
+                $SSN = $db->quote($_POST['ssn']);
+                $get = $db->query("SELECT * FROM employee WHERE `SSN` IN(SELECT Employee_SSN FROM supervises WHERE (Superviser_SSN =$SSN)) ");
+                
+                foreach ($get as $emplo){
+                    ?>
                 <tr>
                             <td><?=$emplo['SSN']?></td>
                             <td><?=$emplo['FirstName']?></td>
@@ -45,27 +47,26 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
                             <td><?=$emplo['NameTag']?></td>
 
                 <td>
-                    <a>DELETE</a>
+                    <a href= 'delete.php'>DELETE</a>
+                    <a href= 'edit.php'> EDIT</a>
                 </td>
 
                 </tr>
                 <?php
             }
-
-
-}
-            ?>
+            
+            
+        }
+        ?>
         </table>
 
 
-        <input type='submit' value="Get Employees" name= "submit">
-    </form>
 
-    <script type="text/javascript">
-      function showTable(){
-        document.getElementById('tab1').display.style="";
-    }
-    </script>
+
 </div>
 </body>
 </html>
+        <?php
+        if (isset($_POST['ssn'])){?>
+            <script> document.getElementById('tab1').display.style='';</script>
+        <?php }?>
