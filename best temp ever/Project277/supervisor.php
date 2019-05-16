@@ -7,7 +7,7 @@
   <body>
 
 <?php
-$db = new PDO("mysql:dbname=restaurant", "root", "");
+$db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
 ?>
 <div style="text-align: center">
     <h1> Manage Your Employees!</h1>
@@ -25,13 +25,13 @@ $db = new PDO("mysql:dbname=restaurant", "root", "");
         </select><br><br>
 
 
-        <input type='submit' value="Get Employees" name= "submit">
+        <input type='submit' value="Get Employees" name= "submit"><br><br>
     </form>
     <?php
             if (isset($_POST['ssn'])){
                 $SSN = $db->quote($_POST['ssn']);
                 $get = $db->query("SELECT * FROM employee WHERE `SSN` IN(SELECT Employee_SSN FROM supervises WHERE (Superviser_SSN =$SSN)) ");
-                ?><table id="tab1"border="1" style="text-align: center;">
+                ?><table id="tab1"border="1" style="margin: 0px auto;">
                     <tr><th>Employees</th></tr>
                     <tr><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th><th>Actions</th></tr>
                 <?php
