@@ -15,7 +15,7 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
         Enter SSN <select name="ssn">
             <option value=-1>Employee</option>
             <?php
-                $employee = $db->query("SELECT SSN FROM employee");
+                $employee = $db->query("SELECT SSN FROM supervisor");
                 foreach ($employee as $emp) {
                     ?>
             <option value="<?= $emp[0] ?>"><?= $emp[0] ?></option>
@@ -30,7 +30,7 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
     <?php
             if (isset($_POST['ssn'])){
                 $SSN = $db->quote($_POST['ssn']);
-                $get = $db->query("SELECT * FROM employee WHERE `SSN` IN(SELECT Employee_SSN FROM supervises WHERE (Superviser_SSN =$SSN)) ");
+                $get = $db->query("SELECT * FROM employee WHERE `SSN` IN(SELECT Employee_SSN FROM supervises WHERE (Superviser_SSN =$SSN AND NOT Employee_SSN =Superviser_SSN)) ");
                 ?><table id="tab1"border="1" style="margin: 0px auto;">
                     <tr><th>Employees</th></tr>
                     <tr><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th><th>Actions</th></tr>
@@ -48,8 +48,8 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
                             <td><?=$emplo['NameTag']?></td>
 
                 <td>
-                    <a href= 'delete.php'>DELETE</a>
-                    <a href= 'edit.php'> EDIT</a>
+                    <a href= 'delete.php?Employee=<?=$emplo['SSN']?>'>DELETE</a>
+                    <a href= 'edit.php?Employee=<?=$emplo['SSN']?>'> EDIT</a>
                 </td>
 
                 </tr>
@@ -67,4 +67,3 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
 </div>
 </body>
 </html>
-      

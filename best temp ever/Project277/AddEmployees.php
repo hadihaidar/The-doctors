@@ -63,7 +63,7 @@
       <label> Enter SSN: </label><input class="Box" name='ssn'>
       <label> FirstName: </label><input class="Box2" name='first'>
       <label> LastName: </label><input class="Box2" name='last'>
-      <label> DateOfBirth: </label><input type="date" class="Box2" name='birth'>
+      <label> DateOfBirth: </label><input type="date" class="Box3" name='birth'>
       <label> Shift: </label><input class="Box2" name='shift'><label> Salary: </label><input class="Box" name='salary'>
       <label> YearsOfExperiance: </label><input class="Box" name='years'>
       <label> NameTag: </label><input class="Box" name='tag'>
