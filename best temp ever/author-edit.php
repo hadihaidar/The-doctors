@@ -251,7 +251,7 @@ if (isset($_POST['about'])) {
 						</a>
 						<div class="noto-popup messages-block">
 							<div class="m-close"><i class="fa fa-times"></i></div>
-							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="message.php">View all messages</a></span></div>
+							<div class="noto-label">Your Messages </div>
 							<div class="noto-body">
 								<!-- on click take him to the messages page and change it to read-->
 								<?php

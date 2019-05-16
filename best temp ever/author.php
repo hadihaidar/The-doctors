@@ -143,7 +143,7 @@ if (!isset($_SESSION['name'])) {
 						</a>
 						<div class="noto-popup messages-block">
 							<div class="m-close"><i class="fa fa-times"></i></div>
-							<div class="noto-label">Your Messages <span class="noto-label-links"><a href="messages.php">View all messages</a></span></div>
+							<div class="noto-label">Your Messages </div>
 							<div class="noto-body">
 								<!-- on click take him to the messages page and change it to read-->
 								<?php
@@ -220,7 +220,7 @@ if (!isset($_SESSION['name'])) {
 				<div class="col-xs-12 col-md-4 left-feild">
 					<div class="be-user-block style-3">
 						<div class="be-user-detail">
-							<a class="be-ava-user style-2" href="page1.html">
+							<a class="be-ava-user style-2" >
 								<img height="115" width="115" src="<?= $_SESSION['img'] ?>" alt=""><!-- should be the profile picture of the user-->
 							</a>
 							<a class="be-ava-left btn color-1 size-2 hover-1" href="author-edit.php"><i class="fa fa-pencil"></i>Edit</a>
@@ -299,8 +299,8 @@ if (!isset($_SESSION['name'])) {
 										?><div class="row">
 											<div class="col-ml-12 col-xs-6 col-sm-8">
 												<div class="be-post">
-													<a href="page1.html"><?= $rows['body'] ?> </a>
-													<a href="page1.html" class="be-img-block">
+													<a ><?= $rows['body'] ?> </a>
+													<a  class="be-img-block">
 														<br>
 														<?php
 														$ext = pathinfo($row['file'], PATHINFO_EXTENSION);
@@ -350,7 +350,7 @@ if (!isset($_SESSION['name'])) {
 										<div class="row">
 											<div class="col-ml-12 col-xs-6 col-sm-12">
 												<div class="be-post">
-													<a href="page1.html" style="color:black;">
+													<a  style="color:black;">
 														<?= $rows['body'] ?> <br> <br>
 													</a>
 

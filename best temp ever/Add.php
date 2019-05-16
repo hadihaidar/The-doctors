@@ -4,7 +4,7 @@
         header("location:index.php");
     }
 
-    $db = new PDO("mysql:port=3302;dbname=thedoctors", "root", "");
+    $db = new PDO("mysql:dbname=thedoctors", "root", "");
     $from = $db->quote($_SESSION['user']);
     $to = $db->quote($_REQUEST['to']);
     $go=$_REQUEST['to'];
