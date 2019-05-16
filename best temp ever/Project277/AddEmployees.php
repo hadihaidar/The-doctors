@@ -25,11 +25,14 @@
     if($_POST['positions'] == 'SuperVisor'){
       $query = $db->exec("INSERT INTO supervisor VALUES ($ssn)");  
     }
-    elseif($_POST['positions'] == 'Waiter'){
+    if($_POST['positions'] == 'Waiter'){
       $query = $db->exec("INSERT INTO waiter VALUES ($ssn)");  
     }
-    elseif($_POST['positions'] == 'Cashier'){
+    if($_POST['positions'] == 'Cashier'){
       $query = $db->exec("INSERT INTO cashier VALUES ($ssn)");  
+    }
+    if($_POST['positions'] == 'headchef'){
+      $query = $db->exec("INSERT INTO headchef VALUES ($ssn)");  
     }
   }
   ?>
@@ -50,7 +53,7 @@
       <option value=-1>Position</option>
         <option value="SuperVisor">SuperVisor</option>
         <option value="Waiter">Waiter</option>
-        <option value="Waiter">Head Chef</option>
+        <option value="headchef">Head Chef</option>
         <option value="Cashier">Cashier</option>
       </select> <br><br>
       <label> Enter SSN: </label><input class="Box" name='ssn'>

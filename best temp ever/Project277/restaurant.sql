@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2019 at 06:07 PM
+-- Generation Time: May 16, 2019 at 10:39 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -32,6 +32,13 @@ CREATE TABLE `cashier` (
   `SSN` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `cashier`
+--
+
+INSERT INTO `cashier` (`SSN`) VALUES
+(3);
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +57,16 @@ CREATE TABLE `employee` (
   `LastName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`RestaurantName`, `SSN`, `Shift`, `Salary`, `YearsOfExperiance`, `NameTag`, `DateOfBirth`, `FirstName`, `LastName`) VALUES
+('Parilla', 3, 'night', 900, 9, 'hh', '2222-02-22', 'ali', 'ali'),
+('Parilla', 6, 'n', 6, 7, 'gg', '7777-07-07', 'hh', 'hhh'),
+('Parilla', 8, 'fdd', 33, 4, 'hh', '6565-06-05', 'hhh', 'jjjj'),
+('Parilla', 343, 'hhh', 76, 78, '87', '0555-05-05', 'xcfg', 'dfgh');
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +79,13 @@ CREATE TABLE `gives` (
   `Order_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `gives`
+--
+
+INSERT INTO `gives` (`HeadChef_SSN`, `Cashier_SSN`, `Order_ID`) VALUES
+(343, 3, 1557935966);
+
 -- --------------------------------------------------------
 
 --
@@ -71,6 +95,13 @@ CREATE TABLE `gives` (
 CREATE TABLE `headchef` (
   `SSN` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `headchef`
+--
+
+INSERT INTO `headchef` (`SSN`) VALUES
+(343);
 
 -- --------------------------------------------------------
 
@@ -82,6 +113,15 @@ CREATE TABLE `inplaceorder` (
   `TableNumber` int(11) NOT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inplaceorder`
+--
+
+INSERT INTO `inplaceorder` (`TableNumber`, `ID`) VALUES
+(56, 1557953592),
+(10, 1557995281),
+(23, 1557995318);
 
 -- --------------------------------------------------------
 
@@ -100,7 +140,8 @@ CREATE TABLE `onphoneorder` (
 --
 
 INSERT INTO `onphoneorder` (`Address`, `PhoneNumber`, `ID`) VALUES
-('shwayfet', 3000000, 1557935966);
+('shwayfet', 3000000, 1557935966),
+('Hamra', 123456789, 1557994727);
 
 -- --------------------------------------------------------
 
@@ -119,29 +160,12 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`ID`, `Price`, `Items`) VALUES
-(1557935966, 10, 'crispy');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `phone number`
---
-
-CREATE TABLE `phone number` (
-  `PhoneNumber` int(11) NOT NULL,
-  `Name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `recipes`
---
-
-CREATE TABLE `recipes` (
-  `NameOfMeal` varchar(200) NOT NULL,
-  `HeadChef_SSN` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(1557935966, 10, 'crispy'),
+(1557953592, 30, 'eskalop'),
+(1557994212, 5, 'batata'),
+(1557994727, 4000, 'shawarma'),
+(1557995281, 10, 'crispy'),
+(1557995318, 10, 'crispy');
 
 -- --------------------------------------------------------
 
@@ -176,6 +200,15 @@ CREATE TABLE `supervises` (
   `Employee_SSN` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `supervises`
+--
+
+INSERT INTO `supervises` (`Superviser_SSN`, `Employee_SSN`) VALUES
+(343, 3),
+(343, 6),
+(343, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -186,6 +219,14 @@ CREATE TABLE `supervisor` (
   `SSN` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `supervisor`
+--
+
+INSERT INTO `supervisor` (`SSN`) VALUES
+(8),
+(343);
+
 -- --------------------------------------------------------
 
 --
@@ -195,9 +236,17 @@ CREATE TABLE `supervisor` (
 CREATE TABLE `takes` (
   `Waiter_SSN` int(11) NOT NULL,
   `Cashier_SSN` int(11) NOT NULL,
-  `TableNumber` int(11) DEFAULT NULL,
-  `PhoneNumber` int(11) DEFAULT NULL
+  `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `takes`
+--
+
+INSERT INTO `takes` (`Waiter_SSN`, `Cashier_SSN`, `ID`) VALUES
+(6, 3, 1557953592),
+(6, 3, 1557995281),
+(6, 3, 1557995318);
 
 -- --------------------------------------------------------
 
@@ -208,6 +257,13 @@ CREATE TABLE `takes` (
 CREATE TABLE `waiter` (
   `SSN` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `waiter`
+--
+
+INSERT INTO `waiter` (`SSN`) VALUES
+(6);
 
 --
 -- Indexes for dumped tables
@@ -245,34 +301,20 @@ ALTER TABLE `headchef`
 --
 ALTER TABLE `inplaceorder`
   ADD PRIMARY KEY (`TableNumber`),
-  ADD KEY `ID` (`ID`);
+  ADD KEY `inplaceorder_ibfk_1` (`ID`);
 
 --
 -- Indexes for table `onphoneorder`
 --
 ALTER TABLE `onphoneorder`
   ADD PRIMARY KEY (`PhoneNumber`),
-  ADD KEY `ID` (`ID`);
+  ADD KEY `onphoneorder_ibfk_1` (`ID`);
 
 --
 -- Indexes for table `order`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `phone number`
---
-ALTER TABLE `phone number`
-  ADD PRIMARY KEY (`PhoneNumber`),
-  ADD KEY `Name` (`Name`);
-
---
--- Indexes for table `recipes`
---
-ALTER TABLE `recipes`
-  ADD PRIMARY KEY (`NameOfMeal`),
-  ADD KEY `HeadChef_SSN` (`HeadChef_SSN`);
 
 --
 -- Indexes for table `restaurant`
@@ -285,7 +327,7 @@ ALTER TABLE `restaurant`
 --
 ALTER TABLE `supervises`
   ADD PRIMARY KEY (`Superviser_SSN`,`Employee_SSN`),
-  ADD KEY `Employee_SSN` (`Employee_SSN`);
+  ADD KEY `supervises_ibfk_1` (`Employee_SSN`);
 
 --
 -- Indexes for table `supervisor`
@@ -297,8 +339,8 @@ ALTER TABLE `supervisor`
 -- Indexes for table `takes`
 --
 ALTER TABLE `takes`
-  ADD PRIMARY KEY (`Waiter_SSN`,`Cashier_SSN`),
-  ADD KEY `PhoneNumber` (`PhoneNumber`);
+  ADD PRIMARY KEY (`Waiter_SSN`,`Cashier_SSN`,`ID`),
+  ADD KEY `blabla` (`Cashier_SSN`);
 
 --
 -- Indexes for table `waiter`
@@ -314,7 +356,7 @@ ALTER TABLE `waiter`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1557935967;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1557995319;
 
 --
 -- Constraints for dumped tables
@@ -351,33 +393,20 @@ ALTER TABLE `headchef`
 -- Constraints for table `inplaceorder`
 --
 ALTER TABLE `inplaceorder`
-  ADD CONSTRAINT `inplaceorder_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `order` (`ID`);
+  ADD CONSTRAINT `inplaceorder_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `order` (`ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `onphoneorder`
 --
 ALTER TABLE `onphoneorder`
-  ADD CONSTRAINT `onphoneorder_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `order` (`ID`);
-
---
--- Constraints for table `phone number`
---
-ALTER TABLE `phone number`
-  ADD CONSTRAINT `phone number_ibfk_1` FOREIGN KEY (`Name`) REFERENCES `restaurant` (`Name`);
-
---
--- Constraints for table `recipes`
---
-ALTER TABLE `recipes`
-  ADD CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`HeadChef_SSN`) REFERENCES `headchef` (`SSN`);
+  ADD CONSTRAINT `onphoneorder_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `order` (`ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `supervises`
 --
 ALTER TABLE `supervises`
-  ADD CONSTRAINT `supervises_ibfk_1` FOREIGN KEY (`Employee_SSN`) REFERENCES `cashier` (`SSN`),
-  ADD CONSTRAINT `supervises_ibfk_2` FOREIGN KEY (`Employee_SSN`) REFERENCES `headchef` (`SSN`),
-  ADD CONSTRAINT `supervises_ibfk_3` FOREIGN KEY (`Employee_SSN`) REFERENCES `waiter` (`SSN`);
+  ADD CONSTRAINT `supervises_ibfk_1` FOREIGN KEY (`Employee_SSN`) REFERENCES `employee` (`SSN`),
+  ADD CONSTRAINT `supervises_ibfk_2` FOREIGN KEY (`Superviser_SSN`) REFERENCES `employee` (`SSN`);
 
 --
 -- Constraints for table `supervisor`
@@ -389,14 +418,13 @@ ALTER TABLE `supervisor`
 -- Constraints for table `takes`
 --
 ALTER TABLE `takes`
-  ADD CONSTRAINT `takes_ibfk_1` FOREIGN KEY (`PhoneNumber`) REFERENCES `onphoneorder` (`PhoneNumber`),
-  ADD CONSTRAINT `takes_ibfk_2` FOREIGN KEY (`Waiter_SSN`) REFERENCES `waiter` (`SSN`);
+  ADD CONSTRAINT `blabla` FOREIGN KEY (`Cashier_SSN`) REFERENCES `cashier` (`SSN`);
 
 --
 -- Constraints for table `waiter`
 --
 ALTER TABLE `waiter`
-  ADD CONSTRAINT `waiter` FOREIGN KEY (`SSN`) REFERENCES `supervisor` (`SSN`);
+  ADD CONSTRAINT `waiter` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
