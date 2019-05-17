@@ -1,5 +1,5 @@
 <?php
-$db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
+$db = new PDO("mysql:dbname=restaurant", "root", "");
 if(isset($_POST['submit'])){
     $cashier = $db->quote($_POST["cashiers"]);
     $waiter = $db->quote($_POST["waiters"]);
