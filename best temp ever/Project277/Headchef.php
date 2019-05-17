@@ -1,3 +1,4 @@
+  <link rel="stylesheet" href="styles.css">
 <?php
 $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
 if (isset($_POST['submit'])){

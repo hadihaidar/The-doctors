@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+      <link rel="stylesheet" href="styles.css">
     <meta charset="utf-8">
     <title>supervisor</title>
   </head>
@@ -13,7 +14,7 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
     <h1> Manage Your Employees!</h1>
     <form action='supervisor.php' method='post'>
         Enter SSN <select name="ssn">
-            <option value=-1>Employee</option>
+            <option value=-1>SuperVisor</option>
             <?php
                 $employee = $db->query("SELECT SSN FROM supervisor");
                 foreach ($employee as $emp) {
@@ -33,13 +34,14 @@ $db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
                 $get = $db->query("SELECT * FROM employee WHERE `SSN` IN(SELECT Employee_SSN FROM supervises WHERE (Superviser_SSN =$SSN AND NOT Employee_SSN =Superviser_SSN)) ");
                 ?><table id="tab1"border="1" style="margin: 0px auto;">
                     <tr><th>Employees</th></tr>
-                    <tr><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th><th>Actions</th></tr>
+                    <tr><th>RestaurantName </th><th>SSN </th><th>First Name</th><th>last Name</th> <th>Date of Birth</th><th>Shift</th><th>Salary</th><th>Years of Experience</th><th>Name Tag</th><th>Actions</th></tr>
                 <?php
                 foreach ($get as $emplo){
                     ?>
                 <tr>
-                    <td><?=$emplo['SSN']?></td>
-                    <td><?=$emplo['FirstName']?></td>
+                            <td><?=$emplo['RestaurantName']?></td>
+                            <td><?=$emplo['SSN']?></td>
+                            <td><?=$emplo['FirstName']?></td>
                             <td><?=$emplo['LastName']?></td>
                             <td><?=$emplo['DateOfBirth']?></td>
                             <td><?=$emplo['Shift']?></td>
