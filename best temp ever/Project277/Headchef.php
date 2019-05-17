@@ -1,6 +1,6 @@
   <link rel="stylesheet" href="styles.css">
 <?php
-$db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
+$db = new PDO("mysql:dbname=restaurant", "root", "");
 if (isset($_POST['submit'])){
 
 $order = $db->quote($_POST['order']);
