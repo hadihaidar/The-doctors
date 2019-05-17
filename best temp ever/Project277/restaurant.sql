@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2019 at 10:39 AM
+-- Generation Time: May 17, 2019 at 10:11 AM
 -- Server version: 10.1.38-MariaDB
--- PHP Version: 5.6.40
+-- PHP Version: 7.2.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,7 +37,44 @@ CREATE TABLE `cashier` (
 --
 
 INSERT INTO `cashier` (`SSN`) VALUES
-(3);
+(13),
+(16);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `data`
+-- (See below for the actual view)
+--
+CREATE TABLE `data` (
+`RestaurantName` varchar(100)
+,`SSN` int(11)
+,`Shift` varchar(200)
+,`Salary` int(11)
+,`YearsOfExperiance` int(11)
+,`NameTag` varchar(100)
+,`DateOfBirth` date
+,`FirstName` varchar(100)
+,`LastName` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `dataa`
+-- (See below for the actual view)
+--
+CREATE TABLE `dataa` (
+`RestaurantName` varchar(100)
+,`SSN` int(11)
+,`Shift` varchar(200)
+,`Salary` int(11)
+,`YearsOfExperiance` int(11)
+,`NameTag` varchar(100)
+,`DateOfBirth` date
+,`FirstName` varchar(100)
+,`LastName` varchar(100)
+);
 
 -- --------------------------------------------------------
 
@@ -62,10 +99,14 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`RestaurantName`, `SSN`, `Shift`, `Salary`, `YearsOfExperiance`, `NameTag`, `DateOfBirth`, `FirstName`, `LastName`) VALUES
-('Parilla', 3, 'night', 900, 9, 'hh', '2222-02-22', 'ali', 'ali'),
-('Parilla', 6, 'n', 6, 7, 'gg', '7777-07-07', 'hh', 'hhh'),
-('Parilla', 8, 'fdd', 33, 4, 'hh', '6565-06-05', 'hhh', 'jjjj'),
-('Parilla', 343, 'hhh', 76, 78, '87', '0555-05-05', 'xcfg', 'dfgh');
+('Parilla', 0, '8:00-8:00', 100, 0, 'hmh', '2000-06-25', 'Hadi', 'Haidar'),
+('Parilla', 1, '8:00-8:00', 1500, 12, 'jh', '1999-11-01', 'Jana', 'Hamsho'),
+('Parilla', 12, '8:00-8:00', 2000, 100, 'Tcc01', '1999-08-07', 'Tarek', 'Cheaib'),
+('Parilla', 13, '8:00-8:00', 10000, 12, 'ai01', '2019-05-07', 'ali', 'issa'),
+('Parilla', 16, '10:00-5:00', 3000, 12, 'lah10', '1987-12-12', 'Lara', 'Hammoud'),
+('Parilla', 17, '11:00-9:00', 1000, 12, 'abh', '1999-11-05', 'Ali', 'Haidar'),
+('Parilla', 99, '8:00-8:00', 1500, 1, 'Oh1', '1989-12-08', 'Omar', 'Halabi'),
+('Parilla', 343, '10:00-5:00', 10000, 78, 'Mbh', '0555-05-05', 'Mohammad', 'Hammoud');
 
 -- --------------------------------------------------------
 
@@ -78,13 +119,6 @@ CREATE TABLE `gives` (
   `Cashier_SSN` int(11) NOT NULL,
   `Order_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `gives`
---
-
-INSERT INTO `gives` (`HeadChef_SSN`, `Cashier_SSN`, `Order_ID`) VALUES
-(343, 3, 1557935966);
 
 -- --------------------------------------------------------
 
@@ -101,7 +135,7 @@ CREATE TABLE `headchef` (
 --
 
 INSERT INTO `headchef` (`SSN`) VALUES
-(343);
+(1);
 
 -- --------------------------------------------------------
 
@@ -119,7 +153,6 @@ CREATE TABLE `inplaceorder` (
 --
 
 INSERT INTO `inplaceorder` (`TableNumber`, `ID`) VALUES
-(56, 1557953592),
 (10, 1557995281),
 (23, 1557995318);
 
@@ -134,14 +167,6 @@ CREATE TABLE `onphoneorder` (
   `PhoneNumber` int(11) NOT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `onphoneorder`
---
-
-INSERT INTO `onphoneorder` (`Address`, `PhoneNumber`, `ID`) VALUES
-('shwayfet', 3000000, 1557935966),
-('Hamra', 123456789, 1557994727);
 
 -- --------------------------------------------------------
 
@@ -205,9 +230,8 @@ CREATE TABLE `supervises` (
 --
 
 INSERT INTO `supervises` (`Superviser_SSN`, `Employee_SSN`) VALUES
-(343, 3),
-(343, 6),
-(343, 8);
+(343, 13),
+(343, 343);
 
 -- --------------------------------------------------------
 
@@ -224,7 +248,7 @@ CREATE TABLE `supervisor` (
 --
 
 INSERT INTO `supervisor` (`SSN`) VALUES
-(8),
+(12),
 (343);
 
 -- --------------------------------------------------------
@@ -238,15 +262,6 @@ CREATE TABLE `takes` (
   `Cashier_SSN` int(11) NOT NULL,
   `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `takes`
---
-
-INSERT INTO `takes` (`Waiter_SSN`, `Cashier_SSN`, `ID`) VALUES
-(6, 3, 1557953592),
-(6, 3, 1557995281),
-(6, 3, 1557995318);
 
 -- --------------------------------------------------------
 
@@ -263,7 +278,27 @@ CREATE TABLE `waiter` (
 --
 
 INSERT INTO `waiter` (`SSN`) VALUES
-(6);
+(0),
+(17),
+(99);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `data`
+--
+DROP TABLE IF EXISTS `data`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `data`  AS  select `employee`.`RestaurantName` AS `RestaurantName`,`employee`.`SSN` AS `SSN`,`employee`.`Shift` AS `Shift`,`employee`.`Salary` AS `Salary`,`employee`.`YearsOfExperiance` AS `YearsOfExperiance`,`employee`.`NameTag` AS `NameTag`,`employee`.`DateOfBirth` AS `DateOfBirth`,`employee`.`FirstName` AS `FirstName`,`employee`.`LastName` AS `LastName` from (`employee` join `restaurant`) where (`Address` = 'Bliss-Beirut') ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `dataa`
+--
+DROP TABLE IF EXISTS `dataa`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dataa`  AS  select `employee`.`RestaurantName` AS `RestaurantName`,`employee`.`SSN` AS `SSN`,`employee`.`Shift` AS `Shift`,`employee`.`Salary` AS `Salary`,`employee`.`YearsOfExperiance` AS `YearsOfExperiance`,`employee`.`NameTag` AS `NameTag`,`employee`.`DateOfBirth` AS `DateOfBirth`,`employee`.`FirstName` AS `FirstName`,`employee`.`LastName` AS `LastName` from (`employee` join `restaurant`) where (`Address` = 'Bliss-Beirut') ;
 
 --
 -- Indexes for dumped tables
@@ -366,28 +401,27 @@ ALTER TABLE `order`
 -- Constraints for table `cashier`
 --
 ALTER TABLE `cashier`
-  ADD CONSTRAINT `cash` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`);
+  ADD CONSTRAINT `cash` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `employee`
 --
 ALTER TABLE `employee`
-  ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`RestaurantName`) REFERENCES `restaurant` (`Name`),
-  ADD CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`RestaurantName`) REFERENCES `restaurant` (`Name`);
+  ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`RestaurantName`) REFERENCES `restaurant` (`Name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `gives`
 --
 ALTER TABLE `gives`
   ADD CONSTRAINT `gives_ibfk_1` FOREIGN KEY (`Order_ID`) REFERENCES `order` (`ID`),
-  ADD CONSTRAINT `gives_ibfk_2` FOREIGN KEY (`Cashier_SSN`) REFERENCES `cashier` (`SSN`),
-  ADD CONSTRAINT `gives_ibfk_3` FOREIGN KEY (`HeadChef_SSN`) REFERENCES `headchef` (`SSN`);
+  ADD CONSTRAINT `gives_ibfk_2` FOREIGN KEY (`Cashier_SSN`) REFERENCES `cashier` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `gives_ibfk_3` FOREIGN KEY (`HeadChef_SSN`) REFERENCES `headchef` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `headchef`
 --
 ALTER TABLE `headchef`
-  ADD CONSTRAINT `head` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`);
+  ADD CONSTRAINT `head` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `inplaceorder`
@@ -405,26 +439,26 @@ ALTER TABLE `onphoneorder`
 -- Constraints for table `supervises`
 --
 ALTER TABLE `supervises`
-  ADD CONSTRAINT `supervises_ibfk_1` FOREIGN KEY (`Employee_SSN`) REFERENCES `employee` (`SSN`),
-  ADD CONSTRAINT `supervises_ibfk_2` FOREIGN KEY (`Superviser_SSN`) REFERENCES `employee` (`SSN`);
+  ADD CONSTRAINT `supervises_ibfk_1` FOREIGN KEY (`Employee_SSN`) REFERENCES `employee` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `supervises_ibfk_2` FOREIGN KEY (`Superviser_SSN`) REFERENCES `employee` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `supervisor`
 --
 ALTER TABLE `supervisor`
-  ADD CONSTRAINT `supervisor` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`);
+  ADD CONSTRAINT `supervisor` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `takes`
 --
 ALTER TABLE `takes`
-  ADD CONSTRAINT `blabla` FOREIGN KEY (`Cashier_SSN`) REFERENCES `cashier` (`SSN`);
+  ADD CONSTRAINT `blabla` FOREIGN KEY (`Cashier_SSN`) REFERENCES `cashier` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `waiter`
 --
 ALTER TABLE `waiter`
-  ADD CONSTRAINT `waiter` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`);
+  ADD CONSTRAINT `waiter` FOREIGN KEY (`SSN`) REFERENCES `employee` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
