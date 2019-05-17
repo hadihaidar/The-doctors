@@ -8,7 +8,7 @@
   <body>
 
 <?php
-$db = new PDO("mysql:port=3302;dbname=restaurant", "root", "");
+$db = new PDO("mysql:dbname=restaurant", "root", "");
 ?>
 <div style="text-align: center">
     <h1> Manage Your Employees!</h1>
